@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">DailyLog</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_dlog_base">DLogBaseActivity</string>
+
+    <string name="daily_title">일간</string>
+    <string name="daily_date">%1$s년 %2$s월 %3$s일 %4$s요일</string>
 </resources>

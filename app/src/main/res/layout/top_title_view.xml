@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_title_view"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp50"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/dp16"
+    android:paddingRight="@dimen/dp16">
+
+    <ImageView
+        android:id="@+id/top_iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dlog_logo_01" />
+
+    <TextView
+        android:id="@+id/top_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp35"
+        android:layout_toEndOf="@+id/top_iv_logo"
+        android:gravity="center"
+        android:text="@string/daily_title"
+        android:textSize="@dimen/dp16" />
+
+    <ImageButton
+        android:id="@+id/top_btn_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/btn_menu_selector" />
+
+    <ImageButton
+        android:id="@+id/top_btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/top_btn_menu"
+        android:background="@drawable/btn_search_selector" />
+
+    <ImageButton
+        android:id="@+id/top_btn_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/top_btn_search"
+        android:background="@drawable/btn_open_selector" />
+
+    <RelativeLayout
+        android:id="@+id/top_layout_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/top_btn_open">
+
+        <ImageButton
+            android:id="@+id/top_btn_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_calendar_selector" />
+
+        <TextView
+            android:id="@+id/top_tv_calendar"
+            android:layout_width="@dimen/dp35"
+            android:layout_height="@dimen/dp35"
+            android:gravity="center"
+            android:paddingTop="@dimen/dp02"
+            android:text="19"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp10" />
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/top_btn_pencil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/top_layout_calendar"
+        android:background="@drawable/btn_pencil_selector" />
+
+</RelativeLayout>

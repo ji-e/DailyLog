@@ -9,13 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".main.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.DailyActivity" />
+        <activity android:name=".main.DailyActivity"/>
+        <activity android:name=".main.MainActivity" />
+
         <activity
-            android:name=".Consts.Main2Activity"
-            android:label="@string/title_activity_main2" />
-        <activity android:name=".Consts.DLogBaseActivity"></activity>
+            android:name=".base.DLogBaseActivity"
+            android:label="@string/title_activity_dlog_base" />
+
     </application>
 
 </manifest>
