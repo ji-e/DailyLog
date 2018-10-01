@@ -2,6 +2,7 @@
     <declare-styleable name="TopTitleView">
         <attr name="tvTitle" format="reference|string" />
         <attr name="imgLogo" format="boolean" />
+        <attr name="btnClose" format="boolean" />
         <attr name="btnMenu" format="boolean" />
         <attr name="btnSearch" format="boolean" />
         <attr name="btnOpen" format="boolean" />

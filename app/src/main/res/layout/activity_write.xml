@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".main.WriteActivity">
+
+    <!--상단 타이틀 및 아이콘 바-->
+    <com.example.uohih.dailylog.view.TopTitleView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:gravity="center_vertical"
+        app:btnClose="true"
+        app:btnOpen="true"
+        app:btnSearch="true"
+        app:btnCalendar="true"
+        />
+
+
+    <!--일간 날짜-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingRight="@dimen/dp16">
+
+        <TextView
+            android:id="@+id/write_tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/write_date"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp17" />
+
+        <ImageButton
+            android:id="@+id/write_btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_back_selector" />
+
+        <ImageButton
+            android:id="@+id/write_btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_next_selector" />
+    </RelativeLayout>
+
+    <!--제목 입력-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:background="@color/c_f2edf9"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingRight="@dimen/dp16">
+
+        <EditText
+            android:id="@+id/write_et_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/write_title"
+            android:textSize="@dimen/dp16"
+            android:background="@null"
+            android:textColor="@color/c_333333"
+            android:textStyle="bold"/>
+
+        <ImageButton
+            android:id="@+id/write_btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_delete_selector" />
+    </LinearLayout>
+
+
+    <!--일지 입력-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="@dimen/dp16">
+
+        <EditText
+            android:id="@+id/write_et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/write_content"
+            android:textColor="@color/c_555555"
+            android:textSize="@dimen/dp16" />
+
+        <ImageButton
+            android:id="@+id/write_btn_camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/btn_camera_selector" />
+
+
+    </RelativeLayout>
+
+    <!--버튼-->
+    <Button
+        android:id="@+id/write_btn_write"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:background="@drawable/btn_bottom_selector"
+        android:text="@string/btn_03"
+        android:textColor="@color/c_333333"
+        android:lineSpacingExtra ="@dimen/dp10"
+        android:textSize="@dimen/dp17"/>
+
+</LinearLayout>

@@ -2,7 +2,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/c_ffffff</item>
+        <item name="android:colorBackground">@color/c_ffffff</item>
     </style>
 
 </resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/c_ffffff">
+
+    <TextView
+        android:id="@+id/dialog_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:minHeight="@dimen/dp120"
+        android:layout_weight="1"
+        android:padding="@dimen/dp16"
+        android:gravity="center"
+        android:textSize="@dimen/dp15"
+        android:textColor="@color/c_333333"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dialog_no"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/btn_02"
+            android:textSize="@dimen/dp17"
+            android:textColor="@color/c_333333"
+            android:textStyle="bold"
+            android:background="@drawable/btn_bottom_selector2"/>
+        <Button
+            android:id="@+id/dialog_yes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/btn_01"
+            android:textSize="@dimen/dp17"
+            android:textColor="@color/c_333333"
+            android:textStyle="bold"
+            android:background="@drawable/btn_bottom_selector"/>
+
+    </LinearLayout>
+</LinearLayout>

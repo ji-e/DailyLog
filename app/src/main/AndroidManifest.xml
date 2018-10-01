@@ -16,13 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.DailyActivity"/>
+        <activity android:name=".main.DailyActivity" />
         <activity android:name=".main.MainActivity" />
-
         <activity
             android:name=".base.DLogBaseActivity"
             android:label="@string/title_activity_dlog_base" />
-
+        <activity android:name=".main.WriteActivity"></activity>
     </application>
 
 </manifest>

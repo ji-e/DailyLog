@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp120"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/dp150"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp16"
+        android:background="@drawable/rectangle"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/menu_logout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp35"
+            android:layout_marginLeft="@dimen/dp16"
+            android:gravity="center_vertical"
+            android:text="@string/menu_01"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp15" />
+
+
+
+        <TextView
+            android:id="@+id/menu_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp35"
+            android:layout_marginLeft="@dimen/dp16"
+            android:gravity="center_vertical"
+            android:text="@string/menu_02"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp15" />
+
+
+
+        <TextView
+            android:id="@+id/menu_excel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp35"
+            android:layout_marginLeft="@dimen/dp16"
+            android:gravity="center_vertical"
+            android:text="@string/menu_03"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp15" />
+
+
+
+        <TextView
+            android:id="@+id/menu_setting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp35"
+            android:layout_marginLeft="@dimen/dp16"
+            android:gravity="center_vertical"
+            android:text="@string/menu_04"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp15" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

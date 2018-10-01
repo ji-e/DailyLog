@@ -2,14 +2,20 @@ package com.example.uohih.dailylog.view
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.support.v4.content.res.TypedArrayUtils.getString
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
-import android.widget.RelativeLayout
 import com.example.uohih.dailylog.R
-import kotlinx.android.synthetic.main.activity_daily.view.*
+import com.example.uohih.dailylog.main.WriteActivity
 import kotlinx.android.synthetic.main.top_title_view.view.*
+import java.util.*
+import android.widget.*
+import com.example.uohih.dailylog.R.style.*
+import kotlinx.android.synthetic.main.dialog_menu.view.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -30,30 +36,121 @@ class TopTitleView : RelativeLayout {
 //    private var ivCalendar: ImageButton = top_btn_calendar
 //    private var ivpencil: ImageButton = top_btn_pencil
 
-    // 닫기
-    private val mCloseBtnClickListener = OnClickListener {
+    /**
+     * 닫기
+     */
+    private val mCloseBtnClickListener : View.OnClickListener = OnClickListener {
         if (mContext != null && mContext is Activity) {
             (mContext as Activity).finish()
         }
     }
 
+
     // 메뉴
-    private var mMenuBtnClickListener = OnClickListener { }
+    private var mMenuBtnClickListener : View.OnClickListener = OnClickListener {
+        val popupView = LayoutInflater.from(mContext).inflate(R.layout.dialog_menu, null)
+        val mPopupWindow = PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        mPopupWindow.isFocusable = true
+        mPopupWindow.showAsDropDown(it)
+
+        // todo 화면 잠금이 없을 때는 로그아웃 표시 안함
+        val logout=true
+        if(logout){
+            popupView.menu_logout.visibility=View.GONE
+        }
+
+        // todo 일단 모두 toast
+        popupView.menu_logout.setOnClickListener {
+            Toast.makeText(mContext, "로그아웃", Toast.LENGTH_SHORT).show()
+            mPopupWindow.dismiss()
+        }
+        /**
+         * 보기 방식
+         */
+        popupView.menu_view.setOnClickListener {
+            var arrayList:ArrayList<String>?=null
+            val listViewAdapter=ListViewAdapter(mContext!!, ArrayList())
+            listViewAdapter.setContent(resources.getString(R.string.daily_title))
+            listViewAdapter.setContent(resources.getString(R.string.monthly_title))
+            listViewAdapter.setContent(resources.getString(R.string.year_title))
+
+            val customDialogList=CustomListDialog(mContext!!,  android.R.style.Theme_Material_Dialog_MinWidth)
+            customDialogList.showDialogList(mContext,listViewAdapter)
+
+//            Toast.makeText(mContext, "보기방식", Toast.LENGTH_SHORT).show()
+            mPopupWindow.dismiss()
+        }
+        popupView.menu_excel.setOnClickListener {
+            Toast.makeText(mContext, "엑셀", Toast.LENGTH_SHORT).show()
+            mPopupWindow.dismiss()
+        }
+        popupView.menu_setting.setOnClickListener {
+            Toast.makeText(mContext, "환경설정", Toast.LENGTH_SHORT).show()
+            mPopupWindow.dismiss()
+        }
+
+    }
+
 
     // 검색
-    private val mSearchBtnClickListener = OnClickListener { }
+    private val mSearchBtnClickListener : View.OnClickListener= OnClickListener {
+
+        // todo 다이얼로그 테스트
+        val customDialog=CustomDialog(mContext!!,  android.R.style.Theme_Material_Dialog_MinWidth)
+       customDialog.showDialog(mContext,"fdfssssssssssd","ㄹㅇㄹㅇㄹ",null,"fdafdf",null)
+    }
 
     // 불러오기
-    private val mOpenBtnClickListener = OnClickListener { }
+    private val mOpenBtnClickListener : View.OnClickListener = OnClickListener { }
 
     // 캘린더
-    private var mCalendarBtnClickListener = OnClickListener { }
+    private var mCalendarBtnClickListener : View.OnClickListener = OnClickListener {
+//        Toast.makeText(mContext, "제목 fdfdf!", Toast.LENGTH_SHORT).show()
+    }
 
-    // 연필
-    private val mPencilBtnClickListener = OnClickListener { }
+    /**
+     * 연필
+     * 일지 작성(WriteActivity 이동)
+     */
+    private val mPencilBtnClickListener : View.OnClickListener = OnClickListener {
+        val intent = Intent(mContext, WriteActivity::class.java)
+        (mContext as Activity).startActivity(intent)
+    }
 
     // 지우개
-    private var mEraserBtnClickListener = OnClickListener { }
+    private var mEraserBtnClickListener : View.OnClickListener = OnClickListener { }
+
+
+    /**
+     * 상단바 연필 -> 지우개
+     */
+    fun setEraser() {
+        top_btn_pencil.setImageResource(R.drawable.btn_eraser_selector)
+        top_btn_pencil.setOnClickListener(mEraserBtnClickListener)
+    }
+
+    /**
+     * 상단바 로고 -> 닫기
+     */
+    fun setClose() {
+        top_iv_logo.setImageResource(R.drawable.btn_close_selector)
+        top_iv_logo.setOnClickListener(mCloseBtnClickListener)
+    }
+
+
+    fun setCalendarBtnClickListener(mCalendarBtnClickListener: View.OnClickListener) {
+        top_btn_calendar.setOnClickListener(mCalendarBtnClickListener)
+    }
+
+    fun setEraserBtnClickListener(mEraserBtnClickListener: View.OnClickListener) {
+        top_btn_pencil.setOnClickListener(mEraserBtnClickListener)
+
+    }
+
+    fun setMenuBtnClickListener(mMenuBtnClickListener: View.OnClickListener) {
+        top_btn_menu.setOnClickListener(mMenuBtnClickListener)
+    }
+
 
 
     constructor(context: Context) : super(context) {
@@ -68,8 +165,11 @@ class TopTitleView : RelativeLayout {
         init(attrs, defStyle, context)
     }
 
-    private fun init(attrs: AttributeSet?, defStyle: Int, context: Context) {
 
+    /**
+     * 초기화
+     */
+    private fun init(attrs: AttributeSet?, defStyle: Int, context: Context) {
         mContext = context
         val inflater = mContext!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         mRootView = inflater.inflate(R.layout.top_title_view, null)
@@ -88,6 +188,13 @@ class TopTitleView : RelativeLayout {
         // 상단 바 타이틀
         if (!at.hasValue(R.styleable.TopTitleView_tvTitle)) {
             top_tv_title.visibility = View.GONE
+        }
+
+        // 상단 바 닫기
+        if (!at.hasValue(R.styleable.TopTitleView_btnClose)) {
+            top_btn_close.visibility = View.GONE
+        } else {
+            top_btn_close.setOnClickListener(mCloseBtnClickListener)
         }
 
         // 상단 바 메뉴
@@ -116,11 +223,10 @@ class TopTitleView : RelativeLayout {
 
         // 상단 바 캘린더
         if (!at.hasValue(R.styleable.TopTitleView_btnCalendar)) {
-            top_layout_calendar.visibility = View.GONE
+            top_btn_calendar.visibility = View.GONE
         } else {
-            top_layout_calendar.setOnClickListener(mCalendarBtnClickListener)
-            //todo 오늘 날짜 가져오는 것
-            top_tv_calendar.text = "오늘 날짜"
+            top_btn_calendar.setOnClickListener(mCalendarBtnClickListener)
+            top_tv_calendar.text = getCurrentDate() // 현재 날짜 세팅
         }
 
         // 상단 바 연필
@@ -130,39 +236,19 @@ class TopTitleView : RelativeLayout {
             top_btn_pencil.setOnClickListener(mPencilBtnClickListener)
         }
 
-
-//        at.recycle()
-
-
     }
+
+
+
+
 
     /**
-     * 상단바 연필 -> 지우개
+     * 현재 날짜 구하기
      */
-    fun setEraser() {
-        top_btn_pencil.setImageResource(R.drawable.btn_eraser_selector)
-        top_btn_pencil.setOnClickListener(mEraserBtnClickListener)
-    }
-
-    /**
-     * 상단바 로고 -> 닫기
-     */
-    fun setClose(){
-        top_iv_logo.setImageResource(R.drawable.btn_close_selector)
-        top_iv_logo.setOnClickListener(mCloseBtnClickListener)
-    }
-
-
-    fun setCalendarBtnClickListener(mCalendarBtnClickListener: View.OnClickListener) {
-        this.mCalendarBtnClickListener = mCalendarBtnClickListener
-    }
-
-    fun setEraserBtnClickListener(mEraserBtnClickListener: View.OnClickListener) {
-        this.mEraserBtnClickListener = mEraserBtnClickListener
-    }
-
-    fun setMenuBtnClickListener(mMenuBtnClickListener: View.OnClickListener) {
-        this.mMenuBtnClickListener = mMenuBtnClickListener
+    private fun getCurrentDate(): String {
+        val instance: Calendar = Calendar.getInstance()
+        val date: String = instance.get(Calendar.DATE).toString() //현재 날짜
+        return date
     }
 
 
