@@ -36,32 +36,27 @@ class DailyActivity : DLogBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily)
 
-//        // 상단 바 메뉴 클릭 이벤트
-//        daily_title_view.setMenuBtnClickListener(View.OnClickListener {
-////            menu_logout.visibility=View.GONE
-//        })
+        // 상단 바 캘린더 클릭 이벤트
+        daily_title_view.setCalendarBtnClickListener(View.OnClickListener {
+            Toast.makeText(mContext, jsonCalendar.get("yyyymmdd").toString(), Toast.LENGTH_SHORT).show()
+            setData(jsonCalendar)
 
-        // 현재 날짜 세팅
-        daily_tv_date.text = String.format(getString(R.string.daily_date), jsonCalendar.get("year"), jsonCalendar.get("month"), jsonCalendar.get("date"), jsonCalendar.get("day"))
+        })
 
         // 이전 버튼 클릭 이벤트
         daily_btn_back.setOnClickListener {
-            var preCalendar = JSONObject(getDate(true,1).toString())
+            var preCalendar = JSONObject(getDate(true,1,"일").toString())
             setDateInfom(preCalendar)
-            daily_tv_date.text = String.format(getString(R.string.daily_date), preCalendar.get("year"), preCalendar.get("month"), preCalendar.get("date"), preCalendar.get("day"))
-            setData(preCalendar.get("yyyymmdd").toString())
+            setData(preCalendar)
 
-
-            Log.d(tag,"11111111111111111111111111111111")
         }
 
         // 다음 버튼 클릭 이벤트
         daily_btn_next.setOnClickListener {
-            var nextCalendar = JSONObject(getDate(false,1).toString())
+            var nextCalendar = JSONObject(getDate(false,1,"일").toString())
             setDateInfom(nextCalendar)
-            daily_tv_date.text = String.format(getString(R.string.daily_date), nextCalendar.get("year"), nextCalendar.get("month"), nextCalendar.get("date"), nextCalendar.get("day"))
-            setData(nextCalendar.get("yyyymmdd").toString())
-            Log.d(tag,"222222222222222222222222222222222")
+            setData(nextCalendar)
+
         }
 
 
@@ -72,14 +67,17 @@ class DailyActivity : DLogBaseActivity() {
         Log.d(tag, "onResume")
         super.onResume()
 
-        // 현재 날짜 데이터 세팅
-        setData(currentDate)
+        // 날짜 데이터 세팅
+        setData(jsonCalendar)
 
 
     }
 
-    private fun setData(date: String) {
-        val cursor = db.select(date.toInt())
+    private fun setData(jsonObject: JSONObject) {
+        // 날짜 파싱
+        daily_tv_date.text = String.format(getString(R.string.daily_date), jsonObject.get("year"), jsonObject.get("month"), jsonObject.get("date"), jsonObject.get("day"))
+
+        val cursor = db.select(jsonObject.get("yyyymmdd").toString().toInt())
         dailyList.clear()
         while (cursor.moveToNext()) {
             dailyList.add(DailyData(cursor.getString(2), cursor.getString(3)))

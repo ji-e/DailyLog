@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/dp120"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="@dimen/dp150"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp02"
+        android:layout_marginTop="@dimen/dp02"
+        android:layout_marginBottom="@dimen/dp02"
         android:layout_marginRight="@dimen/dp16"
-        android:background="@drawable/rectangle"
+        android:background="@color/c_ffffff"
+        android:elevation="@dimen/dp02"
         android:orientation="vertical">
 
 
@@ -23,7 +27,6 @@
             android:textSize="@dimen/dp15" />
 
 
-
         <TextView
             android:id="@+id/menu_view"
             android:layout_width="match_parent"
@@ -35,7 +38,6 @@
             android:textSize="@dimen/dp15" />
 
 
-
         <TextView
             android:id="@+id/menu_excel"
             android:layout_width="match_parent"
@@ -45,7 +47,6 @@
             android:text="@string/menu_03"
             android:textColor="@color/c_333333"
             android:textSize="@dimen/dp15" />
-
 
 
         <TextView

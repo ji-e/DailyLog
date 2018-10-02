@@ -12,17 +12,21 @@
     <string name="daily_title">일간</string>
     <string name="daily_date">%1$s년 %2$s월 %3$s일 %4$s요일</string>
 
+    <!--WeeklyActivity-->
+    <string name="weekly_title">주간</string>
+    <string name="weekly_date">%1$s년 %2$s월 %3$s주</string>
+
     <!--MonthlyActivity-->
     <string name="monthly_title">월간</string>
-
-    <!--YearActivity-->
-    <string name="year_title">년간</string>
+    <string name="monthly_date">%1$s년 %2$s월 </string>
 
     <!--WriteActivity-->
     <string name="write_date">%1$s년 %2$s월 %3$s일 %4$s요일</string>
     <string name="write_title">제목을 작성해 주세요.</string>
     <string name="write_content">일지를 작성해 주세요.</string>
 
+    <!--SettingActivity-->
+    <string name="setting_title">환경설정</string>
     <!--Menu-->
     <string name="menu_01">로그아웃</string>
     <string name="menu_02">보기방식</string>

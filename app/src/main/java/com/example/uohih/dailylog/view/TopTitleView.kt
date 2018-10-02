@@ -2,18 +2,18 @@ package com.example.uohih.dailylog.view
 
 import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import android.support.v4.content.res.TypedArrayUtils.getString
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import com.example.uohih.dailylog.R
-import com.example.uohih.dailylog.main.WriteActivity
 import kotlinx.android.synthetic.main.top_title_view.view.*
 import java.util.*
 import android.widget.*
-import com.example.uohih.dailylog.R.style.*
+import com.example.uohih.dailylog.main.*
+import com.example.uohih.dailylog.setting.SettingActivity
 import kotlinx.android.synthetic.main.dialog_menu.view.*
 import kotlin.collections.ArrayList
 
@@ -26,20 +26,11 @@ class TopTitleView : RelativeLayout {
     private var mContext: Context? = null
     private var mRootView: View? = null
 
-//    private var _textTitle: String? = null
-
-//    private var tvTitle: TextView = top_tv_title
-//    private var ivLogo: ImageView = top_iv_logo
-//    private var ivMenu: ImageButton = top_btn_menu
-//    private var ivSearch: ImageButton = top_btn_search
-//    private var ivOpen: ImageButton = top_btn_open
-//    private var ivCalendar: ImageButton = top_btn_calendar
-//    private var ivpencil: ImageButton = top_btn_pencil
 
     /**
      * 닫기
      */
-    private val mCloseBtnClickListener : View.OnClickListener = OnClickListener {
+    private val mCloseBtnClickListener: View.OnClickListener = OnClickListener {
         if (mContext != null && mContext is Activity) {
             (mContext as Activity).finish()
         }
@@ -47,16 +38,17 @@ class TopTitleView : RelativeLayout {
 
 
     // 메뉴
-    private var mMenuBtnClickListener : View.OnClickListener = OnClickListener {
+    private var mMenuBtnClickListener: View.OnClickListener = OnClickListener {
         val popupView = LayoutInflater.from(mContext).inflate(R.layout.dialog_menu, null)
         val mPopupWindow = PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+
         mPopupWindow.isFocusable = true
         mPopupWindow.showAsDropDown(it)
 
         // todo 화면 잠금이 없을 때는 로그아웃 표시 안함
-        val logout=true
-        if(logout){
-            popupView.menu_logout.visibility=View.GONE
+        val logout = true
+        if (logout) {
+            popupView.menu_logout.visibility = View.GONE
         }
 
         // todo 일단 모두 toast
@@ -68,14 +60,33 @@ class TopTitleView : RelativeLayout {
          * 보기 방식
          */
         popupView.menu_view.setOnClickListener {
-            var arrayList:ArrayList<String>?=null
-            val listViewAdapter=ListViewAdapter(mContext!!, ArrayList())
-            listViewAdapter.setContent(resources.getString(R.string.daily_title))
-            listViewAdapter.setContent(resources.getString(R.string.monthly_title))
-            listViewAdapter.setContent(resources.getString(R.string.year_title))
 
-            val customDialogList=CustomListDialog(mContext!!,  android.R.style.Theme_Material_Dialog_MinWidth)
-            customDialogList.showDialogList(mContext,listViewAdapter)
+            val listViewAdapter = ListViewAdapter((mContext as Activity), ArrayList())
+            listViewAdapter.setContent(resources.getString(R.string.daily_title))
+            listViewAdapter.setContent(resources.getString(R.string.weekly_title))
+            listViewAdapter.setContent(resources.getString(R.string.monthly_title))
+
+            val customDialogList = CustomListDialog((mContext as Activity), android.R.style.Theme_Material_Dialog_MinWidth)
+            customDialogList.showDialogList(mContext, resources.getString(R.string.menu_02), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, position, id ->
+                when (position) {
+                    0 -> {
+                        val intent = Intent(mContext, DailyActivity::class.java)
+                        (mContext as Activity).startActivity(intent)
+                        (mContext as Activity).finish()
+                    }
+                    1 -> {
+                        val intent = Intent(mContext, WeeklyActivity::class.java)
+                        (mContext as Activity).startActivity(intent)
+                        (mContext as Activity).finish()
+                    }
+                    2 -> {
+                        val intent = Intent(mContext, MonthlyActivity::class.java)
+                        (mContext as Activity).startActivity(intent)
+                        (mContext as Activity).finish()
+                    }
+                }
+                customDialogList.dismiss()
+            })
 
 //            Toast.makeText(mContext, "보기방식", Toast.LENGTH_SHORT).show()
             mPopupWindow.dismiss()
@@ -85,7 +96,10 @@ class TopTitleView : RelativeLayout {
             mPopupWindow.dismiss()
         }
         popupView.menu_setting.setOnClickListener {
-            Toast.makeText(mContext, "환경설정", Toast.LENGTH_SHORT).show()
+            val intent = Intent(mContext, SettingActivity::class.java)
+            (mContext as Activity).startActivity(intent)
+
+//            Toast.makeText(mContext, "환경설정", Toast.LENGTH_SHORT).show()
             mPopupWindow.dismiss()
         }
 
@@ -93,32 +107,35 @@ class TopTitleView : RelativeLayout {
 
 
     // 검색
-    private val mSearchBtnClickListener : View.OnClickListener= OnClickListener {
+    private val mSearchBtnClickListener: View.OnClickListener = OnClickListener {
 
         // todo 다이얼로그 테스트
-        val customDialog=CustomDialog(mContext!!,  android.R.style.Theme_Material_Dialog_MinWidth)
-       customDialog.showDialog(mContext,"fdfssssssssssd","ㄹㅇㄹㅇㄹ",null,"fdafdf",null)
+        val customDialog = CustomDialog(mContext!!, android.R.style.Theme_Material_Dialog_MinWidth)
+        customDialog.showDialog(mContext, "fdfssssssssssd", "ㄹㅇㄹㅇㄹ", null, "fdafdf", null)
     }
 
     // 불러오기
-    private val mOpenBtnClickListener : View.OnClickListener = OnClickListener { }
+    private val mOpenBtnClickListener: View.OnClickListener = OnClickListener { }
 
     // 캘린더
-    private var mCalendarBtnClickListener : View.OnClickListener = OnClickListener {
-//        Toast.makeText(mContext, "제목 fdfdf!", Toast.LENGTH_SHORT).show()
+    private var mCalendarBtnClickListener: View.OnClickListener = OnClickListener {
+
+
+        //        Toast.makeText(mContext, "제목 fdfdf!", Toast.LENGTH_SHORT).show()
     }
 
     /**
      * 연필
      * 일지 작성(WriteActivity 이동)
      */
-    private val mPencilBtnClickListener : View.OnClickListener = OnClickListener {
+    private val mPencilBtnClickListener: View.OnClickListener = OnClickListener {
         val intent = Intent(mContext, WriteActivity::class.java)
         (mContext as Activity).startActivity(intent)
+
     }
 
     // 지우개
-    private var mEraserBtnClickListener : View.OnClickListener = OnClickListener { }
+    private var mEraserBtnClickListener: View.OnClickListener = OnClickListener { }
 
 
     /**
@@ -150,7 +167,6 @@ class TopTitleView : RelativeLayout {
     fun setMenuBtnClickListener(mMenuBtnClickListener: View.OnClickListener) {
         top_btn_menu.setOnClickListener(mMenuBtnClickListener)
     }
-
 
 
     constructor(context: Context) : super(context) {
@@ -188,6 +204,8 @@ class TopTitleView : RelativeLayout {
         // 상단 바 타이틀
         if (!at.hasValue(R.styleable.TopTitleView_tvTitle)) {
             top_tv_title.visibility = View.GONE
+        }else{
+            top_tv_title.text=at.getText(R.styleable.TopTitleView_tvTitle)
         }
 
         // 상단 바 닫기
@@ -237,9 +255,6 @@ class TopTitleView : RelativeLayout {
         }
 
     }
-
-
-
 
 
     /**

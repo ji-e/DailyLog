@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".main.DailyActivity">
-
+    tools:context=".main.MonthlyActivity">
 
     <!--상단 타이틀 및 아이콘 바-->
     <com.example.uohih.dailylog.view.TopTitleView
-        android:id="@+id/daily_title_view"
+        android:id="@+id/monthly_title_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
         android:gravity="center_vertical"
@@ -19,9 +18,9 @@
         app:btnPencil="true"
         app:btnSearch="true"
         app:imgLogo="true"
-        app:tvTitle="@string/daily_title" />
+        app:tvTitle="@string/monthly_title" />
 
-    <!--일간 날짜-->
+    <!--월간 날짜-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
@@ -30,17 +29,17 @@
         android:paddingRight="@dimen/dp10">
 
         <TextView
-            android:id="@+id/daily_tv_date"
+            android:id="@+id/monthly_tv_date"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="@string/daily_date"
+            android:text="@string/monthly_date"
             android:textColor="@color/c_333333"
             android:textSize="@dimen/dp17" />
 
         <ImageButton
-            android:id="@+id/daily_btn_back"
+            android:id="@+id/monthly_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -48,7 +47,7 @@
             android:background="@drawable/btn_back_selector" />
 
         <ImageButton
-            android:id="@+id/daily_btn_next"
+            android:id="@+id/monthly_btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -60,12 +59,4 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp02"
         android:background="@color/c_f2edf9" />
-
-    <!--리사이클뷰-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/daily_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

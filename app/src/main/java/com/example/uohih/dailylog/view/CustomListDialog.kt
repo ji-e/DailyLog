@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.util.Log
 import android.view.*
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
@@ -29,6 +30,7 @@ class CustomListDialog(context: Context, theme: Int) : Dialog(context, theme) {
 //        private var mText02btnClickListener: DialogInterface.OnClickListener? = null
 //        private var mText03btnClickListener: DialogInterface.OnClickListener? = null
         private var mClosebtnClickListener: DialogInterface.OnClickListener? = null
+        private var mItemClickListener:AdapterView.OnItemClickListener?=null
 
         private var listAdapter: ListAdapter? = null
         private var listView: ListView? = null
@@ -46,12 +48,22 @@ class CustomListDialog(context: Context, theme: Int) : Dialog(context, theme) {
         }
 
         /**
+         * 리스트뷰 아이템 리스너
+         */
+        fun setmItemClickListener(mItemClickListener:AdapterView.OnItemClickListener):Builder{
+            this.mItemClickListener=mItemClickListener
+            return this
+        }
+
+        /**
          * 리스트 뷰
          */
         fun setListAdater(listAdapter: ListAdapter): Builder {
             this.listAdapter = listAdapter
             return this
         }
+
+
 
 
         /**
@@ -65,6 +77,7 @@ class CustomListDialog(context: Context, theme: Int) : Dialog(context, theme) {
             dialog.addContentView(contentView, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
 
 
+            Log.d("FDFDFd",dialogTitle)
             // title 세팅
             if (dialogTitle.isNullOrEmpty()) {
                 contentView.daiog_list_tv_title.visibility = View.GONE
@@ -87,18 +100,11 @@ class CustomListDialog(context: Context, theme: Int) : Dialog(context, theme) {
                 contentView.daiog_list_title.visibility=View.GONE
             }
 
-            // 해당 뷰에 리스트뷰 호출
-            listView = contentView.findViewById(R.id.dailog_list) as ListView
-            listView!!.adapter = listAdapter
+            // 리스트뷰 세팅
+            listView = contentView.dailog_list
+            listView?.adapter = listAdapter
+            listView?.onItemClickListener = mItemClickListener
 
-            listView!!.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-                when (position) {
-                    0 -> Toast.makeText(context, "일간", Toast.LENGTH_SHORT).show()
-                    1 -> Toast.makeText(context, "월간", Toast.LENGTH_SHORT).show()
-                    2 -> Toast.makeText(context, "년간", Toast.LENGTH_SHORT).show()
-                }
-                dialog.dismiss()
-            }
 
             return dialog
         }
@@ -108,14 +114,14 @@ class CustomListDialog(context: Context, theme: Int) : Dialog(context, theme) {
     /**
      * 리스트 다이얼로그
      */
-    fun showDialogList(context: Context?, listAdapter: ListAdapter) {
-        showDialogList(context, null, null, listAdapter)
+    fun showDialogList(context: Context?, listAdapter: ListAdapter, itemClickListener: AdapterView.OnItemClickListener) {
+        showDialogList(context, null, null, listAdapter,itemClickListener)
     }
 
     /**
      * 타이틀 리스트 다이얼로그
      */
-    fun showDialogList(context: Context?, title: String?, closeBtnListener: DialogInterface.OnClickListener?, listAdapter: ListAdapter): CustomListDialog? {
+    fun showDialogList(context: Context?, title: String?, closeBtnListener: DialogInterface.OnClickListener?, listAdapter: ListAdapter,itemClickListener: AdapterView.OnItemClickListener): CustomListDialog? {
         if (context == null) {
             return null
         }
@@ -131,6 +137,7 @@ class CustomListDialog(context: Context, theme: Int) : Dialog(context, theme) {
         val builder = CustomListDialog.Builder(context)
         builder.setListAdater(listAdapter)
         builder.setmCloseBtnClickListener(title, closeBtnListener)
+        builder.setmItemClickListener(itemClickListener)
         val dialog = builder.create()
         dialog.show()
         return dialog
@@ -141,6 +148,8 @@ class CustomListDialog(context: Context, theme: Int) : Dialog(context, theme) {
 class ListViewAdapter(context: Context, item: ArrayList<String>) : BaseAdapter() {
     private val mContext = context
     private val mItem = item
+
+
 
     // 리스트에 값을 추가할 메소드
     fun setContent(text: String) {

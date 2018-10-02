@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp45"
     android:gravity="center_vertical"
-    android:paddingLeft="@dimen/dp16"
-    android:paddingRight="@dimen/dp16">
+    android:paddingLeft="@dimen/dp10"
+    android:paddingRight="@dimen/dp10">
 
     <ImageButton
         android:id="@+id/top_btn_close"
@@ -25,7 +25,6 @@
         android:layout_height="@dimen/dp35"
         android:layout_toEndOf="@+id/top_iv_logo"
         android:gravity="center"
-        android:text="@string/daily_title"
         android:textSize="@dimen/dp16" />
 
     <!--오른쪽 버튼-->

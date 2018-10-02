@@ -37,7 +37,7 @@ class WriteActivity : DLogBaseActivity() {
 
         // 이전 버튼 클릭 이벤트
         write_btn_back.setOnClickListener {
-            var preCalendar = JSONObject(getDate(true, 1).toString())
+            var preCalendar = JSONObject(getDate(true, 1,"일").toString())
             setDateInfom(preCalendar)
             write_tv_date.text = String.format(getString(R.string.daily_date), preCalendar.get("year"), preCalendar.get("month"), preCalendar.get("date"), preCalendar.get("day"))
             write_et_title.setText("")
@@ -47,7 +47,7 @@ class WriteActivity : DLogBaseActivity() {
 
         // 다음 버튼 클릭 이벤트
         write_btn_next.setOnClickListener {
-            var nextCalendar = JSONObject(getDate(false, 1).toString())
+            var nextCalendar = JSONObject(getDate(false, 1,"일").toString())
             setDateInfom(nextCalendar)
             write_tv_date.text = String.format(getString(R.string.daily_date), nextCalendar.get("year"), nextCalendar.get("month"), nextCalendar.get("date"), nextCalendar.get("day"))
             write_et_title.setText("")

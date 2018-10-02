@@ -11,6 +11,7 @@
             android:layout_height="match_parent"
             android:textColor="@color/c_333333"
             android:paddingLeft="@dimen/dp16"
+            android:paddingRight="@dimen/dp16"
             android:gravity="center_vertical"
             android:textSize="@dimen/dp15" />
 
