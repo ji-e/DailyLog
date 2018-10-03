@@ -11,6 +11,7 @@
     <!--DailyActivity-->
     <string name="daily_title">일간</string>
     <string name="daily_date">%1$s년 %2$s월 %3$s일 %4$s요일</string>
+    <string name="daily_all_check">전체 선택</string>
 
     <!--WeeklyActivity-->
     <string name="weekly_title">주간</string>
@@ -28,7 +29,7 @@
     <!--SettingActivity-->
     <string name="setting_title">환경설정</string>
     <!--Menu-->
-    <string name="menu_01">로그아웃</string>
+    <string name="menu_01">편집</string>
     <string name="menu_02">보기방식</string>
     <string name="menu_03">엑셀로 내보내기</string>
     <string name="menu_04">환경설정</string>

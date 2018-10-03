@@ -9,10 +9,11 @@
 
     <!--상단 타이틀 및 아이콘 바-->
     <com.example.uohih.dailylog.view.TopTitleView
+        android:id="@+id/write_top_title_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
         android:gravity="center_vertical"
-        app:btnClose="true"
+        app:btnLogo="true"
         app:btnOpen="true"
         app:btnSearch="true"
         app:btnCalendar="true"

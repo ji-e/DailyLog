@@ -5,6 +5,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import org.json.JSONArray
+import org.json.JSONObject
 
 class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) {
 
@@ -54,12 +56,18 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
     /**
      * tb_dlog의 데이터 삭제
      */
-    fun delete(no: Int) {
+    fun delete(array: ArrayList<String>, index:String) {
         val db = writableDatabase
-        val queryDelete = "delete $tableName where no=\'$no\'"
-        db.execSQL(queryDelete)
+        for(i in 0 until array.size){
+            val no=array[i]
+            var queryDelete = "delete from $tableName where $index=\'$no\'"
+            if(index.equals("no")){
+                queryDelete = "delete from $tableName where $index=$no"
+            }
+            db.execSQL(queryDelete)
+            Log.d(tag,queryDelete)
+        }
         db.close()
-        Log.d(tag,queryDelete)
     }
 
     /**

@@ -27,11 +27,26 @@
             android:textColor="@color/c_333333"
             android:textSize="@dimen/dp17" />
 
-        <ImageButton
-            android:id="@+id/btn_daily_item"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_down_selector" />
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/btn_daily_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:background="@drawable/btn_down_selector" />
+
+            <CheckBox
+                android:id="@+id/check_daily_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:background="@drawable/btn_check_selector"
+                android:visibility="gone" />
+        </RelativeLayout>
     </LinearLayout>
 
     <View
@@ -49,15 +64,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/c_efedf2"
-            android:padding="@dimen/dp16"
-            android:minHeight="@dimen/dp100">
+            android:minHeight="@dimen/dp100"
+            android:padding="@dimen/dp16">
 
             <TextView
                 android:id="@+id/tv_daily_item_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/c_555555"
                 android:layout_marginLeft="@dimen/dp30"
+                android:textColor="@color/c_555555"
                 android:textSize="@dimen/dp15" />
 
         </LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
+import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.database.DBHelper
 import kotlinx.android.synthetic.main.activity_monthly.*
 import org.json.JSONObject
@@ -24,8 +25,8 @@ class MonthlyActivity : DLogBaseActivity() {
 
         // 이전 버튼 클릭 이벤트
         monthly_btn_back.setOnClickListener {
-            var preCalendar = JSONObject(getDate(true, 1,"월").toString())
-            setDateInfom(preCalendar)
+            var preCalendar = JSONObject(getDate(true, 1, "월").toString())
+            DLogBaseApplication().setDateInfom(preCalendar)
             monthly_tv_date.text = String.format(getString(R.string.monthly_date), preCalendar.get("year"), preCalendar.get("month"))
 //            setData(preCalendar.get("yyyymmdd").toString())
 
@@ -35,8 +36,8 @@ class MonthlyActivity : DLogBaseActivity() {
 
         // 다음 버튼 클릭 이벤트
         monthly_btn_next.setOnClickListener {
-            var nextCalendar = JSONObject(getDate(false, 1,"월").toString())
-            setDateInfom(nextCalendar)
+            var nextCalendar = JSONObject(getDate(false, 1, "월").toString())
+            DLogBaseApplication().setDateInfom(nextCalendar)
             monthly_tv_date.text = String.format(getString(R.string.monthly_date), nextCalendar.get("year"), nextCalendar.get("month"))
 //            setData(nextCalendar.get("yyyymmdd").toString())
             Log.d(tag, "222222222222222222222222222222222")

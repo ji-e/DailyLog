@@ -17,7 +17,7 @@
         app:btnMenu="true"
         app:btnPencil="true"
         app:btnSearch="true"
-        app:imgLogo="true"
+        app:btnLogo="true"
         app:tvTitle="@string/monthly_title" />
 
     <!--월간 날짜-->

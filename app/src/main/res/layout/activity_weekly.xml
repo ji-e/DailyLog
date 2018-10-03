@@ -17,7 +17,7 @@
         app:btnMenu="true"
         app:btnPencil="true"
         app:btnSearch="true"
-        app:imgLogo="true"
+        app:btnLogo="true"
         app:tvTitle="@string/weekly_title" />
 
     <!--주간 날짜-->

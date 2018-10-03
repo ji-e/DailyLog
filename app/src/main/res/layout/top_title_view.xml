@@ -7,23 +7,24 @@
     android:paddingLeft="@dimen/dp10"
     android:paddingRight="@dimen/dp10">
 
-    <ImageButton
-        android:id="@+id/top_btn_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_close_selector" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/top_btn_close"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/btn_close_selector" />-->
 
-    <ImageView
-        android:id="@+id/top_iv_logo"
+    <ImageButton
+        android:id="@+id/top_btn_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/dlog_logo_01" />
+        android:background="@null"
+         />
 
     <TextView
         android:id="@+id/top_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp35"
-        android:layout_toEndOf="@+id/top_iv_logo"
+        android:layout_toEndOf="@+id/top_btn_logo"
         android:gravity="center"
         android:textSize="@dimen/dp16" />
 
@@ -38,7 +39,8 @@
             android:id="@+id/top_btn_pencil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_pencil_selector" />
+            android:background="@null"
+            />
 
         <RelativeLayout
             android:id="@+id/top_layout_calendar"
