@@ -87,17 +87,17 @@ class TopTitleView : RelativeLayout {
             var customDialogList = CustomListDialog((mContext as Activity), android.R.style.Theme_Material_Dialog_MinWidth)
             customDialogList = customDialogList.showDialogList(mContext, resources.getString(R.string.menu_02), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, position, id ->
                 when (position) {
-                    0 -> {
+                    0 -> { //일간
                         val intent = Intent(mContext, DailyActivity::class.java)
                         (mContext as Activity).startActivity(intent)
                         (mContext as Activity).finish()
                     }
-                    1 -> {
+                    1 -> { //주간
                         val intent = Intent(mContext, WeeklyActivity::class.java)
                         (mContext as Activity).startActivity(intent)
                         (mContext as Activity).finish()
                     }
-                    2 -> {
+                    2 -> { //월간
                         val intent = Intent(mContext, MonthlyActivity::class.java)
                         (mContext as Activity).startActivity(intent)
                         (mContext as Activity).finish()

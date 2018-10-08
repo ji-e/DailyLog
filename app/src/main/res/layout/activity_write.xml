@@ -68,7 +68,7 @@
         <EditText
             android:id="@+id/write_et_title"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="@string/write_title"
             android:textSize="@dimen/dp16"
@@ -94,8 +94,9 @@
         <EditText
             android:id="@+id/write_et_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@null"
+            android:gravity="top"
             android:hint="@string/write_content"
             android:textColor="@color/c_555555"
             android:textSize="@dimen/dp16" />

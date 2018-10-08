@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import org.json.JSONObject
 import java.util.*
+import kotlin.collections.ArrayList
 
 open class DLogBaseActivity : Activity() {
 
@@ -67,8 +68,12 @@ open class DLogBaseActivity : Activity() {
      * num: 구할 날짜의 차이
      * type: 일, 주, 월
      */
-    fun getDate(pre: Boolean, num: Int, type: String): JSONObject {
-        var jsonCalendar = JSONObject(DLogBaseApplication().getDateInfom().toString())
+
+    fun getDate(pre: Boolean, num: Int, type: String): JSONObject{
+       return getDate(pre, num, type, DLogBaseApplication().getDateInfom())
+    }
+    fun getDate(pre: Boolean, num: Int, type: String, jsonObject: JSONObject): JSONObject {
+        var jsonCalendar = JSONObject(jsonObject.toString())
         var year = jsonCalendar.get("year").toString().toInt()// 년도
         var month = jsonCalendar.get("month").toString().toInt()// 월
         var date = jsonCalendar.get("date").toString().toInt()// 날짜
@@ -152,7 +157,8 @@ open class DLogBaseActivity : Activity() {
 
     override fun onDestroy() {
         super.onDestroy()
-
+        DLogBaseApplication().setDeleteItem(ArrayList())
+        DLogBaseApplication().setAllCheckBox(false)
 //        val db = DBHelper(this)
 //        db.close()
     }

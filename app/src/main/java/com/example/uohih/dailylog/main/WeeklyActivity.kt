@@ -22,6 +22,7 @@ class WeeklyActivity : DLogBaseActivity() {
 
         // 현재 날짜 세팅
         weekly_tv_date.text = String.format(getString(R.string.weekly_date), jsonCalendar.get("year"), jsonCalendar.get("month"), jsonCalendar.get("week"))
+        DLogBaseApplication().setDateInfom(jsonCalendar)
 
         // 이전 버튼 클릭 이벤트
         weekly_btn_back.setOnClickListener {

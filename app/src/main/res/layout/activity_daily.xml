@@ -69,6 +69,7 @@
         android:paddingRight="@dimen/dp10"
         android:paddingLeft="@dimen/dp16"
         android:visibility="gone"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -83,10 +84,11 @@
 
         <CheckBox
             android:id="@+id/daily_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp18"
+            android:layout_height="@dimen/dp18"
             android:button="@null"
-            android:background="@drawable/btn_check_selector"
+            android:layout_marginRight="@dimen/dp13"
+            android:background="@drawable/btn_check_selector2"
             />
 
 
