@@ -1,8 +1,6 @@
 package com.example.uohih.dailylog.base
 
 import android.app.Application
-import android.util.Log
-import org.json.JSONArray
 import org.json.JSONObject
 
 class DLogBaseApplication : Application() {
@@ -35,7 +33,7 @@ class DLogBaseApplication : Application() {
      */
     fun setDeleteItem(deleteItem: ArrayList<String>) {
         Companion.deleteItem.clear()
-        Log.d("arrray", deleteItem.toString())
+        LogUtil.d(deleteItem.toString())
         Companion.deleteItem = deleteItem
     }
 

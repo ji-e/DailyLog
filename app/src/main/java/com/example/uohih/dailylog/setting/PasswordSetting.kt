@@ -1,6 +1,5 @@
 package com.example.uohih.dailylog.setting
 
-import android.app.Activity
 import android.os.Bundle
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity

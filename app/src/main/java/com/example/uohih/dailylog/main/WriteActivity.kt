@@ -1,7 +1,6 @@
 package com.example.uohih.dailylog.main
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
@@ -11,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_write.*
 import org.json.JSONObject
 
 class WriteActivity : DLogBaseActivity() {
-    private val tag = "WriteActivity"
     private val base = DLogBaseApplication()
     //    private var jsonCalendar = JSONObject(getToday().toString())
     private var jsonCalendar = base.getDateInfom()
@@ -31,8 +29,6 @@ class WriteActivity : DLogBaseActivity() {
         DLogBaseApplication().setDateInfom(jsonCalendar)
         // 일지 쓰기 버튼 클릭 이벤트
         write_btn_write.setOnClickListener {
-
-            Log.d(tag, write_et_title.text.toString())
             if (write_et_title.text.toString().isEmpty()) {
                 emptyAlert()
             } else {

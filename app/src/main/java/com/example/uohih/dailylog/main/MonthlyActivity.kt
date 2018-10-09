@@ -1,7 +1,6 @@
 package com.example.uohih.dailylog.main
 
 import android.os.Bundle
-import android.util.Log
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
@@ -10,8 +9,6 @@ import kotlinx.android.synthetic.main.activity_monthly.*
 import org.json.JSONObject
 
 class MonthlyActivity : DLogBaseActivity() {
-
-    private val tag = "MonthlyActivity"
     private var jsonCalendar = JSONObject(getToday().toString())
     private val db = DBHelper(this)
     private val currentDate = jsonCalendar.get("yyyymmdd").toString()
@@ -29,9 +26,6 @@ class MonthlyActivity : DLogBaseActivity() {
             DLogBaseApplication().setDateInfom(preCalendar)
             monthly_tv_date.text = String.format(getString(R.string.monthly_date), preCalendar.get("year"), preCalendar.get("month"))
 //            setData(preCalendar.get("yyyymmdd").toString())
-
-
-            Log.d(tag, "11111111111111111111111111111111")
         }
 
         // 다음 버튼 클릭 이벤트
@@ -40,7 +34,6 @@ class MonthlyActivity : DLogBaseActivity() {
             DLogBaseApplication().setDateInfom(nextCalendar)
             monthly_tv_date.text = String.format(getString(R.string.monthly_date), nextCalendar.get("year"), nextCalendar.get("month"))
 //            setData(nextCalendar.get("yyyymmdd").toString())
-            Log.d(tag, "222222222222222222222222222222222")
         }
     }
 

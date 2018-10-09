@@ -1,7 +1,6 @@
 package com.example.uohih.dailylog.main
 
 import android.os.Bundle
-import android.util.Log
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
@@ -30,9 +29,6 @@ class WeeklyActivity : DLogBaseActivity() {
             DLogBaseApplication().setDateInfom(preCalendar)
             weekly_tv_date.text = String.format(getString(R.string.weekly_date), preCalendar.get("year"), preCalendar.get("month"), preCalendar.get("week"))
 //            setData(preCalendar.get("yyyymmdd").toString())
-
-
-            Log.d(tag, "11111111111111111111111111111111")
         }
 
         // 다음 버튼 클릭 이벤트
@@ -41,7 +37,6 @@ class WeeklyActivity : DLogBaseActivity() {
             DLogBaseApplication().setDateInfom(nextCalendar)
             weekly_tv_date.text = String.format(getString(R.string.weekly_date), nextCalendar.get("year"), nextCalendar.get("month"), nextCalendar.get("week"))
 //            setData(nextCalendar.get("yyyymmdd").toString())
-            Log.d(tag, "222222222222222222222222222222222")
         }
     }
 }

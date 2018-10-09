@@ -4,9 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
-import org.json.JSONArray
-import org.json.JSONObject
+import com.example.uohih.dailylog.base.LogUtil
 
 class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) {
 
@@ -17,7 +15,6 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
      * title: 제목
      * content: 내용
      */
-    val tag="DBHelper"
     val tableName = "tb_dlog"
 
 
@@ -39,7 +36,7 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
         val queryInsert = "insert into $tableName (date, title, content) values (?,?,?), ($date, \'$title\', \'$content\')"
         db.execSQL(queryInsert)
         db.close()
-        Log.d(tag,queryInsert)
+        LogUtil.d(queryInsert)
     }
 
     /**
@@ -50,7 +47,7 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
         val queryUpdate = "update $tableName set title =\'$title\', content=\'$content\' where no=\'$no\'"
         db.execSQL(queryUpdate)
         db.close()
-        Log.d(tag,queryUpdate)
+        LogUtil.d(queryUpdate)
     }
 
     /**
@@ -65,7 +62,7 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
                 queryDelete = "delete from $tableName where $index=$no"
             }
             db.execSQL(queryDelete)
-            Log.d(tag,queryDelete)
+            LogUtil.d(queryDelete)
         }
         db.close()
     }
@@ -77,7 +74,7 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
         val db = writableDatabase
         val querySelect ="select * from $tableName where date=\'$date\'"
         db.rawQuery(querySelect,null)
-        Log.d(tag,querySelect)
+        LogUtil.d(querySelect)
         return db.rawQuery(querySelect,null)
     }
 

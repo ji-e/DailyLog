@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".main.WriteActivity">
+    tools:context=".main.UpdateActivity">
 
     <!--상단 타이틀 및 아이콘 바-->
     <com.example.uohih.dailylog.view.TopTitleView
-        android:id="@+id/write_top_title_view"
+        android:id="@+id/update_top_title_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
         android:gravity="center_vertical"
@@ -29,7 +29,7 @@
         android:paddingRight="@dimen/dp10">
 
         <TextView
-            android:id="@+id/write_tv_date"
+            android:id="@+id/update_tv_date"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
@@ -39,7 +39,7 @@
             android:textSize="@dimen/dp17" />
 
         <ImageButton
-            android:id="@+id/write_btn_back"
+            android:id="@+id/update_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -47,7 +47,7 @@
             android:background="@drawable/btn_back_selector" />
 
         <ImageButton
-            android:id="@+id/write_btn_next"
+            android:id="@+id/update_btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -66,7 +66,7 @@
         android:paddingRight="@dimen/dp16">
 
         <EditText
-            android:id="@+id/write_et_title"
+            android:id="@+id/update_et_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -77,7 +77,7 @@
             android:textStyle="bold"/>
 
         <ImageButton
-            android:id="@+id/write_btn_delete"
+            android:id="@+id/update_btn_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_delete_selector" />
@@ -92,7 +92,7 @@
         android:padding="@dimen/dp16">
 
         <EditText
-            android:id="@+id/write_et_content"
+            android:id="@+id/update_et_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
@@ -102,7 +102,7 @@
             android:textSize="@dimen/dp16" />
 
         <ImageButton
-            android:id="@+id/write_btn_camera"
+            android:id="@+id/update_btn_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -114,7 +114,7 @@
 
     <!--버튼-->
     <Button
-        android:id="@+id/write_btn_write"
+        android:id="@+id/update_btn_write"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
         android:background="@drawable/btn_bottom_selector"

@@ -3,7 +3,6 @@ package com.example.uohih.dailylog.base
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
@@ -150,7 +149,7 @@ open class DLogBaseActivity : Activity() {
         jsonCalendar.put("day", day)
         jsonCalendar.put("yyyymmdd", "$year$_month$_date")
 
-        Log.d("calcal", jsonCalendar.get("yyyymmdd").toString())
+        LogUtil.d(jsonCalendar.get("yyyymmdd").toString())
         return jsonCalendar
     }
 

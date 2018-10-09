@@ -22,6 +22,7 @@
             android:name=".base.DLogBaseActivity"
             android:label="@string/title_activity_dlog_base" />
         <activity android:name=".main.WriteActivity" />
+        <activity android:name=".main.UpdateActivity" />
         <activity android:name=".main.MonthlyActivity" />
         <activity android:name=".main.WeeklyActivity" />
         <activity android:name=".setting.SettingActivity" />

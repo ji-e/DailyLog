@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,19 +15,16 @@ import android.widget.*
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
+import com.example.uohih.dailylog.base.LogUtil
 import com.example.uohih.dailylog.database.DBHelper
 import com.example.uohih.dailylog.view.CustomListDialog
 import com.example.uohih.dailylog.view.ListViewAdapter
 import com.example.uohih.dailylog.view.TopTitleView
 import kotlinx.android.synthetic.main.activity_daily.*
 import org.json.JSONObject
-import java.nio.file.Files.size
-
-
 
 
 class DailyActivity : DLogBaseActivity() {
-    private val tag = "DailyActivity"
     private val base = DLogBaseApplication()
     private var jsonCalendar = JSONObject(getToday().toString())
     private val db = DBHelper(this)
@@ -44,7 +41,7 @@ class DailyActivity : DLogBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily)
-        Log.d(tag, "onCreate()")
+        LogUtil.d("onCreate()")
         create = true
 
         // 상단 바 캘린더 클릭 이벤트
@@ -79,11 +76,11 @@ class DailyActivity : DLogBaseActivity() {
                 if (allCheck) {
                     // 상단 바 지우개 클릭 이벤트
                     daily_title_view.setEraserBtnClickListener(View.OnClickListener {
-                        daily_check.isChecked=false
+                        daily_check.isChecked = false
                         val array = base.getDeleteItem()
                         db.delete(array, "no")
                         setData(base.getDateInfom(), allCheck)
-                        Toast.makeText(mContext,"삭제 되었습니다.",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mContext, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                     })
                     daily_checkbox.visibility = View.VISIBLE
                     setData(base.getDateInfom(), allCheck)
@@ -99,7 +96,7 @@ class DailyActivity : DLogBaseActivity() {
 
 
     override fun onResume() {
-        Log.d(tag, "onResume")
+        LogUtil.d("onResume")
         super.onResume()
 
         // 날짜 데이터 세팅
@@ -120,7 +117,7 @@ class DailyActivity : DLogBaseActivity() {
         val cursor = db.select(jsonObject.get("yyyymmdd").toString().toInt())
         dailyList.clear()
         while (cursor.moveToNext()) {
-            dailyList.add(DailyData(cursor.getInt(0), cursor.getString(2), cursor.getString(3)))
+            dailyList.add(DailyData(cursor.getInt(0),cursor.getInt(1), cursor.getString(2), cursor.getString(3)))
         }
 
         val mAadapter = DailyRvAadapter(this, dailyList, delete)
@@ -153,7 +150,7 @@ class DailyActivity : DLogBaseActivity() {
     }
 }
 
-class DailyData(val no: Int, val title: String, val content: String)
+class DailyData(val no: Int, val date:Int, val title: String, val content: String)
 
 /**
  * daily
@@ -243,7 +240,6 @@ class DailyRvAadapter(val mContext: Context, val dailyList: ArrayList<DailyData>
             /**
              * 상세 내용이 없을 때
              */
-            Log.d("aass", data.content)
             if (data.content.isBlank()) {
                 itemBtn.visibility = View.GONE
             }
@@ -297,20 +293,30 @@ class DailyRvAadapter(val mContext: Context, val dailyList: ArrayList<DailyData>
 
 
                 var customDialogList = CustomListDialog(mContext, android.R.style.Theme_Material_Dialog_MinWidth)
-                customDialogList = customDialogList.showDialogList(mContext,itemTitle.text.toString(), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, position, id ->
+                customDialogList = customDialogList.showDialogList(mContext, itemTitle.text.toString(), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, position, id ->
                     when (position) {
                         0 -> { //수정
-                            Toast.makeText(mContext,"수정",Toast.LENGTH_SHORT).show()
+
+                            var jsonObject=JSONObject()
+                            jsonObject.put("no",data.no)
+                            jsonObject.put("date",data.date)
+                            jsonObject.put("title",data.title)
+                            jsonObject.put("content",data.content)
+
+                            val intent = Intent(mContext, UpdateActivity::class.java)
+                            intent.putExtra("daily",jsonObject.toString())
+                            mContext.startActivity(intent)
+                            Toast.makeText(mContext, "수정", Toast.LENGTH_SHORT).show()
                         }
                         1 -> { //삭제
                             DBHelper(mContext).delete(arrayListOf(no.toString()), "no")
                             removeAt(adapterPosition)
-                            Toast.makeText(mContext,"삭제 되었습니다.",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
                         }
 
                     }
 //                    postDelayed({
-                        customDialogList.dismiss()
+                    customDialogList.dismiss()
 //                    }, 500)
 
                 })!!
