@@ -90,9 +90,6 @@
             android:layout_marginRight="@dimen/dp13"
             android:background="@drawable/btn_check_selector2"
             />
-
-
-
     </LinearLayout>
 
     <!--리사이클뷰-->

@@ -77,5 +77,12 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
         LogUtil.d(querySelect)
         return db.rawQuery(querySelect,null)
     }
+    fun select(first:Int, last:Int): Cursor {
+        val db = writableDatabase
+        val querySelect ="select * from $tableName where date>=\'$first\' and date<=\'$last\' order by date asc"
+        db.rawQuery(querySelect,null)
+        LogUtil.d(querySelect)
+        return db.rawQuery(querySelect,null)
+    }
 
 }

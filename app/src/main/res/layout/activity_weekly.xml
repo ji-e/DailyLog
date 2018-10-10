@@ -15,7 +15,6 @@
         android:gravity="center_vertical"
         app:btnCalendar="true"
         app:btnMenu="true"
-        app:btnPencil="true"
         app:btnSearch="true"
         app:btnLogo="true"
         app:tvTitle="@string/weekly_title" />
@@ -59,6 +58,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp02"
         android:background="@color/c_f2edf9" />
+
+    <ListView
+        android:id="@+id/weekly_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="0dp"
+        android:divider="@color/c_ffffff">
+
+    </ListView>
 
 
 

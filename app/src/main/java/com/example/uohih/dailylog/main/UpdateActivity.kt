@@ -1,6 +1,10 @@
 package com.example.uohih.dailylog.main
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
@@ -39,6 +43,56 @@ class UpdateActivity : DLogBaseActivity() {
             update_et_title.setText(dailyIntent.get("title").toString())
             update_et_content.setText(dailyIntent.get("content").toString())
         }
+
+
+        /**
+         * 제목 입력에 따른 삭제 버튼
+         */
+        update_et_title.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                if (update_et_title.text.length > 0)
+                    update_btn_delete.visibility = View.VISIBLE
+            } else {
+                update_btn_delete.visibility = View.GONE
+            }
+
+        }
+
+        /**
+         * 제목 입력에 따른 삭제 버튼
+         */
+        update_et_title.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                update_et_content.requestFocus()
+            }
+            false
+        }
+
+        /**
+         * 제목 입력에 따른 삭제 버튼
+         */
+        update_et_title.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+
+            }
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (count == 0 && start == 0) {
+                    update_btn_delete.visibility = View.GONE
+                } else {
+                    update_btn_delete.visibility = View.VISIBLE
+                }
+            }
+            override fun afterTextChanged(s: Editable) {}
+        })
+
+        /**
+         * 삭제 버튼 클릭 리스너
+         */
+        update_btn_delete.setOnClickListener {
+            update_et_title.setText("")
+        }
+
+
 
 
         // 일지 쓰기 버튼 클릭 이벤트

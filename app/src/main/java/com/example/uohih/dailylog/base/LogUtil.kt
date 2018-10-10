@@ -11,24 +11,24 @@ object LogUtil {
         doLog(Log.DEBUG, "called")
     }
 
-    fun v(text: String) {
-        doLog(Log.VERBOSE, text)
+    fun v(text: Any) {
+        doLog(Log.VERBOSE, text.toString())
     }
 
-    fun d(text: String) {
-        doLog(Log.DEBUG, text)
+    fun d(text: Any) {
+        doLog(Log.DEBUG, text.toString())
     }
 
-    fun i(text: String) {
-        doLog(Log.INFO, text)
+    fun i(text: Any) {
+        doLog(Log.INFO, text.toString())
     }
 
-    fun w(text: String) {
-        doLog(Log.WARN, text)
+    fun w(text: Any) {
+        doLog(Log.WARN, text.toString())
     }
 
-    fun e(text: String) {
-        doLog(Log.ERROR, text)
+    fun e(text: Any) {
+        doLog(Log.ERROR, text.toString())
     }
 
 
@@ -52,8 +52,8 @@ object LogUtil {
             val simpleClassName = fullClassName.substring(fullClassName.lastIndexOf(".") + 1)
 
             //add class and method data to logText
-            logText = MessageFormat.format("T:{0} | {1} , {2}() | {3}", Thread.currentThread()
-                    .id, simpleClassName, element.methodName, logText)
+            logText = MessageFormat.format("T:{0} | {1} , {2}() {3}| {4}", Thread.currentThread()
+                    .id, simpleClassName, element.methodName, element.lineNumber, logText)
         }
 
         Log.println(logLevel, TAG, logText)

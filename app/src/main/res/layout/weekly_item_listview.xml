@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <TextView
+        android:id="@+id/weekly_item_date"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp30"
+        android:background="@color/c_f2edf9"
+        android:paddingRight="@dimen/dp10"
+        android:paddingLeft="@dimen/dp16"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/dp17"
+        android:gravity="center_vertical"
+        android:text="@string/weekly_sub_date"/>
+
+    <LinearLayout
+        android:id="@+id/weekly_item_lin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp30"
+        android:paddingRight="@dimen/dp16">
+
+        <ImageView
+            android:id="@+id/weekly_item_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp16"
+            android:background="@drawable/circle_01" />
+
+        <TextView
+            android:id="@+id/weekly_item_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp17" />
+    </LinearLayout>
+</LinearLayout>

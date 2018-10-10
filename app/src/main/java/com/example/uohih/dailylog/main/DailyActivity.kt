@@ -150,7 +150,7 @@ class DailyActivity : DLogBaseActivity() {
     }
 }
 
-class DailyData(val no: Int, val date:Int, val title: String, val content: String)
+class DailyData(val no: Int?, val date:Int, val title: String, val content: String)
 
 /**
  * daily
@@ -288,8 +288,8 @@ class DailyRvAadapter(val mContext: Context, val dailyList: ArrayList<DailyData>
              */
             layout.setOnLongClickListener {
                 val listViewAdapter = ListViewAdapter((mContext as Activity), ArrayList())
-                listViewAdapter.setContent("수정")
-                listViewAdapter.setContent("삭제")
+                listViewAdapter.setContent(itemView.resources.getString(R.string.menu_05))
+                listViewAdapter.setContent(itemView.resources.getString(R.string.menu_06))
 
 
                 var customDialogList = CustomListDialog(mContext, android.R.style.Theme_Material_Dialog_MinWidth)

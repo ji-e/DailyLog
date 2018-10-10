@@ -7,6 +7,7 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
+
 open class DLogBaseActivity : Activity() {
 
     var mContext: Context? = null
@@ -15,10 +16,6 @@ open class DLogBaseActivity : Activity() {
         super.onCreate(savedInstanceState)
         mContext = applicationContext
 //        setContentView(R.layout.activity_intro)
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
 
@@ -68,9 +65,10 @@ open class DLogBaseActivity : Activity() {
      * type: 일, 주, 월
      */
 
-    fun getDate(pre: Boolean, num: Int, type: String): JSONObject{
-       return getDate(pre, num, type, DLogBaseApplication().getDateInfom())
+    fun getDate(pre: Boolean, num: Int, type: String): JSONObject {
+        return getDate(pre, num, type, DLogBaseApplication().getDateInfom())
     }
+
     fun getDate(pre: Boolean, num: Int, type: String, jsonObject: JSONObject): JSONObject {
         var jsonCalendar = JSONObject(jsonObject.toString())
         var year = jsonCalendar.get("year").toString().toInt()// 년도
@@ -153,6 +151,72 @@ open class DLogBaseActivity : Activity() {
         return jsonCalendar
     }
 
+
+    /**
+     * 주차 구하기
+     */
+    fun getWeek(date: String): String {
+        val instance = Calendar.getInstance()
+        instance.set(date.substring(0, 4).toInt(), date.substring(4, 6).toInt() - 1, date.substring(6).toInt())
+        val week = instance.get(Calendar.WEEK_OF_MONTH).toString()
+        return week
+    }
+
+    /**
+     * 요일 구하기
+     */
+    fun getDay(date: String): String {
+        val instance = Calendar.getInstance()
+        instance.set(date.substring(0, 4).toInt(), date.substring(4, 6).toInt() - 1, date.substring(6).toInt())
+        var day = instance.get(Calendar.DAY_OF_WEEK).toString()
+        // 요일로 변환
+        when (day) {
+            "1" -> day = "일"
+            "2" -> day = "월"
+            "3" -> day = "화"
+            "4" -> day = "수"
+            "5" -> day = "목"
+            "6" -> day = "금"
+            "7" -> day = "토"
+
+        }
+        return day
+    }
+
+    /**
+     * 주의 첫날과 마지막날 구하기
+     * 1: 월- 7: 일
+     */
+    fun weekCalendar(cur:String)  :ArrayList<String>{
+        val arrayList = ArrayList<String>(7)
+        val cal = Calendar.getInstance()
+        cal.set(cur.substring(0, 4).toInt(), cur.substring(4, 6).toInt()-1, cur.substring(6).toInt())
+        val inYear = cal.get(Calendar.YEAR)
+        val inMonth = cal.get(Calendar.MONTH)
+        var inDay = cal.get(Calendar.DAY_OF_MONTH)
+        var yoil = cal.get(Calendar.DAY_OF_WEEK) //요일나오게하기(숫자로)
+        if (yoil != 1) {   //해당요일이 일요일이 아닌경우
+            yoil = yoil - 2
+        } else {           //해당요일이 일요일인경우
+            yoil = 7
+        }
+        inDay = inDay - yoil
+        for (i in 0..6) {
+            cal.set(inYear, inMonth, inDay + i)  //
+            val y = Integer.toString(cal.get(Calendar.YEAR))
+            var m = Integer.toString(cal.get(Calendar.MONTH) + 1)
+            var d = Integer.toString(cal.get(Calendar.DAY_OF_MONTH))
+            if (m.length == 1) m = "0$m"
+            if (d.length == 1) d = "0$d"
+
+            arrayList.add( y + m + d)
+            println("ymd =$y$m$d")
+            LogUtil.d(arrayList[i])
+
+
+        }
+        return arrayList
+    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -9,6 +9,7 @@
         android:id="@+id/lin_daily_item"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp50"
+        android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/dp16"
         android:paddingRight="@dimen/dp16">
@@ -36,15 +37,15 @@
                 android:id="@+id/btn_daily_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:background="@drawable/btn_down_selector" />
+                android:background="@drawable/btn_down_selector"
+                android:visibility="visible" />
 
             <CheckBox
                 android:id="@+id/check_daily_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@null"
                 android:background="@drawable/btn_check_selector"
+                android:button="@null"
                 android:visibility="gone" />
         </RelativeLayout>
     </LinearLayout>
@@ -61,29 +62,28 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-    <ScrollView
-        android:id="@+id/scr_daily_item"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/c_efedf2"
-        >
-
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scr_daily_item"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/c_efedf2"
-            android:padding="@dimen/dp16">
+            android:layout_height="match_parent"
+            android:background="@color/c_efedf2">
 
-            <TextView
-                android:id="@+id/tv_daily_item_content"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp30"
-                android:textColor="@color/c_555555"
-                android:textSize="@dimen/dp15" />
+                android:background="@color/c_efedf2"
+                android:orientation="vertical"
+                android:padding="@dimen/dp16">
 
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/tv_daily_item_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp30"
+                    android:textColor="@color/c_555555"
+                    android:textSize="@dimen/dp15" />
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

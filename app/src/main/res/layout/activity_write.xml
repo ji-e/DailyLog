@@ -13,11 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
         android:gravity="center_vertical"
+        app:btnCalendar="true"
         app:btnLogo="true"
         app:btnOpen="true"
-        app:btnSearch="true"
-        app:btnCalendar="true"
-        />
+        app:btnSearch="true" />
 
 
     <!--일간 날짜-->
@@ -70,17 +69,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="@string/write_title"
-            android:textSize="@dimen/dp16"
             android:background="@null"
+            android:hint="@string/write_title"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLines="1"
             android:textColor="@color/c_333333"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/dp16"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/write_btn_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_delete_selector" />
+            android:background="@drawable/btn_delete_selector"
+            android:visibility="gone" />
     </LinearLayout>
 
 
@@ -105,8 +108,8 @@
             android:id="@+id/write_btn_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/btn_camera_selector" />
 
 
@@ -118,9 +121,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
         android:background="@drawable/btn_bottom_selector"
+        android:lineSpacingExtra="@dimen/dp10"
         android:text="@string/btn_03"
         android:textColor="@color/c_333333"
-        android:lineSpacingExtra ="@dimen/dp10"
-        android:textSize="@dimen/dp17"/>
+        android:textSize="@dimen/dp17" />
 
 </LinearLayout>

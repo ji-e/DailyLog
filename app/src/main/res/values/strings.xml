@@ -16,7 +16,8 @@
     <!--WeeklyActivity-->
     <string name="weekly_title">주간</string>
     <string name="weekly_date">%1$s년 %2$s월 %3$s주</string>
-
+    <string name="weekly_sub_date">%1$s월 %2$s일 %3$s요일</string>
+    <string name="weekly_noting">일지를 작성해주세요</string>
     <!--MonthlyActivity-->
     <string name="monthly_title">월간</string>
     <string name="monthly_date">%1$s년 %2$s월 </string>
