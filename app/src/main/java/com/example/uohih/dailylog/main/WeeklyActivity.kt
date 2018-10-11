@@ -1,33 +1,29 @@
 package com.example.uohih.dailylog.main
 
-import android.content.Context
 import android.os.Bundle
-import android.provider.Settings.Global.getString
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
 import com.example.uohih.dailylog.R
+import com.example.uohih.dailylog.adapter.DBData
+import com.example.uohih.dailylog.adapter.WeeklyAdapter
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.base.LogUtil
 import com.example.uohih.dailylog.database.DBHelper
+import com.example.uohih.dailylog.view.TopTitleView
 import kotlinx.android.synthetic.main.activity_weekly.*
 import org.json.JSONObject
-import java.util.*
-import java.util.Collections.sort
 
 
 class WeeklyActivity : DLogBaseActivity() {
 
-    private val tag = "WeeklyActivity"
+    private val base = DLogBaseApplication()
     private var jsonCalendar = JSONObject(getToday().toString())
     private val db = DBHelper(this)
     private val currentDate = getDate(false, 1, "주", jsonCalendar).get("yyyymmdd").toString()
+    private var allCheck = base.getAllCheckBox()
 
-    var dailyList = arrayListOf<DailyData>()
+    var dailyList = arrayListOf<DBData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +51,37 @@ class WeeklyActivity : DLogBaseActivity() {
 
 //            setData(nextCalendar.get("yyyymmdd").toString())
         }
+
+        // 연필 메뉴 안보이게
+        weekly_title_view.setGone(TopTitleView.menu.PENCIL)
+
+        /**
+         * 편집 클릭 리스너
+         */
+        weekly_title_view.setmClickListener(object : TopTitleView.mClickListener {
+            override fun onmClickEvent() {
+                allCheck = base.getAllCheckBox()
+                if (allCheck) {
+                    // 상단 바 지우개 클릭 이벤트
+                    weekly_title_view.setEraserBtnClickListener(View.OnClickListener {
+                        weekly_check.isChecked = false
+                        val array = base.getDeleteItem()
+                        db.delete(array, "no")
+                        setData(base.getDateInfom(), allCheck)
+                        Toast.makeText(mContext, "삭제 되었습니다.", Toast.LENGTH_SHORT).show()
+                    })
+                    weekly_checkbox.visibility = View.VISIBLE
+                    setData(base.getDateInfom(), allCheck)
+                } else {
+                    // 연필 메뉴 안보이게
+                    weekly_title_view.setGone(TopTitleView.menu.PENCIL)
+                    setData(base.getDateInfom(), allCheck)
+                    weekly_checkbox.visibility = View.GONE
+                }
+            }
+        })
+
+
     }
 
     override fun onResume() {
@@ -73,7 +100,7 @@ class WeeklyActivity : DLogBaseActivity() {
 //        create = false
     }
 
-    fun selector(p: DailyData):Int = p.date
+    fun selector(p: DBData):Int = p.date
     private fun setData(jsonObject: JSONObject, delete: Boolean) {
         // 날짜 파싱
         weekly_tv_date.text = String.format(getString(R.string.weekly_date), jsonCalendar.get("year"), jsonCalendar.get("month"), jsonCalendar.get("week"))
@@ -86,18 +113,23 @@ class WeeklyActivity : DLogBaseActivity() {
         dailyList.clear()
 
         for(i in 0..6){
-            dailyList.add(DailyData(null, dateList[i].toInt(), getString(R.string.weekly_noting), ""))
+            dailyList.add(DBData(null, dateList[i].toInt(), getString(R.string.weekly_noting), ""))
         }
 
 
         while (cursor.moveToNext()) {
-            dailyList.add(DailyData(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)))
+            dailyList.add(DBData(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)))
         }
 
+        // 오름차순으로 정렬
         dailyList.sortBy({selector(it)})
 
+
+        /**
+         * weeklyList 데이터 관리 (일정이 없는 것은 "일정을 작성해 주세요"
+         */
         var tempDate = dateList[0].toInt()
-        var weeklyList = arrayListOf<DailyData>()
+        var weeklyList = arrayListOf<DBData>()
         var index = 1
         var i = 1
         do {
@@ -129,7 +161,7 @@ class WeeklyActivity : DLogBaseActivity() {
         } while (i < dailyList.size)
 
 
-        val mAadapter = WeekllyListAdapter(this, weeklyList, delete)
+        val mAadapter = WeeklyAdapter(this, weeklyList, delete)
         weekly_listview.adapter = mAadapter
 
 
@@ -162,73 +194,3 @@ class WeeklyActivity : DLogBaseActivity() {
     }
 }
 
-class WeekllyListAdapter(val mContext: Context, val dailyList: ArrayList<DailyData>, val delete: Boolean) : BaseAdapter() {
-
-    /* 아이템을 세트로 담기 위한 어레이 */
-//    private val mItems = ArrayList()
-
-    override fun getCount(): Int {
-        return dailyList.size
-    }
-
-    override fun getItem(position: Int): DailyData {
-        return dailyList[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return 0
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        var preItem: Int? = null
-        if (position > 0) {
-            preItem = getItem(position - 1).date
-        }
-
-        lateinit var viewHolder: ViewHolder
-        var view = convertView
-        if (view == null) {
-            viewHolder = ViewHolder()
-            view = LayoutInflater.from(mContext).inflate(R.layout.weekly_item_listview, parent, false)
-            viewHolder.itemTitle = view.findViewById(R.id.weekly_item_tv)
-            viewHolder.itemDate = view.findViewById(R.id.weekly_item_date)
-            viewHolder.itemImg = view.findViewById(R.id.weekly_item_img)
-            view.tag = viewHolder
-            viewHolder.itemTitle.text = dailyList[position].title
-
-            val date = dailyList[position].date.toString()
-            viewHolder.itemDate.text = String.format(view.resources.getString(R.string.weekly_sub_date), date.substring(4, 6), date.substring(6), DLogBaseActivity().getDay(date))
-
-            if (viewHolder.itemTitle == null) {
-                viewHolder.itemImg.visibility = View.GONE
-            }
-
-            // 첫번째 리스트 항목 거래일 뷰 표시
-            if (position == 0) {
-                viewHolder.itemDate.visibility = View.VISIBLE
-            } else {
-                // 거래일이 같으면 거래일 뷰 숨김
-                if (preItem == dailyList[position].date) {
-                    viewHolder.itemDate.visibility = View.GONE
-                    // 거래일이 다르면 거래일 뷰 표시
-                } else {
-                    viewHolder.itemDate.visibility = View.VISIBLE
-                }
-            }
-
-            return view
-        } else {
-            viewHolder = view.tag as ViewHolder
-        }
-        viewHolder.itemTitle.text = dailyList[position].title
-        return view
-    }
-
-    inner class ViewHolder {
-        lateinit var itemTitle: TextView
-        lateinit var itemDate: TextView
-        lateinit var itemImg: ImageView
-
-    }
-
-}

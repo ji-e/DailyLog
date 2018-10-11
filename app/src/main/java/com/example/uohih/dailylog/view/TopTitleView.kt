@@ -27,6 +27,16 @@ import kotlin.collections.ArrayList
  */
 class TopTitleView : RelativeLayout {
 
+    enum class menu{
+        PENCIL,
+        LOGO,
+        MENU,
+        SEARCH,
+        OPEN,
+        TITLE,
+        CALENDAR
+    }
+
     private var mContext: Context? = null
     private var mRootView: View? = null
     private var mListener: mClickListener? = null
@@ -171,6 +181,9 @@ class TopTitleView : RelativeLayout {
      * 상단바 연필 -> 지우개
      */
     fun setEraser() {
+        if(top_btn_pencil.visibility== View.GONE){
+            top_btn_pencil.visibility= View.VISIBLE
+        }
         val title = top_tv_title.text.toString()
         top_btn_pencil.setImageResource(R.drawable.btn_eraser_selector)
         top_tv_title.text = resources.getString(R.string.menu_01)
@@ -199,6 +212,21 @@ class TopTitleView : RelativeLayout {
     fun setClose() {
         top_btn_logo.setImageResource(R.drawable.btn_close_selector)
         top_btn_logo.setOnClickListener(mCloseBtnClickListener)
+    }
+
+
+    /**
+     * 메뉴 visibility 처리
+     */
+    fun setGone(index: menu){
+        when(index){
+            menu.CALENDAR->top_btn_calendar.visibility= View.GONE
+            menu.LOGO->top_btn_logo.visibility= View.GONE
+            menu.OPEN->top_btn_open.visibility= View.GONE
+            menu.PENCIL->top_btn_pencil.visibility= View.GONE
+            menu.TITLE->top_tv_title.visibility= View.GONE
+            menu.MENU->top_btn_menu.visibility= View.GONE
+        }
     }
 
 

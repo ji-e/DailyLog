@@ -17,6 +17,7 @@
         app:btnMenu="true"
         app:btnSearch="true"
         app:btnLogo="true"
+        app:btnPencil="true"
         app:tvTitle="@string/weekly_title" />
 
     <!--주간 날짜-->
@@ -59,6 +60,38 @@
         android:layout_height="@dimen/dp02"
         android:background="@color/c_f2edf9" />
 
+    <LinearLayout
+        android:id="@+id/weekly_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp30"
+        android:background="@color/c_f2edf9"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingRight="@dimen/dp10"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/daily_all_check"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp17" />
+
+        <CheckBox
+            android:id="@+id/weekly_check"
+            android:layout_width="@dimen/dp18"
+            android:layout_height="@dimen/dp18"
+            android:layout_marginRight="@dimen/dp13"
+            android:background="@drawable/btn_check_selector2"
+            android:button="@null" />
+    </LinearLayout>
+
+
+    <!--리스트뷰-->
     <ListView
         android:id="@+id/weekly_listview"
         android:layout_width="match_parent"
