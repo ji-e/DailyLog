@@ -81,13 +81,14 @@
             android:gravity="center_vertical"
             android:text="@string/daily_all_check"
             android:textColor="@color/c_333333"
-            android:textSize="@dimen/dp17" />
+            android:textSize="@dimen/dp15" />
 
         <CheckBox
             android:id="@+id/daily_check"
-            android:layout_width="@dimen/dp18"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/dp18"
-            android:layout_marginRight="@dimen/dp13"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/dp15"
             android:background="@drawable/btn_check_selector2"
             android:button="@null" />
     </LinearLayout>

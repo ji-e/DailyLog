@@ -60,19 +60,21 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
         var array = ArrayList<String>()
         for (i in 0 until count) {
             if (selected[i]) {
-                base.setCheckOnItem(i.toString(), dailyList[i].no.toString())
+                array.add(dailyList[i].no.toString())
+//                base.setCheckOnItem(i.toString(), dailyList[i].no.toString())
             } else {
-                base.setCheckOffItem(i.toString())
+//                base.setCheckOffItem(i.toString())
             }
         }
 
-        var int = 0
-        for (i in 0 until count) {
-            if (!DLogBaseApplication().getCheckItem().optString(i.toString()).isNullOrEmpty()) {
-                array.add(int, base.getCheckItem().get(i.toString()).toString())
-                int++
-            }
-        }
+//        var int = 0
+//        for (i in 0 until count) {
+//            if (!DLogBaseApplication().getCheckItem().optString(i.toString()).isNullOrEmpty()) {
+//                array.add(int, base.getCheckItem().get(i.toString()).toString())
+//                int++
+//            }
+//        }
+        notifyDataSetChanged()
         base.setDeleteItem(array)
     }
 
@@ -150,13 +152,14 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
         holder.layout.setOnClickListener {
             if (holder.itemCheck.visibility == View.VISIBLE) {
                 if (holder.itemCheck.isChecked) {
-                    selected[position] = false
+                    holder.itemCheck.isChecked = false
                 } else {
                     // 전체 선택 해제 리스너
                     if (mListener != null) {
                         mListener?.onmClickEvent()
                     }
-                    selected[position] = true
+//                    selected[position] = true
+                    holder.itemCheck.isChecked = true
                 }
 
             } else if (holder.itemBtn.visibility == View.VISIBLE) {
@@ -183,8 +186,8 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
 
 
             var customDialogList = CustomListDialog(mContext, android.R.style.Theme_Material_Dialog_MinWidth)
-            customDialogList = customDialogList.showDialogList(mContext, holder.itemTitle.text.toString(), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, position, id ->
-                when (position) {
+            customDialogList = customDialogList.showDialogList(mContext, holder.itemTitle.text.toString(), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, p, id ->
+                when (p) {
                     0 -> { //수정
                         var jsonObject = JSONObject()
                         jsonObject.put("no", dailyList[position].no)
@@ -239,7 +242,7 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
                 if (!isChecked && mListener != null) {
                     mListener?.onmClickEvent()
                 }
-                notifyDataSetChanged()
+//                notifyDataSetChanged()
             }
         }
 
@@ -252,7 +255,7 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
         }
 
         // 체크 상태
-        check()
+//        check()
 
         return view!!
     }

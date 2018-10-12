@@ -32,7 +32,7 @@ class DailyActivity : DLogBaseActivity() {
     private val db = DBHelper(this)
     private val currentDate = getDate(false, 1, "일", jsonCalendar).get("yyyymmdd").toString()
     private var allCheck = base.getAllCheckBox()
-
+private var mAadapter:DailyAdapter?=null
 
     // 리사이클 뷰
     var dailyList = arrayListOf<DBData>()
@@ -81,7 +81,9 @@ class DailyActivity : DLogBaseActivity() {
                 if (allCheck) {
                     // 상단 바 지우개 클릭 이벤트
                     daily_title_view.setEraserBtnClickListener(View.OnClickListener {
-                        daily_check.isChecked = false
+//                        daily_check.isChecked = false
+                        mAadapter?.check()
+
                         val array = base.getDeleteItem()
                         db.delete(array, "no")
                         setData(base.getDateInfom(), allCheck)
@@ -95,7 +97,6 @@ class DailyActivity : DLogBaseActivity() {
                 }
             }
         })
-
 
     }
 
@@ -125,7 +126,7 @@ class DailyActivity : DLogBaseActivity() {
             dailyList.add(DBData(cursor.getInt(0),cursor.getInt(1), cursor.getString(2), cursor.getString(3)))
         }
 
-        val mAadapter = DailyAdapter(this, dailyList, delete)
+         mAadapter = DailyAdapter(this, dailyList, delete)
 //        daily_recyclerView.choiceMode = ListView.CHOICE_MODE_SINGLE
 
         daily_recyclerView.adapter = mAadapter
@@ -139,16 +140,16 @@ class DailyActivity : DLogBaseActivity() {
          */
         daily_check.setOnClickListener {
             if (daily_check.isChecked) {
-                mAadapter.setAllCheckList(true)
+                mAadapter?.setAllCheckList(true)
             } else {
-                mAadapter.setAllCheckList(false)
+                mAadapter?.setAllCheckList(false)
             }
         }
 
         /**
          * 전체 선택 해제 리스너
          */
-        mAadapter.setmCheckboxListener(object : DailyAdapter.mCheckboxListener {
+        mAadapter?.setmCheckboxListener(object : DailyAdapter.mCheckboxListener {
             override fun onmClickEvent() {
                 daily_check.isChecked = false
             }

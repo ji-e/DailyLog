@@ -53,7 +53,7 @@ class WeeklyActivity : DLogBaseActivity() {
         }
 
         // 연필 메뉴 안보이게
-        weekly_title_view.setGone(TopTitleView.menu.PENCIL)
+//        weekly_title_view.setGone(TopTitleView.menu.PENCIL)
 
         /**
          * 편집 클릭 리스너
@@ -100,7 +100,7 @@ class WeeklyActivity : DLogBaseActivity() {
 //        create = false
     }
 
-    fun selector(p: DBData):Int = p.date
+    fun selector(p: DBData): Int = p.date
     private fun setData(jsonObject: JSONObject, delete: Boolean) {
         // 날짜 파싱
         weekly_tv_date.text = String.format(getString(R.string.weekly_date), jsonCalendar.get("year"), jsonCalendar.get("month"), jsonCalendar.get("week"))
@@ -112,7 +112,7 @@ class WeeklyActivity : DLogBaseActivity() {
 
         dailyList.clear()
 
-        for(i in 0..6){
+        for (i in 0..6) {
             dailyList.add(DBData(null, dateList[i].toInt(), getString(R.string.weekly_noting), ""))
         }
 
@@ -122,7 +122,7 @@ class WeeklyActivity : DLogBaseActivity() {
         }
 
         // 오름차순으로 정렬
-        dailyList.sortBy({selector(it)})
+        dailyList.sortBy({ selector(it) })
 
 
         /**
@@ -135,7 +135,7 @@ class WeeklyActivity : DLogBaseActivity() {
         do {
             val temp = dailyList[i].date
             if (tempDate == temp) {
-                if(i==dailyList.size-1){
+                if (i == dailyList.size - 1) {
                     weeklyList.add(dailyList[i])
                     break
                 }
@@ -161,7 +161,7 @@ class WeeklyActivity : DLogBaseActivity() {
         } while (i < dailyList.size)
 
 
-        val mAadapter = WeeklyAdapter(this, weeklyList, delete)
+        val mAadapter = WeeklyAdapter(this, weeklyList)
         weekly_listview.adapter = mAadapter
 
 
