@@ -65,7 +65,7 @@
         android:id="@+id/weekly_checkbox"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp30"
-        android:background="@color/c_f2edf9"
+        android:background="@color/c_ffffff"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp16"
@@ -96,9 +96,7 @@
     <ListView
         android:id="@+id/weekly_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@color/c_ffffff"
-        android:dividerHeight="0dp">
+        android:layout_height="match_parent">
 
     </ListView>
 

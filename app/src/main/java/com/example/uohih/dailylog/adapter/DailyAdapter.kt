@@ -21,9 +21,21 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
 
     private val base = DLogBaseApplication()
     private var selected = ArrayList<Boolean>(count) // 체크 된 항목
-    var mListener: mCheckboxListener? = null // 전체 선택 해제 리스너
     var down = true
 
+
+    /**
+     * 전체 선택 체크박스 리스너
+     */
+    private var mListener: mCheckboxListener? = null
+
+    interface mCheckboxListener {
+        fun onmClickEvent()
+    }
+
+    fun setmCheckboxListener(listener: mCheckboxListener) {
+        this.mListener = listener
+    }
 
     /**
      * 전체 선택 및 해제
@@ -33,17 +45,9 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
         for (i in 0 until count) {
             selected.add(isCheck)
         }
-
         notifyDataSetChanged()
     }
 
-    interface mCheckboxListener {
-        fun onmClickEvent()
-    }
-
-    fun setmCheckboxListener(listener: mCheckboxListener) {
-        this.mListener = listener
-    }
 
     /**
      * 데이터 삭제
@@ -158,7 +162,6 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
                     if (mListener != null) {
                         mListener?.onmClickEvent()
                     }
-//                    selected[position] = true
                     holder.itemCheck.isChecked = true
                 }
 

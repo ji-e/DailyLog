@@ -31,10 +31,12 @@ class DLogBaseApplication : Application() {
     /**
      * 삭제 항목 세팅
      */
-    fun setDeleteItem(deleteItem: ArrayList<String>) {
+    fun setDeleteItem(deleteItem: ArrayList<String>?) {
         Companion.deleteItem.clear()
-        LogUtil.d(deleteItem.toString())
-        Companion.deleteItem = deleteItem
+        if (deleteItem != null) {
+            LogUtil.d(deleteItem.toString())
+            Companion.deleteItem = deleteItem
+        }
     }
 
     fun getDeleteItem(): ArrayList<String> {
@@ -44,28 +46,26 @@ class DLogBaseApplication : Application() {
     /**
      * 체크 항목 세팅
      */
-    fun setCheckOnItem(index:String, check:String) {
+    fun setCheckOnItem(index: String, check: String) {
         Companion.checkItem.put(index, check)
     }
 
-    fun setCheckOffItem(index:String) {
+    fun setCheckOffItem(index: String) {
         Companion.checkItem.remove(index)
     }
-    fun getCheckItem():JSONObject {
-       return Companion.checkItem
+
+    fun getCheckItem(): JSONObject {
+        return Companion.checkItem
     }
-
-
 
 
     companion object {
         private var dateInfo: JSONObject = DLogBaseActivity().getToday() //설정 날짜
         private var allCheckBox = false //전체 선택
-        private var deleteItem=ArrayList<String>()//삭제 항목
-        private var checkItem=JSONObject()
+        private var deleteItem = ArrayList<String>()//삭제 항목
+        private var checkItem = JSONObject()
 
     }
-
 
 
 }

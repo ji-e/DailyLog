@@ -24,14 +24,23 @@
             android:textSize="@dimen/dp17" />
 
         <CheckBox
-            android:id="@+id/weekly_itme_check"
+            android:id="@+id/weekly_item_check"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp18"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp25"
             android:background="@drawable/btn_check_selector2"
             android:button="@null"
             android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/weekly_item_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp10"
+            android:background="@drawable/btn_next_selector" />
 
     </LinearLayout>
 

@@ -23,8 +23,18 @@ open class DLogBaseActivity : Activity() {
      * 현재 날짜 구하기
      */
     fun getToday(): JSONObject {
+        return getToday(null)
+    }
+
+    /**
+     * 현재 날짜 구하기
+     */
+    fun getToday(date: String?): JSONObject {
         var jsonCalendar = JSONObject()
         val instance = Calendar.getInstance()
+        if (date != null) {
+            instance.set(date.substring(0, 4).toInt(), date.substring(4, 6).toInt() - 1, date.substring(6).toInt())
+        }
         val year = instance.get(Calendar.YEAR).toString() //현재 년도
         var month = (instance.get(Calendar.MONTH) + 1).toString() //현재 월
         var date = instance.get(Calendar.DAY_OF_MONTH).toString() //현재 날짜
@@ -57,6 +67,7 @@ open class DLogBaseActivity : Activity() {
 
         return jsonCalendar
     }
+
 
     /**
      * 날짜 구하기
@@ -187,33 +198,30 @@ open class DLogBaseActivity : Activity() {
      * 주의 첫날과 마지막날 구하기
      * 1: 월- 7: 일
      */
-    fun weekCalendar(cur:String)  :ArrayList<String>{
+    fun weekCalendar(cur: String): ArrayList<String> {
         val arrayList = ArrayList<String>(7)
         val cal = Calendar.getInstance()
-        cal.set(cur.substring(0, 4).toInt(), cur.substring(4, 6).toInt()-1, cur.substring(6).toInt())
+        cal.set(cur.substring(0, 4).toInt(), cur.substring(4, 6).toInt() - 1, cur.substring(6).toInt())
         val inYear = cal.get(Calendar.YEAR)
         val inMonth = cal.get(Calendar.MONTH)
         var inDay = cal.get(Calendar.DAY_OF_MONTH)
         var yoil = cal.get(Calendar.DAY_OF_WEEK) //요일나오게하기(숫자로)
-        if (yoil != 1) {   //해당요일이 일요일이 아닌경우
-            yoil = yoil - 2
-        } else {           //해당요일이 일요일인경우
-            yoil = 7
-        }
-        inDay = inDay - yoil
+//        if (yoil != 1) {   //해당요일이 일요일이 아닌경우
+//            yoil = yoil - 2
+//        } else {           //해당요일이 일요일인경우
+//            yoil = 7
+//            yoil = yoil - 2
+//        }
+        inDay -= yoil
         for (i in 0..6) {
-            cal.set(inYear, inMonth, inDay + i)  //
+            cal.set(inYear, inMonth, inDay + i + 1)  //
             val y = Integer.toString(cal.get(Calendar.YEAR))
             var m = Integer.toString(cal.get(Calendar.MONTH) + 1)
             var d = Integer.toString(cal.get(Calendar.DAY_OF_MONTH))
             if (m.length == 1) m = "0$m"
             if (d.length == 1) d = "0$d"
 
-            arrayList.add( y + m + d)
-            println("ymd =$y$m$d")
-            LogUtil.d(arrayList[i])
-
-
+            arrayList.add(y + m + d)
         }
         return arrayList
     }
@@ -228,6 +236,12 @@ open class DLogBaseActivity : Activity() {
 
     override fun onPause() {
         super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        DLogBaseApplication().setAllCheckBox(false)
+        DLogBaseApplication().setDeleteItem(null)
     }
 
 }

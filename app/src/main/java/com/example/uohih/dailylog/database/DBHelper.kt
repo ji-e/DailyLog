@@ -42,7 +42,7 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
     /**
      * tb_dlog의 데이터 수정
      */
-    fun update(no:Int, title: String, content: String) {
+    fun update(no: Int, title: String, content: String) {
         val db = writableDatabase
         val queryUpdate = "update $tableName set title =\'$title\', content=\'$content\' where no=\'$no\'"
         db.execSQL(queryUpdate)
@@ -53,14 +53,14 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
     /**
      * tb_dlog의 데이터 삭제
      */
-    fun delete(array: ArrayList<String>, index:String) {
+    fun delete(array: ArrayList<String>, index: String) {
         val db = writableDatabase
-        for(i in 0 until array.size){
-            val no=array[i]
-            var queryDelete = "delete from $tableName where $index=\'$no\'"
-            if(index.equals("no")){
-                queryDelete = "delete from $tableName where $index=$no"
-            }
+        for (i in 0 until array.size) {
+            val no = array[i]
+//            var queryDelete = "delete from $tableName where $index=\'$no\'"
+//            if(index.equals("no")){
+            var queryDelete = "delete from $tableName where $index=$no"
+//            }
             db.execSQL(queryDelete)
             LogUtil.d(queryDelete)
         }
@@ -70,19 +70,20 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
     /**
      * tb_dlog의 데이터 검색
      */
-    fun select (date: Int) :Cursor {
+    fun select(date: Int): Cursor {
         val db = writableDatabase
-        val querySelect ="select * from $tableName where date=\'$date\'"
-        db.rawQuery(querySelect,null)
+        val querySelect = "select * from $tableName where date=\'$date\'"
+        db.rawQuery(querySelect, null)
         LogUtil.d(querySelect)
-        return db.rawQuery(querySelect,null)
+        return db.rawQuery(querySelect, null)
     }
-    fun select(first:Int, last:Int): Cursor {
+
+    fun select(first: Int, last: Int): Cursor {
         val db = writableDatabase
-        val querySelect ="select * from $tableName where date>=\'$first\' and date<=\'$last\' order by date asc"
-        db.rawQuery(querySelect,null)
+        val querySelect = "select * from $tableName where date>=\'$first\' and date<=\'$last\' order by date asc"
+        db.rawQuery(querySelect, null)
         LogUtil.d(querySelect)
-        return db.rawQuery(querySelect,null)
+        return db.rawQuery(querySelect, null)
     }
 
 }
