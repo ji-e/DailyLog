@@ -2,6 +2,7 @@ package com.example.uohih.dailylog.base
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageInfo
 import android.os.Bundle
 import org.json.JSONObject
 import java.util.*
@@ -11,6 +12,11 @@ import kotlin.collections.ArrayList
 open class DLogBaseActivity : Activity() {
 
     var mContext: Context? = null
+
+
+    val activitySetting = "activitySetting"
+    val passwordSetting = "passwordSetting"
+    val temp = "temp"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,35 +100,12 @@ open class DLogBaseActivity : Activity() {
                 "주" -> cal.add(Calendar.WEEK_OF_MONTH, -num) // 이전 일
                 "월" -> cal.add(Calendar.MONTH, -num) // 이전 달
             }
-
-
-//            when (day) {
-//                "화" -> day = "월"
-//                "수" -> day = "화"
-//                "목" -> day = "수"
-//                "금" -> day = "목"
-//                "토" -> day = "금"
-//                "일" -> day = "토"
-//                "월" -> day = "일"
-//
-//            }
         } else {
             when (type) {
                 "일" -> cal.add(Calendar.DAY_OF_YEAR, +num) // 이후 일
                 "주" -> cal.add(Calendar.WEEK_OF_MONTH, +num) // 이후 일
                 "월" -> cal.add(Calendar.MONTH, +num) // 이후 달
             }
-
-//            when (day) {
-//                "일" -> day = "월"
-//                "월" -> day = "화"
-//                "화" -> day = "수"
-//                "수" -> day = "목"
-//                "목" -> day = "금"
-//                "금" -> day = "토"
-//                "토" -> day = "일"
-//
-//            }
         }
 
 
@@ -149,7 +132,6 @@ open class DLogBaseActivity : Activity() {
             "7" -> day = "토"
 
         }
-
 
         jsonCalendar.put("year", year.toString())
         jsonCalendar.put("month", _month)
@@ -225,6 +207,49 @@ open class DLogBaseActivity : Activity() {
         }
         return arrayList
     }
+
+    /**
+     * 앱 버전 정보 가져오기
+     */
+    fun getVersionInfo(): String {
+        val info: PackageInfo? = mContext?.packageManager?.getPackageInfo(mContext?.packageName, 0)
+        return info?.versionName.toString()
+    }
+
+    /**
+     * 키패드 데이터 세팅
+     */
+    fun setkeyPadData(): ArrayList<String> {
+        val arrayList = ArrayList<String>()
+        for (i in 0 until 12) {
+            when (i) {
+                9 -> arrayList.add("왼")
+                10 -> arrayList.add("0")
+                11 -> arrayList.add("오")
+                else -> arrayList.add((i + 1).toString())
+            }
+        }
+        return arrayList
+    }
+
+    /**
+     * 프리퍼런스에 값 저장
+     */
+    fun setPreference(key: String, str: String) {
+        val pref = getSharedPreferences(key, MODE_PRIVATE)
+        var editor = pref.edit()
+        editor.putString(key, str)
+        editor.commit()
+    }
+
+    /**
+     * 프리퍼런스 값 가져오기
+     */
+    fun getPreference(key: String): String {
+        val pref = getSharedPreferences(key, MODE_PRIVATE)
+        return pref.getString(key, "")
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

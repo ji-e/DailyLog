@@ -34,7 +34,7 @@ class DailyActivity : DLogBaseActivity() {
     private var allCheck = base.getAllCheckBox()
     private var mAadapter: DailyAdapter? = null
 
-    // 리사이클 뷰
+    // 리스트 뷰
     var dailyList = arrayListOf<DBData>()
 
     private var create = false
@@ -105,6 +105,12 @@ class DailyActivity : DLogBaseActivity() {
     override fun onResume() {
         LogUtil.d("onResume")
         super.onResume()
+
+
+        /**
+         * 프리퍼런스에 액티비티 상태 저장
+         */
+        setPreference(activitySetting, "daily")
 
         // 날짜 데이터 세팅
 //        if (create && !intent.hasExtra("weekly")) {

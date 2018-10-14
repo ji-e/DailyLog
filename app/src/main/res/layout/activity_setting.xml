@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".setting.SettingActivity">
 
     <!--상단 타이틀 및 아이콘 바-->
@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
         android:gravity="center_vertical"
-        app:btnLogo="true"
-       />
+        app:btnLogo="true" />
 
     <TextView
         android:id="@+id/setting_tv_date"
@@ -25,11 +24,225 @@
         android:gravity="center"
         android:text="@string/setting_title"
         android:textColor="@color/c_333333"
-        android:textSize="@dimen/dp17" />
+        android:textSize="@dimen/dp17"
+        android:textStyle="bold" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp02"
+        android:background="@color/c_f2edf9" />
+
+    <!--앱정보-->
+    <LinearLayout
+        android:id="@+id/setting_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingRight="@dimen/dp16"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingTop="@dimen/dp10"
+        android:paddingBottom="@dimen/dp10">
+
+        <!--앱정보-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp05"
+            android:gravity="center_vertical"
+            android:text="@string/setting_version"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp15"
+            android:textStyle="bold" />
+
+        <!--현재버전-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp05"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dp70"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/setting_cur_version"
+                android:textColor="@color/c_555555"
+                android:textSize="@dimen/dp13" />
+
+            <TextView
+                android:id="@+id/setting_cur_version"
+                android:layout_width="@dimen/dp100"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/setting_cur_version"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp13" />
+
+        </LinearLayout>
+
+        <!--&lt;!&ndash;최신버전&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="@dimen/dp05"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="@dimen/dp70"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:text="@string/setting_cur_version"-->
+                <!--android:textColor="@color/c_555555"-->
+                <!--android:textSize="@dimen/dp13" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/setting_new_version"-->
+                <!--android:layout_width="@dimen/dp100"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:text="@string/setting_cur_version"-->
+                <!--android:textColor="@color/c_333333"-->
+                <!--android:textSize="@dimen/dp13" />-->
+        <!--</LinearLayout>-->
+
+        <!--제작-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dp70"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/setting_development"
+                android:textColor="@color/c_555555"
+                android:textSize="@dimen/dp13" />
+
+            <TextView
+                android:id="@+id/setting_development"
+                android:layout_width="@dimen/dp100"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/setting_development"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp13" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp01"
+        android:background="@color/c_f2edf9" />
+
+    <!--비밀번호 설정-->
+    <LinearLayout
+        android:id="@+id/setting_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingRight="@dimen/dp16">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp45"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/setting_password"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp15"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/setting_password_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_next_selector" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp01"
+        android:background="@color/c_f2edf9" />
+
+    <!--엑셀로 내보내기-->
+    <LinearLayout
+        android:id="@+id/setting_excel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingRight="@dimen/dp16">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp45"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/setting_excel"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp15"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/setting_excel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_next_selector" />
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp01"
+        android:background="@color/c_f2edf9" />
+
+    <!--초기화-->
+    <LinearLayout
+        android:id="@+id/setting_reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingRight="@dimen/dp16">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp45"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/setting_password"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp15"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/setting_reset_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_next_selector" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp01"
         android:background="@color/c_f2edf9" />
 
 </LinearLayout>

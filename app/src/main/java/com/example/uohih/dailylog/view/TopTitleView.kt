@@ -27,7 +27,7 @@ import kotlin.collections.ArrayList
  */
 class TopTitleView : RelativeLayout {
 
-    enum class menu{
+    enum class menu {
         PENCIL,
         LOGO,
         MENU,
@@ -124,10 +124,10 @@ class TopTitleView : RelativeLayout {
 
             mPopupWindow.dismiss()
         }
-        popupView.menu_excel.setOnClickListener {
-            Toast.makeText(mContext, "엑셀", Toast.LENGTH_SHORT).show()
-            mPopupWindow.dismiss()
-        }
+//        popupView.menu_excel.setOnClickListener {
+//            Toast.makeText(mContext, "엑셀", Toast.LENGTH_SHORT).show()
+//            mPopupWindow.dismiss()
+//        }
         popupView.menu_setting.setOnClickListener {
             val intent = Intent(mContext, SettingActivity::class.java)
             (mContext as Activity).startActivity(intent)
@@ -181,8 +181,8 @@ class TopTitleView : RelativeLayout {
      * 상단바 연필 -> 지우개
      */
     fun setEraser() {
-        if(top_btn_pencil.visibility== View.GONE){
-            top_btn_pencil.visibility= View.VISIBLE
+        if (top_btn_pencil.visibility == View.GONE) {
+            top_btn_pencil.visibility = View.VISIBLE
         }
         val title = top_tv_title.text.toString()
         top_btn_pencil.setImageResource(R.drawable.btn_eraser_selector)
@@ -218,14 +218,14 @@ class TopTitleView : RelativeLayout {
     /**
      * 메뉴 visibility 처리
      */
-    fun setGone(index: menu){
-        when(index){
-            menu.CALENDAR->top_btn_calendar.visibility= View.GONE
-            menu.LOGO->top_btn_logo.visibility= View.GONE
-            menu.OPEN->top_btn_open.visibility= View.GONE
-            menu.PENCIL->top_btn_pencil.visibility= View.GONE
-            menu.TITLE->top_tv_title.visibility= View.GONE
-            menu.MENU->top_btn_menu.visibility= View.GONE
+    fun setGone(index: menu) {
+        when (index) {
+            menu.CALENDAR -> top_btn_calendar.visibility = View.GONE
+            menu.LOGO -> top_btn_logo.visibility = View.GONE
+            menu.OPEN -> top_btn_open.visibility = View.GONE
+            menu.PENCIL -> top_btn_pencil.visibility = View.GONE
+            menu.TITLE -> top_tv_title.visibility = View.GONE
+            menu.MENU -> top_btn_menu.visibility = View.GONE
         }
     }
 

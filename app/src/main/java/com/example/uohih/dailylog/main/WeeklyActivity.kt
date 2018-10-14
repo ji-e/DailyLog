@@ -70,7 +70,7 @@ class WeeklyActivity : DLogBaseActivity() {
                     weekly_title_view.setEraserBtnClickListener(View.OnClickListener {
                         weekly_check.isChecked = false
                         mAadapter?.check()
-                        
+
                         val array = base.getDeleteItem()
                         db.delete(array, "date")
                         setData(base.getDateInfom(), allCheck)
@@ -92,6 +92,13 @@ class WeeklyActivity : DLogBaseActivity() {
     override fun onResume() {
         LogUtil.d("onResume")
         super.onResume()
+
+
+        /**
+         * 프리퍼런스에 액티비티 상태 저장
+         */
+        setPreference(activitySetting, "weekly")
+
 
         // 날짜 데이터 세팅
 //        if (create) {

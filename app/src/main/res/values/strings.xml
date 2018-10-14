@@ -31,6 +31,22 @@
 
     <!--SettingActivity-->
     <string name="setting_title">환경설정</string>
+    <string name="setting_version">앱 정보</string>
+    <string name="setting_cur_version">현재 버전</string>
+    <string name="setting_new_version">최신 버전</string>
+    <string name="setting_development">제작</string>
+    <string name="setting_password">비밀번호 설정</string>
+    <string name="setting_excel">엑셀로 내보내기</string>
+    <string name="setting_reset">초기화</string>
+
+
+    <!--PasswordSettingActivity-->
+    <string name="pwsetting_text01">사용하실 비밀번호를 입력해주세요.</string>
+    <string name="pwsetting_text02">사용하실 비밀번호를 다시 한 번 입력해주세요.</string>
+    <string name="pwsetting_text_complete">비밀번호 설정이 완료되었습니다.</string>
+    <string name="pwsetting_text_inconsistency">입력하신 비밀번호와 일치 하지 않습니다.</string>
+    <string name="pwsetting_text_confirm">기존의 비밀번호를 입력해주세요.</string>
+    <string name="pwsetting_text_cInconsistency">비밀번호가 일치 하지 않습니다.</string>
 
     <!--Menu-->
     <string name="menu_01">편집</string>

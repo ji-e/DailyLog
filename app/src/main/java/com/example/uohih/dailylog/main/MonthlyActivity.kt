@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
+import com.example.uohih.dailylog.base.LogUtil
 import com.example.uohih.dailylog.database.DBHelper
 import kotlinx.android.synthetic.main.activity_monthly.*
 import org.json.JSONObject
@@ -53,4 +54,16 @@ class MonthlyActivity : DLogBaseActivity() {
 //        daily_recyclerView.layoutManager = lm
 //        daily_recyclerView.setHasFixedSize(true)
 //    }
+
+    override fun onResume() {
+        LogUtil.d("onResume")
+        super.onResume()
+
+        /**
+         * 프리퍼런스에 액티비티 상태 저장
+         */
+        setPreference(activitySetting, "monthly")
+
+
+    }
 }
