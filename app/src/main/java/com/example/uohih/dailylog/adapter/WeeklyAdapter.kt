@@ -155,7 +155,7 @@ class WeeklyAdapter(private val mContext: Context, private val weeklyList: Array
          * 날짜 클릭 이벤트
          */
 
-        if (weeklyList[position].date < DLogBaseActivity().getToday().get("yyyymmdd").toString().toInt()) {
+        if (weeklyList[position].date <= DLogBaseActivity().getToday().get("yyyymmdd").toString().toInt()) {
             holder.itemLinear.setOnClickListener {
                 if (holder.itemCheck.visibility == View.VISIBLE) {
                     if (holder.itemCheck.isChecked) {

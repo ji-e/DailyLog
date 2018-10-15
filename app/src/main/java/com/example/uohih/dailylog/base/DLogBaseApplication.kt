@@ -1,7 +1,14 @@
 package com.example.uohih.dailylog.base
 
+import android.app.Activity
 import android.app.Application
+import android.support.v4.os.HandlerCompat.postDelayed
 import org.json.JSONObject
+import com.example.uohih.dailylog.main.MainActivity
+import android.content.Intent
+import android.os.Handler
+import android.support.v4.os.HandlerCompat.postDelayed
+
 
 class DLogBaseApplication : Application() {
 
@@ -57,6 +64,9 @@ class DLogBaseApplication : Application() {
     fun getCheckItem(): JSONObject {
         return Companion.checkItem
     }
+
+
+
 
 
     companion object {

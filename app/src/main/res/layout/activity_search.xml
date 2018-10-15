@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".setting.SearchActivity">
+
+
+    <!--상단 타이틀 및 아이콘 바-->
+    <com.example.uohih.dailylog.view.TopTitleView
+        android:id="@+id/search_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:gravity="center_vertical"
+        app:btnLogo="true"
+        app:tvTitle="@string/search_title"/>
+
+    <!--검색 값 입력-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:background="@color/c_f2edf9"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp16"
+        android:paddingRight="@dimen/dp16">
+
+        <EditText
+            android:id="@+id/update_et_title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/write_title"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp16"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/update_btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_delete_selector"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

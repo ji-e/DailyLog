@@ -26,7 +26,9 @@
         <activity android:name=".main.MonthlyActivity" />
         <activity android:name=".main.WeeklyActivity" />
         <activity android:name=".setting.SettingActivity" />
-        <activity android:name=".setting.PasswordSettingActivity"></activity>
+        <activity android:name=".setting.PasswordSettingActivity" />
+        <activity android:name=".setting.PasswordCheckActivity" />
+        <activity android:name=".setting.SearchActivity"></activity>
     </application>
 
 </manifest>

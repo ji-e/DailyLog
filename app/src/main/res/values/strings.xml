@@ -48,6 +48,13 @@
     <string name="pwsetting_text_confirm">기존의 비밀번호를 입력해주세요.</string>
     <string name="pwsetting_text_cInconsistency">비밀번호가 일치 하지 않습니다.</string>
 
+    <!--PasswordCheckActivity-->
+    <string name="pwcheck_text01">비밀번호를 입력해주세요.</string>
+    <string name="pwcheck_text02">비밀번호가 일치하지 않습니다.\n다시 한 번 입력해주세요.</string>
+
+    <!--SearchActivity-->
+    <string name="search_title">검색</string>
+
     <!--Menu-->
     <string name="menu_01">편집</string>
     <string name="menu_02">보기방식</string>

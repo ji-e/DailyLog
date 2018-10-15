@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.os.Bundle
+import android.os.Handler
 import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
@@ -13,7 +14,7 @@ open class DLogBaseActivity : Activity() {
 
     var mContext: Context? = null
 
-
+    val passwordCheck = 0
     val activitySetting = "activitySetting"
     val passwordSetting = "passwordSetting"
     val temp = "temp"
@@ -250,6 +251,15 @@ open class DLogBaseActivity : Activity() {
         return pref.getString(key, "")
     }
 
+    /**
+     * 앱 종료
+     */
+    fun exit() {
+        finishAffinity()
+        Handler().postDelayed({
+            android.os.Process.killProcess(android.os.Process.myPid())
+        }, 200)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

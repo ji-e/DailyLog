@@ -225,7 +225,7 @@
             android:layout_height="@dimen/dp45"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/setting_password"
+            android:text="@string/setting_reset"
             android:textColor="@color/c_333333"
             android:textSize="@dimen/dp15"
             android:textStyle="bold" />
