@@ -28,7 +28,17 @@
             android:textColor="@color/c_333333"
             android:textSize="@dimen/dp17" />
 
+        <TextView
+            android:id="@+id/tv_daily_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/c_555555"
+            android:textSize="@dimen/dp13"
+            android:visibility="gone"/>
+
         <RelativeLayout
+            android:id="@+id/re_daily_item"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical">

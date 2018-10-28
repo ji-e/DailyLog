@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".setting.SearchActivity">
 
@@ -14,39 +15,199 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp45"
         android:gravity="center_vertical"
-        app:btnLogo="true"
-        app:tvTitle="@string/search_title"/>
+        app:btnLogo="true" />
 
-    <!--검색 값 입력-->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/search_tv_title"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/dp45"
-        android:background="@color/c_f2edf9"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/search_title"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/dp17"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp02"
+        android:background="@color/c_f2edf9" />
+
+    <!--일지 명으로 검색-->
+    <CheckBox
+        android:id="@+id/search_check_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp10"
+        android:button="@null"
+        android:drawableLeft="@drawable/btn_check_selector2"
+        android:drawablePadding="@dimen/dp10"
+        android:text="@string/search_log"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/dp16" />
+
+    <LinearLayout
+        android:id="@+id/search_layout_log"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingLeft="@dimen/dp16"
         android:paddingRight="@dimen/dp16">
 
-        <EditText
-            android:id="@+id/update_et_title"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/write_title"
-            android:imeOptions="actionNext"
-            android:inputType="text"
-            android:maxLines="1"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp45"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/search_log"
             android:textColor="@color/c_333333"
-            android:textSize="@dimen/dp16"
+            android:textSize="@dimen/dp15"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:id="@+id/update_btn_delete"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp45"
+            android:background="@color/c_f2edf9"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp16"
+            android:paddingRight="@dimen/dp16">
+
+            <EditText
+                android:id="@+id/update_et_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/search_log_ed"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp16" />
+
+            <ImageButton
+                android:id="@+id/update_btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_delete_selector"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_delete_selector"
-            android:visibility="gone" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp45"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="@string/search_date"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp15"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!--날짜 1-->
+                <RelativeLayout
+                    android:id="@+id/search_log_date1"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp45"
+                        android:background="@color/c_f2edf9"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/dp16"
+                        android:text="20181002"
+                        android:textColor="@color/c_555555"
+                        android:textSize="@dimen/dp15" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/btn_calendar_selector" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="~"
+                    android:textColor="@color/c_333333"
+                    android:textSize="@dimen/dp20"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:layout_marginRight="@dimen/dp20"/>
+
+                <!--날짜 2-->
+                <RelativeLayout
+                    android:id="@+id/search_log_date2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp45"
+                        android:background="@color/c_f2edf9"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/dp16"
+                        android:text="20181002"
+                        android:textColor="@color/c_555555"
+                        android:textSize="@dimen/dp15" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/btn_calendar_selector" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
+
+
+    <!--날짜 이동-->
+    <CheckBox
+        android:id="@+id/search_check_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp20"
+        android:button="@null"
+        android:drawableLeft="@drawable/btn_check_selector2"
+        android:drawablePadding="@dimen/dp10"
+        android:text="@string/search_date"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/dp16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp02"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@color/c_f2edf9" />
+
+    <ListView
+        android:id="@+id/search_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

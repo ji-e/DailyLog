@@ -17,7 +17,7 @@
         app:btnLogo="true" />
 
     <TextView
-        android:id="@+id/setting_tv_date"
+        android:id="@+id/setting_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp45"
         android:layout_centerHorizontal="true"

@@ -54,6 +54,9 @@
 
     <!--SearchActivity-->
     <string name="search_title">검색</string>
+    <string name="search_log">일지 명으로 검색</string>
+    <string name="search_log_ed">직접입력</string>
+    <string name="search_date">날짜 이동</string>
 
     <!--Menu-->
     <string name="menu_01">편집</string>

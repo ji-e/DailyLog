@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
+import android.widget.ImageView
 import com.example.uohih.dailylog.R
 
 class KeyPadAdapter(private val mContext: Context, private val keyPadData: ArrayList<String>) : BaseAdapter() {
@@ -48,6 +49,7 @@ class KeyPadAdapter(private val mContext: Context, private val keyPadData: Array
             holder.itemBtn = view.findViewById(R.id.keypad_btn)
             holder.itemimg01 = view.findViewById(R.id.keypad_img01)
             holder.itemimg02 = view.findViewById(R.id.keypad_img02)
+            holder.itemback=view.findViewById(R.id.keypad_back)
 
             view.tag = holder
         } else {
@@ -62,6 +64,7 @@ class KeyPadAdapter(private val mContext: Context, private val keyPadData: Array
         } else if (holder.itemBtn.text == "오") {
             holder.itemBtn.visibility = View.GONE
             holder.itemimg02.visibility = View.VISIBLE
+            holder.itemback.visibility=View.VISIBLE
         }
 
         /**
@@ -92,6 +95,7 @@ class KeyPadAdapter(private val mContext: Context, private val keyPadData: Array
         lateinit var itemBtn: Button
         lateinit var itemimg01: Button
         lateinit var itemimg02: Button
+        lateinit var itemback: ImageView
 
 
     }

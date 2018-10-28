@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp70"
+    android:layout_gravity="center"
     android:gravity="center">
 
     <Button
@@ -28,15 +29,23 @@
         android:id="@+id/keypad_img01"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/c_333333"
+        android:background="@drawable/btn_bottom_selector"
         android:visibility="gone" />
 
     <Button
         android:id="@+id/keypad_img02"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/c_cccccc"
+        android:background="@drawable/btn_bottom_selector"
         android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/keypad_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/pw_back"
+        android:visibility="gone" />
 
 </RelativeLayout>
