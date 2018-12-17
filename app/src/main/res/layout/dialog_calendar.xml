@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/calendar_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60">
+
+        <ImageButton
+            android:id="@+id/calendar_btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/dp03"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_close_selector"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp35"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/calendar_btn_backy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_back_selector" />
+
+
+            <TextView
+                android:id="@+id/calendar_tv_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="2014"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp23" />
+
+            <ImageButton
+                android:id="@+id/calendar_btn_nexty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_next_selector" />
+
+            <ImageButton
+                android:id="@+id/calendar_btn_backm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp03"
+                android:background="@drawable/btn_back_selector" />
+
+            <TextView
+                android:id="@+id/calendar_tv_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="12"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp24" />
+
+            <ImageButton
+                android:id="@+id/calendar_btn_nextm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_next_selector" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/calendar_top"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@color/c_f2edf9">
+
+            <TextView
+                android:id="@+id/sun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Sun"
+                android:textColor="@color/c_f13e51"
+                android:textSize="@dimen/dp16" />
+
+            <TextView
+                android:id="@+id/mon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Mon"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp16" />
+
+            <TextView
+                android:id="@+id/the"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="The"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp16" />
+
+            <TextView
+                android:id="@+id/wed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Wed"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp16" />
+
+            <TextView
+                android:id="@+id/thu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Thu"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp16" />
+
+            <TextView
+                android:id="@+id/fri"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Fri"
+                android:textColor="@color/c_333333"
+                android:textSize="@dimen/dp16" />
+
+            <TextView
+                android:id="@+id/sat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Sat"
+                android:textColor="@color/c_3571d6"
+                android:textSize="@dimen/dp16" />
+        </LinearLayout>
+
+        <GridView
+            android:id="@+id/calendar_gridview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp05"
+            android:gravity="center"
+            android:numColumns="7"
+            android:stretchMode="columnWidth" />
+    </LinearLayout>
+
+
+    <!--버튼-->
+    <Button
+        android:id="@+id/calendar_btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:background="@drawable/btn_bottom_selector"
+        android:lineSpacingExtra="@dimen/dp10"
+        android:text="@string/btn_01"
+        android:layout_marginTop="@dimen/dp30"
+        android:textColor="@color/c_333333"
+        android:textSize="@dimen/dp17" />
+</LinearLayout>

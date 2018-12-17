@@ -7,6 +7,7 @@
     <string name="btn_01">확인</string>
     <string name="btn_02">취소</string>
     <string name="btn_03">일지쓰기</string>
+    <string name="btn_04">검색</string>
 
     <!--DailyActivity-->
     <string name="daily_title">일간</string>
@@ -39,6 +40,11 @@
     <string name="setting_excel">엑셀로 내보내기</string>
     <string name="setting_reset">초기화</string>
 
+    <!--SettingResetActivity-->
+    <string name="reset_title">초기화</string>
+    <string name="reset_password">비밀번호 초기화</string>
+    <string name="reset_data">데이터 초기화</string>
+    <string name="reset_msg">비밀번호 초기화가 완료되었습니다.</string>
 
     <!--PasswordSettingActivity-->
     <string name="pwsetting_text01">사용하실 비밀번호를 입력해주세요.</string>
@@ -57,6 +63,12 @@
     <string name="search_log">일지 명으로 검색</string>
     <string name="search_log_ed">직접입력</string>
     <string name="search_date">날짜 이동</string>
+    <string name="search_result">검색 결과가 없습니다.</string>
+    <string name="search_msg1">검색 종료 날짜가 검색 시작 날짜보다 작을 수 없습니다.</string>
+    <string name="search_msg2">검색어를 입력해주세요. </string>
+    <string name="search_msg3">검색 시작 날짜를 선택해주세요.</string>
+    <string name="search_msg4">검색 종료 날짜를 선택해주세요.</string>
+
 
     <!--Menu-->
     <string name="menu_01">편집</string>

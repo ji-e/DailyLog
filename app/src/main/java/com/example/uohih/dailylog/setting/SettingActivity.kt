@@ -27,7 +27,6 @@ class SettingActivity : DLogBaseActivity() {
         setting_password.setOnClickListener{
             val intent = Intent(this, PasswordSettingActivity::class.java)
             startActivity(intent)
-            finish()
         }
 
         /**
@@ -43,7 +42,8 @@ class SettingActivity : DLogBaseActivity() {
          * 초기화 클릭 리스너
          */
         setting_reset.setOnClickListener {
-
+            val intent = Intent(this, SettingResetActivity::class.java)
+            startActivity(intent)
 
         }
 

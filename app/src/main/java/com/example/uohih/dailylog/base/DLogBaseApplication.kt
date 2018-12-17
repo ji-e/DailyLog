@@ -66,6 +66,15 @@ class DLogBaseApplication : Application() {
     }
 
 
+    /**
+     * 캘린더 팝업 날짜 세팅
+     */
+    fun setSeleteDate(selecteDate:String){
+        Companion.selecteDate = selecteDate
+    }
+    fun getSeleteDate():String{
+        return Companion.selecteDate
+    }
 
 
 
@@ -74,6 +83,7 @@ class DLogBaseApplication : Application() {
         private var allCheckBox = false //전체 선택
         private var deleteItem = ArrayList<String>()//삭제 항목
         private var checkItem = JSONObject()
+        private var selecteDate=DLogBaseActivity().getToday().get("yyyymmdd").toString()
 
     }
 

@@ -15,6 +15,7 @@ import com.example.uohih.dailylog.main.DailyActivity
 import com.example.uohih.dailylog.main.MonthlyActivity
 import com.example.uohih.dailylog.main.WeeklyActivity
 import com.example.uohih.dailylog.main.WriteActivity
+import com.example.uohih.dailylog.setting.SearchActivity
 import com.example.uohih.dailylog.setting.SettingActivity
 import kotlinx.android.synthetic.main.dialog_menu.view.*
 import kotlinx.android.synthetic.main.top_title_view.view.*
@@ -145,8 +146,13 @@ class TopTitleView : RelativeLayout {
     private val mSearchBtnClickListener: View.OnClickListener = OnClickListener {
 
         // todo 다이얼로그 테스트
-        val customDialog = CustomDialog(mContext!!, android.R.style.Theme_Material_Dialog_MinWidth)
-        customDialog.showDialog(mContext, "fdfssssssssssd", "ㄹㅇㄹㅇㄹ", null, "fdafdf", null)
+//        val customDialog = CustomDialog(mContext!!, android.R.style.Theme_Material_Dialog_MinWidth)
+//        customDialog.showDialog(mContext, "fdfssssssssssd", "ㄹㅇㄹㅇㄹ", null, "fdafdf", null)
+
+        val intent = Intent(mContext, SearchActivity::class.java)
+        (mContext as Activity).startActivity(intent)
+
+
     }
 
     /**

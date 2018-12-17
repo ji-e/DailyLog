@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.adapter.KeyPadAdapter
 import com.example.uohih.dailylog.base.DLogBaseActivity
@@ -19,6 +20,8 @@ class PasswordCheckActivity : DLogBaseActivity() {
     private var str: String = ""
 //    private var mView: View? = null
 
+    private var reset = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_password_check)
@@ -30,6 +33,15 @@ class PasswordCheckActivity : DLogBaseActivity() {
             setResult(Activity.RESULT_CANCELED)
             finish()
         })
+
+        /**
+         * 비밀번호 초기화
+         */
+        if (intent.hasExtra("reset")) {
+            pwcheck_tv.text = getString(R.string.pwsetting_text_confirm)
+            reset = true
+
+        }
 
         // 핀 클릭 리스너
         pwcheck_linear_pin_input.setOnClickListener {
@@ -113,7 +125,11 @@ class PasswordCheckActivity : DLogBaseActivity() {
         LogUtil.d(str)
         val pw = getPreference(passwordSetting)
         if (pw == str) {
-            setResult(Activity.RESULT_OK)
+            if (reset) {
+                setPreference(passwordSetting, "")
+                Toast.makeText(this, resources.getString(R.string.reset_msg), Toast.LENGTH_SHORT).show()
+            } else
+                setResult(Activity.RESULT_OK)
             finish()
         } else {
             pwcheck_tv.text = getString(R.string.pwcheck_text02)

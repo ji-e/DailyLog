@@ -40,7 +40,7 @@ class WriteActivity : DLogBaseActivity() {
          */
         write_et_title.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                if (write_et_title.text.length > 0)
+                if (write_et_title.text.isNotEmpty())
                     write_btn_delete.visibility = View.VISIBLE
             } else {
                 write_btn_delete.visibility = View.GONE
