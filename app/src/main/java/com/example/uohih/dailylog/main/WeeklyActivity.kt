@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.adapter.DBData
 import com.example.uohih.dailylog.adapter.WeeklyAdapter
+import com.example.uohih.dailylog.base.BackPressCloseHandler
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.base.LogUtil
@@ -28,9 +29,17 @@ class WeeklyActivity : DLogBaseActivity() {
 
     private var create = false
 
+
+    // back key exit
+    private lateinit var  backPressCloseHandler: BackPressCloseHandler
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weekly)
+
+        // back key exit 초기화
+        backPressCloseHandler = BackPressCloseHandler(this)
 
         // 상단 바 캘린더 클릭 이벤트
         weekly_title_view.setCalendarBtnClickListener(View.OnClickListener {
@@ -200,6 +209,11 @@ class WeeklyActivity : DLogBaseActivity() {
                 mAadapter?.setAllCheckList(false)
             }
         }
+    }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        backPressCloseHandler.onBackPressed()
     }
 }
 

@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/lin_search_item"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp50"
+        android:layout_height="@dimen/dp35"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp16"

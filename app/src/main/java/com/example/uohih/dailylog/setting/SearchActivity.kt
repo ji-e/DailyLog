@@ -190,7 +190,7 @@ class SearchActivity : DLogBaseActivity() {
         /**
          * 검색결과 리스트
          */
-        mAadapter = SearchAdapter(this, searchList)
+        mAadapter = SearchAdapter(this, searchList,true)
         search_listview.adapter = mAadapter
 
 

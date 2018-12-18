@@ -76,6 +76,10 @@ class TopTitleView : RelativeLayout {
         mPopupWindow.showAsDropDown(it)
 
 
+        if(DLogBaseApplication().getMonthly()){
+            popupView.menu_delete.visibility=View.GONE
+        }
+
         // todo 일단 모두 toast
         /**
          * 편집

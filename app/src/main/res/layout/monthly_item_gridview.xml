@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/c_ffffff"
+    android:padding="@dimen/dp05">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/monthly_item_today"
+        android:layout_width="@dimen/dp20"
+        android:layout_height="@dimen/dp20"
+        android:background="@drawable/circle" />
+
+        <TextView
+            android:id="@+id/monthly_item_cell"
+            android:layout_width="@dimen/dp20"
+            android:layout_height="@dimen/dp20"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="11"
+            android:textSize="@dimen/dp13" />
+
+    </RelativeLayout>
+
+    <GridLayout
+        android:id="@+id/monthly_lin"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp30"
+        android:columnCount="4"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp05">
+    </GridLayout>
+
+
+</LinearLayout>

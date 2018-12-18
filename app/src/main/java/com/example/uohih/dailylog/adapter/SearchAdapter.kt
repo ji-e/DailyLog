@@ -19,13 +19,9 @@ import com.example.uohih.dailylog.view.CustomListDialog
 import com.example.uohih.dailylog.view.ListViewAdapter
 import org.json.JSONObject
 
-class SearchAdapter(private val mContext: Context, private val searchList: ArrayList<DBData>) : BaseAdapter() {
+class SearchAdapter(private val mContext: Context, private val searchList: ArrayList<DBData>, private val search:Boolean) : BaseAdapter() {
 
     private val base = DLogBaseApplication()
-
-
-
-
 
     override fun getItem(position: Int): DBData {
         return searchList[position]
@@ -58,8 +54,6 @@ class SearchAdapter(private val mContext: Context, private val searchList: Array
 
         holder.itemTitle.text = searchList[position].title
         holder.itemDate.text = (searchList[position].date).toString()
-//        var no = searchList[position].no
-
 
         /**
          * 레이아웃 클릭 이벤트
@@ -77,17 +71,10 @@ class SearchAdapter(private val mContext: Context, private val searchList: Array
             (mContext as Activity).startActivity(intent)
         }
 
-
-
-
-
-
-
-
-
-
-
-
+        if(!search){
+            holder.itemDate.visibility=View.GONE
+            holder.itemTitle.textSize= 15F
+        }
         return view!!
     }
 

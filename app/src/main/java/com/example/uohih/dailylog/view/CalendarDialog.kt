@@ -2,16 +2,15 @@ package com.example.uohih.dailylog.view
 
 import android.app.Activity
 import android.app.Dialog
-
 import android.content.Context
 import android.content.DialogInterface
-import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.GridView
 import com.example.uohih.dailylog.R
+import com.example.uohih.dailylog.adapter.CalendarAdapter
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.base.LogUtil
@@ -28,13 +27,13 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
         lateinit var mClosebtnClickListener: DialogInterface.OnClickListener
         lateinit var mItemClickListener: AdapterView.OnItemClickListener
 
-        lateinit var gridAdapter: GridAdapter
+        lateinit var calendarAdapter: CalendarAdapter
         lateinit var gridView: GridView
 
         private val todayJson = DLogBaseActivity().getToday()
 
-        val instance = Calendar.getInstance()
-        var sdf = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+        private val instance = Calendar.getInstance()
+        private var sdf = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
 
         lateinit var arrayListDayInfo: ArrayList<CalendarDayInfo>
         private var selectedDate: Date = Date()
@@ -63,8 +62,8 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
         /**
          * 그리드 뷰
          */
-        fun setGridAdapter(gridAdapter: GridAdapter): Builder {
-            this.gridAdapter = gridAdapter
+        fun setGridAdapter(calendarAdapter: CalendarAdapter): Builder {
+            this.calendarAdapter = calendarAdapter
             return this
         }
 
@@ -72,12 +71,11 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
         /**
          * 선택 날짜
          */
-
         private fun setSelectedDate(date: Date?) {
             selectedDate = date!!
 
-            if (gridAdapter != null) {
-                gridAdapter.selectedDate = date
+            if (calendarAdapter != null) {
+                calendarAdapter.selectedDate = date
             }
         }
 
@@ -132,8 +130,8 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
                 calendar.add(Calendar.DATE, +1)
             }
 
-            gridAdapter = GridAdapter(context, arrayListDayInfo, selectedDate)
-            gridView.adapter = gridAdapter
+            calendarAdapter = CalendarAdapter(context, arrayListDayInfo, selectedDate)
+            gridView.adapter = calendarAdapter
 
         }
 
@@ -210,10 +208,10 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
              */
             contentView.calendar_gridview.setOnItemClickListener { parent, view, position, id ->
 
-                val selectedDate=(view.tag as CalendarDayInfo).getDate()
-                if((sdf.format(selectedDate)).toInt()<=todayJson.get("yyyymmdd").toString().toInt()) {
+                val selectedDate = (view.tag as CalendarDayInfo).getDate()
+                if ((sdf.format(selectedDate)).toInt() <= todayJson.get("yyyymmdd").toString().toInt()) {
                     setSelectedDate(selectedDate)
-                    gridAdapter.notifyDataSetChanged()
+                    calendarAdapter.notifyDataSetChanged()
                 }
 
             }
@@ -229,8 +227,6 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
 
             // 그리드뷰 세팅
             gridView = contentView.calendar_gridview
-//            gridView.adapter = gridAdapter
-//            gridView.onItemClickListener = mItemClickListener
             getCalendar(mThisMonthCalendar.time)
             setSelectedDate(Date())
             return dialog
@@ -264,72 +260,7 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
 
 }
 
-class GridAdapter(private val mContext: Context, val arrayListDayInfo: ArrayList<CalendarDayInfo>, val date: Date) : BaseAdapter() {
-    var selectedDate = date
 
-    override fun getCount(): Int {
-        return arrayListDayInfo.size
-    }
-
-    override fun getItem(position: Int): Any? {
-        return if (position >= count) null else arrayListDayInfo[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val day = arrayListDayInfo[position]
-        var convertView = convertView
-        val holder: ViewHolder
-        if (convertView == null) {
-            holder = ViewHolder()
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.dialog_calendar_cell, parent, false)
-
-//            convertView.tag = holder
-        } else {
-//            holder = convertView.tag as ViewHolder
-        }
-        val cell = convertView?.findViewById<TextView>(R.id.calendar_cell)
-        val today = convertView?.findViewById<ImageView>(R.id.calendar_today)
-
-        if (day != null) {
-            val tvDay = cell
-            tvDay?.text = day.getDay()
-
-            val ivSelected = today
-            if (day.isSameDay(selectedDate)) {
-                ivSelected?.visibility = View.VISIBLE
-            } else {
-                ivSelected?.visibility = View.INVISIBLE
-            }
-
-            if (day.isInMonth()) {
-                if (position % 7 + 1 == Calendar.SUNDAY) {
-                    tvDay?.setTextColor(Color.RED)
-                } else if (position % 7 + 1 == Calendar.SATURDAY) {
-                    tvDay?.setTextColor(Color.BLUE)
-                } else {
-                    tvDay?.setTextColor(Color.BLACK)
-                }
-            } else {
-                tvDay?.setTextColor(Color.GRAY)
-            }
-
-
-        }
-
-        convertView?.tag = day
-        return convertView!!
-
-    }
-
-    internal inner class ViewHolder {
-        lateinit var cell: TextView
-        lateinit var today: ImageView
-    }
-}
 
 
 

@@ -16,7 +16,7 @@
         android:layout_height="@dimen/dp25"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:textSize="@dimen/dp19"
+        android:textSize="@dimen/dp15"
         android:text="11"/>
 
 

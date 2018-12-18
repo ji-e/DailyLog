@@ -20,6 +20,9 @@
         app:btnLogo="true"
         app:tvTitle="@string/monthly_title" />
 
+
+
+
     <!--월간 날짜-->
     <RelativeLayout
         android:layout_width="match_parent"
@@ -55,8 +58,126 @@
             android:background="@drawable/btn_next_selector" />
     </RelativeLayout>
 
-    <View
+    <!--요일-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp02"
-        android:background="@color/c_f2edf9" />
+        android:layout_height="@dimen/dp30"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/c_f2edf9">
+
+        <TextView
+            android:id="@+id/sun"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sun"
+            android:textColor="@color/c_f13e51"
+            android:textSize="@dimen/dp16" />
+        <!--<View-->
+            <!--android:layout_width="@dimen/dp01"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@color/c_dbdbdb"/>-->
+
+        <TextView
+            android:id="@+id/mon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Mon"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp16" />
+
+        <TextView
+            android:id="@+id/the"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="The"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp16" />
+
+        <TextView
+            android:id="@+id/wed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Wed"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp16" />
+
+        <TextView
+            android:id="@+id/thu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Thu"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp16" />
+
+        <TextView
+            android:id="@+id/fri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Fri"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp16" />
+
+        <TextView
+            android:id="@+id/sat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sat"
+            android:textColor="@color/c_3571d6"
+            android:textSize="@dimen/dp16" />
+    </LinearLayout>
+
+    <!--그리드 뷰-->
+   <GridView
+       android:id="@+id/monthly_gridview"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center"
+       android:background="@color/c_dbdbdb"
+       android:horizontalSpacing="@dimen/dp01"
+       android:verticalSpacing="@dimen/dp01"
+       android:numColumns="7"
+       android:stretchMode="columnWidth" >
+   </GridView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp30"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@color/c_f2edf9"
+        android:paddingLeft="@dimen/dp16">
+
+        <TextView
+            android:id="@+id/monthly_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="20181111"
+            android:textColor="@color/c_333333"
+            android:textSize="@dimen/dp14" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/monthly_listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="@dimen/dp05"/>
+
 </LinearLayout>

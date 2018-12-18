@@ -15,6 +15,7 @@ import android.widget.*
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.adapter.DBData
 import com.example.uohih.dailylog.adapter.DailyAdapter
+import com.example.uohih.dailylog.base.BackPressCloseHandler
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.base.LogUtil
@@ -40,11 +41,17 @@ class DailyActivity : DLogBaseActivity() {
     private var create = false
 
 
+    // back key exit
+    private lateinit var  backPressCloseHandler: BackPressCloseHandler
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daily)
-        LogUtil.d("onCreate()")
         create = true
+
+        // back key exit 초기화
+        backPressCloseHandler = BackPressCloseHandler(this)
 
 
         // 상단 바 캘린더 클릭 이벤트
@@ -168,6 +175,12 @@ class DailyActivity : DLogBaseActivity() {
             }
         })
     }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        backPressCloseHandler.onBackPressed()
+    }
+
 }
 
 //class DBData(val no: Int?, val date:Int, val title: String, val content: String)

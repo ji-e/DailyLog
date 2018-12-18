@@ -77,6 +77,17 @@ class DLogBaseApplication : Application() {
     }
 
 
+    /**
+     * 월간 일지
+     */
+    fun setMonthly(monthly:Boolean){
+        Companion.monthly = monthly
+    }
+    fun getMonthly():Boolean{
+        return Companion.monthly
+    }
+
+
 
     companion object {
         private var dateInfo: JSONObject = DLogBaseActivity().getToday() //설정 날짜
@@ -84,8 +95,11 @@ class DLogBaseApplication : Application() {
         private var deleteItem = ArrayList<String>()//삭제 항목
         private var checkItem = JSONObject()
         private var selecteDate=DLogBaseActivity().getToday().get("yyyymmdd").toString()
+        private var monthly=false
 
     }
+
+
 
 
 }
