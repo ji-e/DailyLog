@@ -25,13 +25,13 @@ class WeeklyActivity : DLogBaseActivity() {
     private var allCheck = base.getAllCheckBox()
     private var mAadapter: WeeklyAdapter? = null
 
-    var dailyList = arrayListOf<DBData>()
+    var weeklyList = arrayListOf<DBData>()
 
     private var create = false
-
+    private var noBack = false
 
     // back key exit
-    private lateinit var  backPressCloseHandler: BackPressCloseHandler
+    private lateinit var backPressCloseHandler: BackPressCloseHandler
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,6 +73,7 @@ class WeeklyActivity : DLogBaseActivity() {
          */
         weekly_title_view.setmClickListener(object : TopTitleView.mClickListener {
             override fun onmClickEvent() {
+                noBack = true
                 allCheck = base.getAllCheckBox()
                 if (allCheck) {
                     // 상단 바 지우개 클릭 이벤트
@@ -131,59 +132,20 @@ class WeeklyActivity : DLogBaseActivity() {
         val last = dateList[6].toInt()
         val cursor = db.select(first, last)
 
-        dailyList.clear()
+        weeklyList.clear()
 
         for (i in 0..6) {
-            dailyList.add(DBData(null, dateList[i].toInt(), getString(R.string.weekly_noting), ""))
+            weeklyList.add(DBData(null, dateList[i].toInt(), getString(R.string.weekly_noting), ""))
         }
 
 
         while (cursor.moveToNext()) {
-            dailyList.add(DBData(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)))
+            weeklyList.add(DBData(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)))
         }
 
         // 오름차순으로 정렬
-        dailyList.sortBy { selector(it) }
+        weeklyList.sortBy { selector(it) }
 
-
-        /**
-         * weeklyList 데이터 관리 (일정이 없는 것은 "일정을 작성해 주세요"
-         */
-        var tempDate = dateList[0].toInt()
-        var weeklyList = arrayListOf<DBData>()
-        var index = 1
-        var i = 1
-        do {
-            val temp = dailyList[i].date
-            if (tempDate == temp) {
-                if (i == dailyList.size - 1) {
-                    weeklyList.add(dailyList[i])
-                    break
-                }
-                if (tempDate == dailyList[i + 1].date) {
-                    weeklyList.add(dailyList[i + 1])
-                    i++
-                } else {
-                    weeklyList.add(dailyList[i])
-                }
-                if (tempDate != dateList[6].toInt()) {
-                    tempDate = dateList[index++].toInt()
-                }
-            } else if ((tempDate != temp) && (tempDate > temp)) {
-                weeklyList.add(dailyList[i])
-            } else {
-                weeklyList.add(dailyList[i - 1])
-                if (tempDate != dateList[6].toInt()) {
-                    tempDate = dateList[index++].toInt()
-                }
-                if ((tempDate == dateList[6].toInt()) && (i == dailyList.size - 1)) {
-                    weeklyList.add(dailyList[i])
-                }
-            }
-
-            i++
-
-        } while (i < dailyList.size)
 
 
         mAadapter = WeeklyAdapter(this, weeklyList, delete)
@@ -213,7 +175,11 @@ class WeeklyActivity : DLogBaseActivity() {
 
     override fun onBackPressed() {
 //        super.onBackPressed()
-        backPressCloseHandler.onBackPressed()
+        if (noBack) {
+            weekly_title_view.setLogo(getString(R.string.daily_title))
+        } else {
+            backPressCloseHandler.onBackPressed()
+        }
     }
 }
 

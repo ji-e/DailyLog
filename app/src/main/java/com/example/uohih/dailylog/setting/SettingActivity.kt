@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
+import com.example.uohih.dailylog.database.ExportExcel
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : DLogBaseActivity() {
@@ -33,7 +34,8 @@ class SettingActivity : DLogBaseActivity() {
          * 엑셀로 내보내기 클릭 리스너
          */
         setting_excel.setOnClickListener {
-
+            val exportExcel=ExportExcel(this)
+             exportExcel.makeExcelFile()
 
         }
 

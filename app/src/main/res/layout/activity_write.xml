@@ -104,13 +104,13 @@
             android:textColor="@color/c_555555"
             android:textSize="@dimen/dp16" />
 
-        <ImageButton
-            android:id="@+id/write_btn_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/btn_camera_selector" />
+        <!--<ImageButton-->
+            <!--android:id="@+id/write_btn_camera"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:background="@drawable/btn_camera_selector" />-->
 
 
     </RelativeLayout>

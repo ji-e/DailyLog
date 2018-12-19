@@ -105,7 +105,9 @@
     <ListView
         android:id="@+id/daily_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:dividerHeight="0dp"
+        android:divider="@color/c_ffffff">
 
     </ListView>
 </LinearLayout>

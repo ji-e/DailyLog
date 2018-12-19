@@ -46,6 +46,10 @@ class SearchActivity : DLogBaseActivity() {
 
         search_log_date1_tv.hint = getToday().get("yyyymmdd").toString()
         search_log_date2_tv.hint = getToday().get("yyyymmdd").toString()
+
+
+
+
         /**
          * 일지 검색 체크박스
          */
@@ -58,12 +62,13 @@ class SearchActivity : DLogBaseActivity() {
                 search_listview.visibility = View.GONE
                 search_btn_confirm.visibility = View.VISIBLE
             } else {
+                search_check_date.isChecked = true
                 search_layout_log.visibility = View.GONE
             }
         }
 
-        search_edt.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
+        search_layout.setOnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
                 if (search_edt.text.isNotEmpty())
                     search_btn_delete.visibility = View.VISIBLE
             } else {
@@ -77,7 +82,7 @@ class SearchActivity : DLogBaseActivity() {
          */
         search_edt.setOnEditorActionListener { v, actionId, event ->
             if (actionId == IME_ACTION_NEXT) {
-                search_edt.clearFocus()
+                search_layout.requestFocus()
             }
             false
         }
@@ -120,6 +125,7 @@ class SearchActivity : DLogBaseActivity() {
             calendarDialog.setOnDismissListener {
                 search_log_date1_tv.text = base.getSeleteDate()
             }
+            search_layout.requestFocus()
         }
 
 
@@ -134,6 +140,7 @@ class SearchActivity : DLogBaseActivity() {
             calendarDialog.setOnDismissListener {
                 search_log_date2_tv.text = base.getSeleteDate()
             }
+            search_layout.requestFocus()
         }
 
         /**
@@ -145,7 +152,7 @@ class SearchActivity : DLogBaseActivity() {
             } else {
                 getSearchResult(2)
             }
-
+            search_layout.requestFocus()
         }
 
 
@@ -163,6 +170,7 @@ class SearchActivity : DLogBaseActivity() {
                 getSearchResult(3)
             } else {
                 search_layout_date.visibility = View.GONE
+                search_check_log.isChecked = true
             }
         }
 
@@ -196,10 +204,14 @@ class SearchActivity : DLogBaseActivity() {
 
     }
 
+
+    /**
+     * 키보드 숨기기
+     */
     private fun hideKeypad() {
         var imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(search_edt.windowToken, 0)
-
+        search_layout.requestFocus()
     }
 
 

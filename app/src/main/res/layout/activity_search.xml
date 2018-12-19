@@ -2,10 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     tools:context=".setting.SearchActivity">
 
 
@@ -61,7 +64,7 @@
             android:layout_height="@dimen/dp45"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="@string/search_log"
+            android:text="@string/search_log_name"
             android:textColor="@color/c_333333"
             android:textSize="@dimen/dp15"
             android:textStyle="bold" />
@@ -107,7 +110,7 @@
                 android:layout_height="@dimen/dp45"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="@string/search_date"
+                android:text="@string/search_log_date"
                 android:textColor="@color/c_333333"
                 android:textSize="@dimen/dp15"
                 android:textStyle="bold" />
@@ -133,7 +136,7 @@
                         android:background="@color/c_f2edf9"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/dp16"
-                        android:textColor="@color/c_555555"
+                        android:textColor="@color/c_333333"
                         android:textSize="@dimen/dp15" />
 
                     <ImageView
@@ -170,7 +173,7 @@
                         android:background="@color/c_f2edf9"
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/dp16"
-                        android:textColor="@color/c_555555"
+                        android:textColor="@color/c_333333"
                         android:textSize="@dimen/dp15" />
 
                     <ImageView
@@ -226,7 +229,7 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="@dimen/dp16"
                     android:text="20181002"
-                    android:textColor="@color/c_555555"
+                    android:textColor="@color/c_333333"
                     android:textSize="@dimen/dp15" />
 
                 <ImageView
@@ -291,7 +294,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:dividerHeight="0dp"
+        android:divider="@color/c_ffffff"/>
 
     <TextView
         android:id="@+id/search_result_tv"

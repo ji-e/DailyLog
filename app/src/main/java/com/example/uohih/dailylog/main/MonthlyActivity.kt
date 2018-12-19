@@ -19,10 +19,11 @@ import java.util.*
 
 
 class MonthlyActivity : DLogBaseActivity() {
+    private val base = DLogBaseApplication()
     private var jsonCalendar = JSONObject(getToday().toString())
     private val db = DBHelper(this)
     private val currentDate = jsonCalendar.get("yyyymmdd").toString()
-    private val base = DLogBaseApplication()
+
 
     private var arrayListDayInfo: ArrayList<CalendarDayInfo> = ArrayList<CalendarDayInfo>()
     lateinit var monthlyAdapter: MonthlyAdapter
@@ -69,7 +70,7 @@ class MonthlyActivity : DLogBaseActivity() {
         // 이전 버튼 클릭 이벤트
         monthly_btn_back.setOnClickListener {
             var preCalendar = JSONObject(getDate(true, 1, "월").toString())
-            DLogBaseApplication().setDateInfom(preCalendar)
+            base.setDateInfom(preCalendar)
             monthly_tv_date.text = String.format(getString(R.string.monthly_date), preCalendar.get("year"), preCalendar.get("month"))
             instance.add(Calendar.MONTH, -1)
             getCalendar(instance.time)
@@ -80,8 +81,8 @@ class MonthlyActivity : DLogBaseActivity() {
         // 다음 버튼 클릭 이벤트
         monthly_btn_next.setOnClickListener {
             var nextCalendar = JSONObject(getDate(false, 1, "월").toString())
-            if (currentDate >= nextCalendar.get("yyyymmdd").toString()) {
-                DLogBaseApplication().setDateInfom(nextCalendar)
+            if (currentDate.substring(0,6) >= nextCalendar.get("yyyymmdd").toString().substring(0,6)) {
+                base.setDateInfom(nextCalendar)
                 monthly_tv_date.text = String.format(getString(R.string.monthly_date), nextCalendar.get("year"), nextCalendar.get("month"))
                 instance.add(Calendar.MONTH, +1)
                 getCalendar(instance.time)
@@ -101,6 +102,7 @@ class MonthlyActivity : DLogBaseActivity() {
                 monthlyAdapter.notifyDataSetChanged()
                 monthly_date.text=sdf.format(selectedDate)
                 getDayList()
+            base.setDateInfom( DLogBaseActivity().getToday(sdf.format(selectedDate)))
             }
         }
     }
@@ -129,10 +131,18 @@ class MonthlyActivity : DLogBaseActivity() {
          */
         setPreference(activitySetting, "monthly")
 
+        jsonCalendar = JSONObject(base.getDateInfom().toString())
+        mThisMonthCalendar.set(Calendar.YEAR,jsonCalendar.get("year").toString().toInt())
+        mThisMonthCalendar.set(Calendar.MONTH,jsonCalendar.get("month").toString().toInt()-1)
+        mThisMonthCalendar.set(Calendar.DAY_OF_MONTH,jsonCalendar.get("date").toString().toInt())
+        instance.set(Calendar.YEAR,jsonCalendar.get("year").toString().toInt())
+        instance.set(Calendar.MONTH,jsonCalendar.get("month").toString().toInt()-1)
+        instance.set(Calendar.DAY_OF_MONTH,jsonCalendar.get("date").toString().toInt())
         // 오늘날짜 세팅
         monthly_date.text=jsonCalendar.get("yyyymmdd").toString()
         // 현재 날짜 세팅
         monthly_tv_date.text = String.format(getString(R.string.monthly_date), jsonCalendar.get("year"), jsonCalendar.get("month"))
+
 
         // 그리드뷰 세팅
         getCalendar(mThisMonthCalendar.time)

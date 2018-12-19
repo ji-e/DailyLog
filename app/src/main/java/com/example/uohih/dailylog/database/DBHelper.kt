@@ -28,6 +28,19 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
         db.execSQL(queryDrop)
     }
 
+
+    /**
+     * tb_dlog 초기화
+     */
+    fun onReset(){
+        val db = writableDatabase
+        val queryDrop = "drop table $tableName"
+        db.execSQL(queryDrop)
+        val queryCreate = "create table $tableName (no integer primary key autoincrement, date integer, title, content)"
+        db.execSQL(queryCreate)
+        db.close()
+    }
+
     /**
      * tb_dlog에 데이터 삽입
      */
@@ -102,6 +115,21 @@ class DBHelper(mcontext: Context) : SQLiteOpenHelper(mcontext, "dlog", null, 1) 
         return db.rawQuery(querySelect, null)
     }
 
+    fun selectAll(): Cursor {
+        val db = writableDatabase
+        val querySelect = "select * from $tableName"
+        db.rawQuery(querySelect, null)
+        LogUtil.d(querySelect)
+        return db.rawQuery(querySelect, null)
+    }
+
+    fun selectResent(): Cursor {
+        val db = writableDatabase
+        val querySelect = "select * from $tableName order by date desc limit 10"
+        db.rawQuery(querySelect, null)
+        LogUtil.d(querySelect)
+        return db.rawQuery(querySelect, null)
+    }
 
 
 }

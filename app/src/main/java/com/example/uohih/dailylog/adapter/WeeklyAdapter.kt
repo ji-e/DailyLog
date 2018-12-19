@@ -87,6 +87,9 @@ class WeeklyAdapter(private val mContext: Context, private val weeklyList: Array
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var preItem: Int? = null
+        var nextItem: Int? = null
+        if (position < count - 1)
+            nextItem = getItem(position + 1).date
         if (position > 0) {
             preItem = getItem(position - 1).date
         }
@@ -129,11 +132,11 @@ class WeeklyAdapter(private val mContext: Context, private val weeklyList: Array
             holder.itemTitle.text = weeklyList[position].title
         }
 
-        if (view != null) {
-            if (holder.itemTitle.text == view.resources.getString(R.string.weekly_noting)) {
-                holder.itemTitle.setTextColor(view.resources.getColor(R.color.c_777777))
-            }
-        }
+//        if (view != null) {
+//            if (holder.itemTitle.text == view.resources.getString(R.string.weekly_noting)) {
+//                holder.itemTitle.setTextColor(view.resources.getColor(R.color.c_777777))
+//            }
+//        }
 
         // 첫번째 리스트 항목 거래일 뷰 표시
         if (position == 0) {
@@ -145,10 +148,26 @@ class WeeklyAdapter(private val mContext: Context, private val weeklyList: Array
                 // 거래일이 다르면 거래일 뷰 표시
             } else {
                 holder.itemLinear.visibility = View.VISIBLE
+
             }
         }
 
+        // 일지를 작성해주세요. 텍스트
+        if (nextItem == weeklyList[position].date) {
+            if (weeklyList[position].no == null) {
+                holder.itemTitleLin.visibility = View.GONE
+            }
+        } else {
+            holder.itemTitleLin.visibility = View.VISIBLE
+
+        }
+        if (view != null) {
+            if (holder.itemTitle.text == view?.resources?.getString(R.string.weekly_noting))
+                holder.itemTitle.setTextColor(view.resources.getColor(R.color.c_777777))
+        }
+
         holder.itemTitle.text = weeklyList[position].title
+//        if(weeklyList[position].no==null){
 
 
         /**
@@ -251,7 +270,7 @@ class WeeklyAdapter(private val mContext: Context, private val weeklyList: Array
         lateinit var itemDate: TextView
         lateinit var itemImg: ImageView
         lateinit var itemLinear: LinearLayout
-        lateinit var itemTitleLin: LinearLayout
+        lateinit var itemTitleLin: RelativeLayout
         lateinit var itemCheck: CheckBox
     }
 

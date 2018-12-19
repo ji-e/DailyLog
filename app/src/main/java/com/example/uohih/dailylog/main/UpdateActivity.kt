@@ -11,6 +11,7 @@ import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.database.DBHelper
 import kotlinx.android.synthetic.main.activity_update.*
+import kotlinx.android.synthetic.main.activity_write.*
 import org.json.JSONObject
 
 class UpdateActivity : DLogBaseActivity() {
@@ -32,7 +33,17 @@ class UpdateActivity : DLogBaseActivity() {
         // 날짜 세팅
 //                    Log.d("FFF",jsonCalendar.toString())
         update_tv_date.text = String.format(getString(R.string.daily_date), jsonCalendar.get("year"), jsonCalendar.get("month"), jsonCalendar.get("date"), jsonCalendar.get("day"))
-        DLogBaseApplication().setDateInfom(jsonCalendar)
+        base.setDateInfom(jsonCalendar)
+
+        // 상단 바 캘린더 클릭 이벤트
+        update_top_title_view.setCalendarBtnClickListener(View.OnClickListener {
+            jsonCalendar = (getToday(currentDate))
+            this.update_tv_date.text = String.format(getString(R.string.daily_date), jsonCalendar.get("year"), jsonCalendar.get("month"), jsonCalendar.get("date"), jsonCalendar.get("day"))
+            base.setDateInfom(jsonCalendar)
+            update_et_title.setText("")
+            update_et_content.setText("")
+        })
+
 
 
         /**
@@ -75,6 +86,7 @@ class UpdateActivity : DLogBaseActivity() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (count == 0 && start == 0) {
                     update_btn_delete.visibility = View.GONE
@@ -82,6 +94,7 @@ class UpdateActivity : DLogBaseActivity() {
                     update_btn_delete.visibility = View.VISIBLE
                 }
             }
+
             override fun afterTextChanged(s: Editable) {}
         })
 
@@ -91,8 +104,6 @@ class UpdateActivity : DLogBaseActivity() {
         update_btn_delete.setOnClickListener {
             update_et_title.setText("")
         }
-
-
 
 
         // 일지 쓰기 버튼 클릭 이벤트
@@ -119,12 +130,16 @@ class UpdateActivity : DLogBaseActivity() {
         // 다음 버튼 클릭 이벤트
         update_btn_next.setOnClickListener {
             var nextCalendar = JSONObject(getDate(false, 1, "일").toString())
-            DLogBaseApplication().setDateInfom(nextCalendar)
-            update_tv_date.text = String.format(getString(R.string.daily_date), nextCalendar.get("year"), nextCalendar.get("month"), nextCalendar.get("date"), nextCalendar.get("day"))
-            update_et_title.setText("")
-            update_et_content.setText("")
 
-            date = nextCalendar.get("yyyymmdd").toString()
+            if (currentDate >= nextCalendar.get("yyyymmdd").toString()) {
+                DLogBaseApplication().setDateInfom(nextCalendar)
+                update_tv_date.text = String.format(getString(R.string.daily_date), nextCalendar.get("year"), nextCalendar.get("month"), nextCalendar.get("date"), nextCalendar.get("day"))
+                update_et_title.setText("")
+                update_et_content.setText("")
+
+                date = nextCalendar.get("yyyymmdd").toString()
+            }
+
         }
 
     }

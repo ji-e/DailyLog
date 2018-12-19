@@ -10,15 +10,17 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.*
 import com.example.uohih.dailylog.R
+import com.example.uohih.dailylog.adapter.DBData
+import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
-import com.example.uohih.dailylog.main.DailyActivity
-import com.example.uohih.dailylog.main.MonthlyActivity
-import com.example.uohih.dailylog.main.WeeklyActivity
-import com.example.uohih.dailylog.main.WriteActivity
+import com.example.uohih.dailylog.base.LogUtil
+import com.example.uohih.dailylog.database.DBHelper
+import com.example.uohih.dailylog.main.*
 import com.example.uohih.dailylog.setting.SearchActivity
 import com.example.uohih.dailylog.setting.SettingActivity
 import kotlinx.android.synthetic.main.dialog_menu.view.*
 import kotlinx.android.synthetic.main.top_title_view.view.*
+import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -41,6 +43,7 @@ class TopTitleView : RelativeLayout {
     private var mContext: Context? = null
     private var mRootView: View? = null
     private var mListener: mClickListener? = null
+
 
     constructor(context: Context) : super(context) {
         init(null, 0, context)
@@ -76,8 +79,8 @@ class TopTitleView : RelativeLayout {
         mPopupWindow.showAsDropDown(it)
 
 
-        if(DLogBaseApplication().getMonthly()){
-            popupView.menu_delete.visibility=View.GONE
+        if (DLogBaseApplication().getMonthly()) {
+            popupView.menu_delete.visibility = View.GONE
         }
 
         // todo 일단 모두 toast
@@ -162,7 +165,55 @@ class TopTitleView : RelativeLayout {
     /**
      * 불러오기 버튼
      */
-    private val mOpenBtnClickListener: View.OnClickListener = OnClickListener { }
+    private val mOpenBtnClickListener: View.OnClickListener = OnClickListener {
+
+        var dailyList = arrayListOf<DBData>()
+        var arrayList = arrayListOf<String>()
+
+        val cursor = DBHelper(mContext as Activity).selectResent()
+        dailyList.clear()
+        while (cursor.moveToNext()) {
+            if (!cursor.getString(2).isNullOrEmpty()) {
+                dailyList.add(DBData(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)))
+                arrayList.add(cursor.getString(2))
+            }
+        }
+
+        if (arrayList.size<=0) {
+            val customDialog = CustomDialog((mContext as Activity), android.R.style.Theme_Material_Dialog_MinWidth)
+            customDialog.showDialog((mContext as Activity), resources.getString(R.string.dailog_notting), resources.getString(R.string.btn_01), null)
+            return@OnClickListener
+        }
+        val listViewAdapter = ListViewAdapter((mContext as Activity), arrayList)
+
+        var customDialogList = CustomListDialog(mContext as Activity, android.R.style.Theme_Material_Dialog_MinWidth)
+        customDialogList = customDialogList.showDialogList(mContext, resources.getString(R.string.menu_07), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, p, id ->
+            LogUtil.d(dailyList[p].title)
+
+            customDialogList.dismiss()
+            var jsonObject = JSONObject()
+            jsonObject.put("no", dailyList[p].no)
+            jsonObject.put("date", dailyList[p].date)
+            jsonObject.put("title", dailyList[p].title)
+            jsonObject.put("content", dailyList[p].content)
+
+
+            val intent = Intent(mContext, UpdateActivity::class.java)
+            intent.putExtra("daily", jsonObject.toString())
+            (mContext as Activity).startActivity(intent)
+            (mContext as Activity).overridePendingTransition(0, 0)
+            (mContext as Activity).finish()
+            Toast.makeText(mContext, "수정", Toast.LENGTH_SHORT).show()
+
+            DLogBaseApplication().setDateInfom(DLogBaseActivity().getToday(jsonObject.get("date").toString()))
+
+
+        })!!
+
+        customDialogList.show()
+
+
+    }
 
     /**
      * 캘린더 버튼
@@ -199,15 +250,7 @@ class TopTitleView : RelativeLayout {
         top_tv_title.text = resources.getString(R.string.menu_01)
         setClose()
         top_btn_logo.setOnClickListener {
-            top_btn_pencil.setImageResource(R.drawable.btn_pencil_selector)
-            top_btn_logo.setImageResource(R.drawable.dlog_logo_01)
-            top_tv_title.text = title
-            top_btn_pencil.setOnClickListener(mPencilBtnClickListener)
-            DLogBaseApplication().setAllCheckBox(false)
-
-            if (mListener != null) {
-                mListener?.onmClickEvent()
-            }
+            setLogo(title)
         }
         DLogBaseApplication().setAllCheckBox(true)
         if (mListener != null) {
@@ -216,13 +259,27 @@ class TopTitleView : RelativeLayout {
 
     }
 
+    fun setLogo(title:String){
+        top_btn_pencil.setImageResource(R.drawable.btn_pencil_selector)
+        top_btn_logo.setImageResource(R.drawable.dlog_logo_01)
+        top_tv_title.text =title
+        top_btn_pencil.setOnClickListener(mPencilBtnClickListener)
+        DLogBaseApplication().setAllCheckBox(false)
+
+        if (mListener != null) {
+            mListener?.onmClickEvent()
+        }
+    }
+
     /**
      * 상단바 로고 -> 닫기
      */
     fun setClose() {
         top_btn_logo.setImageResource(R.drawable.btn_close_selector)
         top_btn_logo.setOnClickListener(mCloseBtnClickListener)
+
     }
+
 
 
     /**
@@ -255,6 +312,10 @@ class TopTitleView : RelativeLayout {
 
     fun setCloseBtnClickListener(mCloseBtnClickListener: View.OnClickListener) {
         top_btn_logo.setOnClickListener(mCloseBtnClickListener)
+    }
+
+    fun setOpenrBtnClickListener(mOpenBtnClickListener: View.OnClickListener) {
+        top_btn_open.setOnClickListener(mOpenBtnClickListener)
     }
 
 

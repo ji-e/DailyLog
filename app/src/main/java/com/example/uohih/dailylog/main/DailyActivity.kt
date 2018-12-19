@@ -34,6 +34,7 @@ class DailyActivity : DLogBaseActivity() {
     private val currentDate = getDate(false, 1, "일", jsonCalendar).get("yyyymmdd").toString()
     private var allCheck = base.getAllCheckBox()
     private var mAadapter: DailyAdapter? = null
+    private var noBack = false
 
     // 리스트 뷰
     var dailyList = arrayListOf<DBData>()
@@ -42,7 +43,7 @@ class DailyActivity : DLogBaseActivity() {
 
 
     // back key exit
-    private lateinit var  backPressCloseHandler: BackPressCloseHandler
+    private lateinit var backPressCloseHandler: BackPressCloseHandler
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,6 +86,7 @@ class DailyActivity : DLogBaseActivity() {
          */
         daily_title_view.setmClickListener(object : TopTitleView.mClickListener {
             override fun onmClickEvent() {
+                noBack = true
                 allCheck = base.getAllCheckBox()
                 if (allCheck) {
                     // 상단 바 지우개 클릭 이벤트
@@ -178,7 +180,11 @@ class DailyActivity : DLogBaseActivity() {
 
     override fun onBackPressed() {
 //        super.onBackPressed()
-        backPressCloseHandler.onBackPressed()
+        if (noBack) {
+            daily_title_view.setLogo(getString(R.string.daily_title))
+        } else {
+            backPressCloseHandler.onBackPressed()
+        }
     }
 
 }

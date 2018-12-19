@@ -153,6 +153,7 @@ class ListViewAdapter(context: Context, item: ArrayList<String>) : BaseAdapter()
             viewHolder = ViewHolder()
             convertView = LayoutInflater.from(mContext).inflate(R.layout.dialog_list_item, parent, false)
             viewHolder.textView = convertView.findViewById(R.id.dailog_list_item)
+
             convertView.tag = viewHolder
             viewHolder.textView.text = mItem[position]
 
@@ -174,6 +175,7 @@ class ListViewAdapter(context: Context, item: ArrayList<String>) : BaseAdapter()
 
     inner class ViewHolder {
         lateinit var textView: TextView
+
     }
 
 }
