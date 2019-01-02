@@ -12,7 +12,10 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
-
+/**
+ * 엑셀파일 만들기
+ * mContext: Context
+ */
 class ExportExcel(mContext: Context) {
 
     private val mContext = mContext

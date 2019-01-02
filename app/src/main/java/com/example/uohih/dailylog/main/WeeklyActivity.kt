@@ -15,7 +15,9 @@ import com.example.uohih.dailylog.view.TopTitleView
 import kotlinx.android.synthetic.main.activity_weekly.*
 import org.json.JSONObject
 
-
+/**
+ * 주간일지
+ */
 class WeeklyActivity : DLogBaseActivity() {
 
     private val base = DLogBaseApplication()
@@ -65,9 +67,6 @@ class WeeklyActivity : DLogBaseActivity() {
 
         }
 
-        // 연필 메뉴 안보이게
-//        weekly_title_view.setGone(TopTitleView.menu.PENCIL)
-
         /**
          * 편집 클릭 리스너
          */
@@ -89,8 +88,6 @@ class WeeklyActivity : DLogBaseActivity() {
                     weekly_checkbox.visibility = View.VISIBLE
                     setData(base.getDateInfom(), allCheck)
                 } else {
-                    // 연필 메뉴 안보이게
-//                    weekly_title_view.setGone(TopTitleView.menu.PENCIL)
                     setData(base.getDateInfom(), allCheck)
                     weekly_checkbox.visibility = View.GONE
                 }
@@ -109,20 +106,17 @@ class WeeklyActivity : DLogBaseActivity() {
          */
         setPreference(activitySetting, "weekly")
 
-
-        // 날짜 데이터 세팅
-//        if (create) {
-//            setData(jsonCalendar, false)
-//            base.setDateInfom(jsonCalendar)
-//        } else {
         setData(base.getDateInfom(), allCheck)
-//        }
-
 
         create = false
     }
 
     fun selector(p: DBData): Int = p.date
+    /**
+     * DB에서 데이터 가져와 set
+     * jsonObject: JSONObject
+     * delete: Boolean (true: 체크박스 활성화)
+     */
     private fun setData(jsonObject: JSONObject, delete: Boolean) {
         // 날짜 파싱
         weekly_tv_date.text = String.format(getString(R.string.weekly_date), jsonObject.get("year"), jsonObject.get("month"), jsonObject.get("week"))
@@ -173,6 +167,9 @@ class WeeklyActivity : DLogBaseActivity() {
         }
     }
 
+    /**
+     * Back Key
+     */
     override fun onBackPressed() {
 //        super.onBackPressed()
         if (noBack) {

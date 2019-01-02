@@ -27,7 +27,9 @@ import kotlinx.android.synthetic.main.activity_update.*
 import org.json.JSONObject
 import org.w3c.dom.Text
 
-
+/**
+ * 일지 검색
+ */
 class SearchActivity : DLogBaseActivity() {
 
     private val base = DLogBaseApplication()
@@ -46,8 +48,6 @@ class SearchActivity : DLogBaseActivity() {
 
         search_log_date1_tv.hint = getToday().get("yyyymmdd").toString()
         search_log_date2_tv.hint = getToday().get("yyyymmdd").toString()
-
-
 
 
         /**
@@ -217,6 +217,7 @@ class SearchActivity : DLogBaseActivity() {
 
     /**
      * 검색 결과 가져오기
+     * index: Int (1: 검색어 검색, 2: 검색어 및 날짜 검색, 3: 날짜 검색)
      */
     fun getSearchResult(index: Int) {
         seleteDate = base.getSeleteDate().toInt()
@@ -264,6 +265,7 @@ class SearchActivity : DLogBaseActivity() {
         }
 
         searchList.clear()
+
         while (cursor.moveToNext()) {
             searchList.add(DBData(cursor.getInt(0), cursor.getInt(1), cursor.getString(2), cursor.getString(3)))
         }

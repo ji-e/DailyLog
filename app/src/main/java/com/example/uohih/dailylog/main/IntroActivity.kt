@@ -13,7 +13,9 @@ import com.example.uohih.dailylog.base.LogUtil
 import com.example.uohih.dailylog.setting.PasswordCheckActivity
 import kotlinx.android.synthetic.main.activity_intro.*
 
-
+/**
+ * 인트로
+ */
 class IntroActivity : DLogBaseActivity() {
 
     lateinit var mListener: mPermissionListener
@@ -49,6 +51,9 @@ class IntroActivity : DLogBaseActivity() {
 
     }
 
+    /**
+     * 다음 화면 이동
+     */
     fun go(){
         intro_activity.postDelayed({
             LogUtil.d((getPreference(passwordSetting)))

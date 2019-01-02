@@ -14,6 +14,9 @@ import kotlinx.android.synthetic.main.activity_update.*
 import kotlinx.android.synthetic.main.activity_write.*
 import org.json.JSONObject
 
+/**
+ * 일지 수정하기
+ */
 class UpdateActivity : DLogBaseActivity() {
     private val base = DLogBaseApplication()
     private var jsonCalendar = base.getDateInfom()
@@ -31,7 +34,6 @@ class UpdateActivity : DLogBaseActivity() {
         update_top_title_view.setClose()
 
         // 날짜 세팅
-//                    Log.d("FFF",jsonCalendar.toString())
         update_tv_date.text = String.format(getString(R.string.daily_date), jsonCalendar.get("year"), jsonCalendar.get("month"), jsonCalendar.get("date"), jsonCalendar.get("day"))
         base.setDateInfom(jsonCalendar)
 
@@ -43,7 +45,6 @@ class UpdateActivity : DLogBaseActivity() {
             update_et_title.setText("")
             update_et_content.setText("")
         })
-
 
 
         /**

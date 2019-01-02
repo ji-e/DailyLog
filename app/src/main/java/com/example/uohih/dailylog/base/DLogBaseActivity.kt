@@ -14,10 +14,13 @@ open class DLogBaseActivity : Activity() {
 
     var mContext: Context? = null
 
-    val passwordCheck = 0
+    // PasswordCheckActivity requestCode
+    val passwordCheck = 1000
+
+    // Preference value
     val activitySetting = "activitySetting"
     val passwordSetting = "passwordSetting"
-    val temp = "temp"
+    val passwordTemp = "passwordTemp"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +31,7 @@ open class DLogBaseActivity : Activity() {
 
     /**
      * 현재 날짜 구하기
+     * return JSONObject
      */
     fun getToday(): JSONObject {
         return getToday(null)
@@ -35,6 +39,8 @@ open class DLogBaseActivity : Activity() {
 
     /**
      * 현재 날짜 구하기
+     * date: String?: date값에 따른 JSONObject 생성
+     * return JSONObject
      */
     fun getToday(date: String?): JSONObject {
         var jsonCalendar = JSONObject()
@@ -42,11 +48,17 @@ open class DLogBaseActivity : Activity() {
         if (date != null) {
             instance.set(date.substring(0, 4).toInt(), date.substring(4, 6).toInt() - 1, date.substring(6).toInt())
         }
-        val year = instance.get(Calendar.YEAR).toString() //현재 년도
-        var month = (instance.get(Calendar.MONTH) + 1).toString() //현재 월
-        var date = instance.get(Calendar.DAY_OF_MONTH).toString() //현재 날짜
-        val week = instance.get(Calendar.WEEK_OF_MONTH).toString() //현재 월의 주
-        var day = instance.get(Calendar.DAY_OF_WEEK).toString() //현재 요일
+
+        //현재 년도
+        val year = instance.get(Calendar.YEAR).toString()
+        //현재 월
+        var month = (instance.get(Calendar.MONTH) + 1).toString()
+        //현재 날짜
+        var date = instance.get(Calendar.DAY_OF_MONTH).toString()
+        //현재 월의 주
+        val week = instance.get(Calendar.WEEK_OF_MONTH).toString()
+        //현재 요일
+        var day = instance.get(Calendar.DAY_OF_WEEK).toString()
 
 
         // 한자리수 앞에 0표기
@@ -131,7 +143,6 @@ open class DLogBaseActivity : Activity() {
             "5" -> day = "목"
             "6" -> day = "금"
             "7" -> day = "토"
-
         }
 
         jsonCalendar.put("year", year.toString())
@@ -172,7 +183,6 @@ open class DLogBaseActivity : Activity() {
             "5" -> day = "목"
             "6" -> day = "금"
             "7" -> day = "토"
-
         }
         return day
     }
@@ -269,9 +279,6 @@ open class DLogBaseActivity : Activity() {
 //        db.close()
     }
 
-    override fun onPause() {
-        super.onPause()
-    }
 
     override fun onResume() {
         super.onResume()

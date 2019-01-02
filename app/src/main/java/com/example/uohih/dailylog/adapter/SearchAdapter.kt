@@ -3,22 +3,26 @@ package com.example.uohih.dailylog.adapter
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.BaseAdapter
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
-import com.example.uohih.dailylog.database.DBHelper
 import com.example.uohih.dailylog.main.UpdateActivity
-import com.example.uohih.dailylog.setting.SearchActivity
-import com.example.uohih.dailylog.view.CustomListDialog
-import com.example.uohih.dailylog.view.ListViewAdapter
 import org.json.JSONObject
 
+
+/**
+ * 검색 아답터
+ * mContext: Context
+ * searchList: ArrayList<DBData>: 검색결과 리스트
+ * search:Boolean
+ */
 class SearchAdapter(private val mContext: Context, private val searchList: ArrayList<DBData>, private val search:Boolean) : BaseAdapter() {
 
     private val base = DLogBaseApplication()

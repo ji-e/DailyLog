@@ -16,9 +16,11 @@ import com.example.uohih.dailylog.database.DBHelper
 import kotlinx.android.synthetic.main.activity_write.*
 import org.json.JSONObject
 
+/**
+ * 일지 쓰기
+ */
 class WriteActivity : DLogBaseActivity() {
     private val base = DLogBaseApplication()
-    //    private var jsonCalendar = JSONObject(getToday().toString())
     private var jsonCalendar = base.getDateInfom()
     private val currentDate = getToday().get("yyyymmdd").toString()
     private var date = jsonCalendar.get("yyyymmdd").toString()

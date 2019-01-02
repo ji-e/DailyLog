@@ -17,7 +17,9 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+/**
+ * 월간일지
+ */
 class MonthlyActivity : DLogBaseActivity() {
     private val base = DLogBaseApplication()
     private var jsonCalendar = JSONObject(getToday().toString())
@@ -100,7 +102,7 @@ class MonthlyActivity : DLogBaseActivity() {
             if ((sdf.format(selectedDate)).toInt() <= currentDate.toInt()) {
                 setSelectedDate(selectedDate)
                 monthlyAdapter.notifyDataSetChanged()
-                monthly_date.text=sdf.format(selectedDate)
+//                monthly_date.text=sdf.format(selectedDate)
                 getDayList()
             base.setDateInfom( DLogBaseActivity().getToday(sdf.format(selectedDate)))
             }
@@ -109,6 +111,7 @@ class MonthlyActivity : DLogBaseActivity() {
 
     /**
      * DB에서 데이터 가져와 set
+     * date: String
      */
     private fun setData(date: String) {
         val cursor = db.select((date + "01").toInt(), (date + "31").toInt())
@@ -157,6 +160,10 @@ class MonthlyActivity : DLogBaseActivity() {
     }
 
 
+    /**
+     * 캘린더 가져오기
+     * dateForCurrentMonth: Date
+     */
     private fun getCalendar(dateForCurrentMonth: Date) {
         var dayOfWeek: Int
         val thisMonthLastDay: Int
@@ -216,6 +223,7 @@ class MonthlyActivity : DLogBaseActivity() {
 
     /**
      * 현재 날짜 동그라미
+     * date: Date?
      */
     private fun setSelectedDate(date: Date?) {
         selectedDate = date!!
@@ -223,6 +231,7 @@ class MonthlyActivity : DLogBaseActivity() {
         if (monthlyAdapter != null) {
             monthlyAdapter.selectedDate = date
         }
+        monthly_date.text=sdf.format(selectedDate)
     }
 
     /**
@@ -244,6 +253,9 @@ class MonthlyActivity : DLogBaseActivity() {
         DLogBaseApplication().setMonthly(false)
     }
 
+    /**
+     * Back Key
+     */
     override fun onBackPressed() {
 //        super.onBackPressed()
       backPressCloseHandler.onBackPressed()

@@ -13,11 +13,13 @@ import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.LogUtil
 import kotlinx.android.synthetic.main.activity_password_setting.*
 
+/**
+ * 비밀번호 설정
+ */
 class PasswordSettingActivity : DLogBaseActivity() {
     private val mIvPwResId = intArrayOf(R.id.iv_pin0, R.id.iv_pin1, R.id.iv_pin2, R.id.iv_pin3, R.id.iv_pin4, R.id.iv_pin5)
     private var mIvPw = arrayOfNulls<ImageView>(mIvPwResId.size)
     private var str: String = ""
-//    private var mView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +34,15 @@ class PasswordSettingActivity : DLogBaseActivity() {
 
         // 상단바 닫기 버튼
         pwsetting_title_view.setClose()
-//        pwsetting_title_view.setCloseBtnClickListener(View.OnClickListener {
-////
-////        })
 
-        // 핀 클릭 리스너
+        /**
+         * 핀 클릭 리스너
+         */
         pwsetting_linear_pin_input.setOnClickListener {
             pwsetting_input.text = ""
         }
 
-        /**
-         * pin id 세팅
-         */
+        // pin id 세팅
         for (i in 0 until mIvPwResId.size) {
             val view: ImageView = pwsetting_linear_pin_input.findViewById(mIvPwResId[i])
             mIvPw[i] = view
@@ -51,7 +50,9 @@ class PasswordSettingActivity : DLogBaseActivity() {
         }
 
 
-        // 비밀번호 입력 할 때 마다 리스너
+        /**
+         * 비밀번호 입력 할 때 마다 리스너
+         */
         pwsetting_input.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
@@ -92,6 +93,7 @@ class PasswordSettingActivity : DLogBaseActivity() {
 
     /**
      * 키패드 클릭시 pin 색 변환
+     * inputLen: Int
      */
     private fun setPwImage(inputLen: Int) {
         for (i in 0 until mIvPw.size) {
@@ -117,12 +119,12 @@ class PasswordSettingActivity : DLogBaseActivity() {
     fun setPassword() {
         LogUtil.d(str)
         if (pwsetting_tv.text == getString(R.string.pwsetting_text01)) {
-            setPreference(temp, str)
+            setPreference(passwordTemp, str)
             pwsetting_tv.text = getString(R.string.pwsetting_text02)
             pwsetting_input.text = ""
             str = ""
         } else if (pwsetting_tv.text == getString(R.string.pwsetting_text02)) {
-            val pw = getPreference(temp)
+            val pw = getPreference(passwordTemp)
             if (pw == str) {
                 Toast.makeText(this, getString(R.string.pwsetting_text_complete), Toast.LENGTH_SHORT).show()
                 setPreference(passwordSetting, str)
@@ -144,6 +146,5 @@ class PasswordSettingActivity : DLogBaseActivity() {
             pwsetting_input.text = ""
             str = ""
         }
-
     }
 }

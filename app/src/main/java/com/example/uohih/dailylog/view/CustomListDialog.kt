@@ -12,7 +12,11 @@ import android.widget.*
 import com.example.uohih.dailylog.R
 import kotlinx.android.synthetic.main.dialog_list.view.*
 
-
+/**
+ * 리스트 다이얼로그
+ * context: Activity
+ * theme: Int
+ */
 class CustomListDialog(context: Activity, theme: Int) : Dialog(context, theme) {
 
     class Builder(private val context: Context) {
@@ -132,50 +136,5 @@ class CustomListDialog(context: Activity, theme: Int) : Dialog(context, theme) {
         return dialog
     }
 
-
-}
-
-class ListViewAdapter(context: Context, item: ArrayList<String>) : BaseAdapter() {
-    private val mContext = context
-    private val mItem = item
-
-
-    // 리스트에 값을 추가할 메소드
-    fun setContent(text: String) {
-        mItem.add(text)
-    }
-
-    override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-        lateinit var viewHolder: ViewHolder
-        var convertView = view
-
-        if (convertView == null) {
-            viewHolder = ViewHolder()
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.dialog_list_item, parent, false)
-            viewHolder.textView = convertView.findViewById(R.id.dailog_list_item)
-
-            convertView.tag = viewHolder
-            viewHolder.textView.text = mItem[position]
-
-            return convertView
-        } else {
-            viewHolder = convertView.tag as ViewHolder
-        }
-
-        viewHolder.textView.text = mItem[position]
-
-        return convertView
-    }
-
-    override fun getItem(position: Int) = mItem[position]
-
-    override fun getItemId(position: Int) = position.toLong()
-
-    override fun getCount() = mItem.size
-
-    inner class ViewHolder {
-        lateinit var textView: TextView
-
-    }
 
 }

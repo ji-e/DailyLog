@@ -18,6 +18,11 @@ import kotlinx.android.synthetic.main.dialog_calendar.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * 캘린더 다이얼로그
+ * context: Context
+ * theme: Int
+ */
 class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
 
     class Builder(private val context: Context) {

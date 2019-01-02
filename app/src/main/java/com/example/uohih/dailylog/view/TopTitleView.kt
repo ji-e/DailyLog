@@ -11,6 +11,7 @@ import android.view.View.OnClickListener
 import android.widget.*
 import com.example.uohih.dailylog.R
 import com.example.uohih.dailylog.adapter.DBData
+import com.example.uohih.dailylog.adapter.DialogAdapter
 import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.base.LogUtil
@@ -26,7 +27,8 @@ import kotlin.collections.ArrayList
 
 
 /**
- * TODO: document your custom view class.
+ * 타이틀 바
+ *
  */
 class TopTitleView : RelativeLayout {
 
@@ -42,7 +44,16 @@ class TopTitleView : RelativeLayout {
 
     private var mContext: Context? = null
     private var mRootView: View? = null
+
+
     private var mListener: mClickListener? = null
+    interface mClickListener {
+        fun onmClickEvent()
+    }
+
+    fun setmClickListener(listener: mClickListener) {
+        this.mListener = listener
+    }
 
 
     constructor(context: Context) : super(context) {
@@ -83,13 +94,12 @@ class TopTitleView : RelativeLayout {
             popupView.menu_delete.visibility = View.GONE
         }
 
-        // todo 일단 모두 toast
+
         /**
          * 편집
          */
         popupView.menu_delete.setOnClickListener {
             setEraser()
-//            Toast.makeText(mContext, "편집", Toast.LENGTH_SHORT).show()
             mPopupWindow.dismiss()
         }
         /**
@@ -97,7 +107,7 @@ class TopTitleView : RelativeLayout {
          */
         popupView.menu_view.setOnClickListener {
 
-            val listViewAdapter = ListViewAdapter((mContext as Activity), ArrayList())
+            val listViewAdapter = DialogAdapter((mContext as Activity), ArrayList())
             listViewAdapter.setContent(resources.getString(R.string.daily_title))
             listViewAdapter.setContent(resources.getString(R.string.weekly_title))
             listViewAdapter.setContent(resources.getString(R.string.monthly_title))
@@ -127,20 +137,13 @@ class TopTitleView : RelativeLayout {
 
             })!!
             customDialogList.show()
-//            Toast.makeText(mContext, "보기방식", Toast.LENGTH_SHORT).show()
-
 
             mPopupWindow.dismiss()
         }
-//        popupView.menu_excel.setOnClickListener {
-//            Toast.makeText(mContext, "엑셀", Toast.LENGTH_SHORT).show()
-//            mPopupWindow.dismiss()
-//        }
+
         popupView.menu_setting.setOnClickListener {
             val intent = Intent(mContext, SettingActivity::class.java)
             (mContext as Activity).startActivity(intent)
-
-//            Toast.makeText(mContext, "환경설정", Toast.LENGTH_SHORT).show()
             mPopupWindow.dismiss()
         }
 
@@ -184,7 +187,7 @@ class TopTitleView : RelativeLayout {
             customDialog.showDialog((mContext as Activity), resources.getString(R.string.dailog_notting), resources.getString(R.string.btn_01), null)
             return@OnClickListener
         }
-        val listViewAdapter = ListViewAdapter((mContext as Activity), arrayList)
+        val listViewAdapter = DialogAdapter((mContext as Activity), arrayList)
 
         var customDialogList = CustomListDialog(mContext as Activity, android.R.style.Theme_Material_Dialog_MinWidth)
         customDialogList = customDialogList.showDialogList(mContext, resources.getString(R.string.menu_07), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, p, id ->
@@ -259,6 +262,10 @@ class TopTitleView : RelativeLayout {
 
     }
 
+    /**
+     * close -> logo로 변경
+     * title:String (logo일 때 title 필요)
+     */
     fun setLogo(title:String){
         top_btn_pencil.setImageResource(R.drawable.btn_pencil_selector)
         top_btn_logo.setImageResource(R.drawable.dlog_logo_01)
@@ -400,13 +407,7 @@ class TopTitleView : RelativeLayout {
         return date
     }
 
-    interface mClickListener {
-        fun onmClickEvent()
-    }
 
-    fun setmClickListener(listener: mClickListener) {
-        this.mListener = listener
-    }
 
 
 }

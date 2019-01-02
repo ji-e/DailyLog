@@ -20,13 +20,14 @@ import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.base.LogUtil
 import com.example.uohih.dailylog.database.DBHelper
-import com.example.uohih.dailylog.view.CustomListDialog
-import com.example.uohih.dailylog.view.ListViewAdapter
+
 import com.example.uohih.dailylog.view.TopTitleView
 import kotlinx.android.synthetic.main.activity_daily.*
 import org.json.JSONObject
 
-
+/**
+ * 일간 일지
+ */
 class DailyActivity : DLogBaseActivity() {
     private val base = DLogBaseApplication()
     private var jsonCalendar = JSONObject(getToday().toString())
@@ -40,7 +41,6 @@ class DailyActivity : DLogBaseActivity() {
     var dailyList = arrayListOf<DBData>()
 
     private var create = false
-
 
     // back key exit
     private lateinit var backPressCloseHandler: BackPressCloseHandler
@@ -116,16 +116,10 @@ class DailyActivity : DLogBaseActivity() {
         super.onResume()
 
 
-        /**
-         * 프리퍼런스에 액티비티 상태 저장
-         */
+        // 프리퍼런스에 액티비티 상태 저장
         setPreference(activitySetting, "daily")
 
-        // 날짜 데이터 세팅
-//        if (create && !intent.hasExtra("weekly")) {
-//            setData(jsonCalendar, allCheck)
-//            base.setDateInfom(jsonCalendar)
-//        } else
+
         if (intent.hasExtra("weekly")) {
             val date = intent.getStringExtra("weekly")
             val jsonObject = getToday(date)
@@ -139,6 +133,11 @@ class DailyActivity : DLogBaseActivity() {
         create = false
     }
 
+    /**
+     * DB에서 데이터 가져와 set
+     * jsonObject: JSONObject
+     * delete: Boolean (true: 체크박스 활성화)
+     */
     private fun setData(jsonObject: JSONObject, delete: Boolean) {
         // 날짜 파싱
         daily_tv_date.text = String.format(getString(R.string.daily_date), jsonObject.get("year"), jsonObject.get("month"), jsonObject.get("date"), jsonObject.get("day"))
@@ -178,6 +177,9 @@ class DailyActivity : DLogBaseActivity() {
         })
     }
 
+    /**
+     * Back Key
+     */
     override fun onBackPressed() {
 //        super.onBackPressed()
         if (noBack) {

@@ -7,6 +7,9 @@ import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.database.ExportExcel
 import kotlinx.android.synthetic.main.activity_setting.*
 
+/**
+ * 환경 설정
+ */
 class SettingActivity : DLogBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

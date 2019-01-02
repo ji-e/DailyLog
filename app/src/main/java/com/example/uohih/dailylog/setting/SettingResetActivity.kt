@@ -8,6 +8,9 @@ import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.database.DBHelper
 import kotlinx.android.synthetic.main.activity_setting_reset.*
 
+/**
+ * 초기화
+ */
 class SettingResetActivity : DLogBaseActivity() {
 
     private val db = DBHelper(this)

@@ -2,16 +2,19 @@ package com.example.uohih.dailylog.base
 
 import android.app.Activity
 import android.content.Context
-import android.support.v4.content.ContextCompat
 import android.widget.Toast
-import kotlinx.android.synthetic.main.daily_item_recycler_view.view.*
 
+/**
+ * back key 두번 클릭 시 앱 종료
+ * mContext: Context
+ */
 class BackPressCloseHandler(mContext: Context){
-    private var backKeyPressedTime:Long=0
     private var mContext=mContext
+    private var backKeyPressedTime:Long=0
     lateinit var toast: Toast
 
     fun onBackPressed(){
+        // 한번 눌렀을 때
         if(System.currentTimeMillis()>backKeyPressedTime+2000){
             backKeyPressedTime=System.currentTimeMillis()
             toast= Toast.makeText(mContext, "한번 더 누르시면 종료 됩니다.",Toast.LENGTH_SHORT)
@@ -19,6 +22,7 @@ class BackPressCloseHandler(mContext: Context){
             return
         }
 
+        // 2초 안에 두번 눌렀을 때
         if(System.currentTimeMillis()<=backKeyPressedTime+2000){
             (mContext as Activity).finish()
             android.os.Process.killProcess(android.os.Process.myPid())

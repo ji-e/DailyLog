@@ -3,7 +3,9 @@ package com.example.uohih.dailylog.base
 import android.util.Log
 import java.text.MessageFormat
 
-
+/**
+ * log
+ */
 object LogUtil {
     private val TAG = "MY_TAG"
 

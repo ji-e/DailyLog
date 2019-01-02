@@ -8,7 +8,11 @@ import android.view.*
 import com.example.uohih.dailylog.R
 import kotlinx.android.synthetic.main.dialog_basic.view.*
 
-
+/**
+ * 다이얼로그
+ * context: Context
+ * theme: Int
+ */
 class CustomDialog(context: Context, theme: Int) : Dialog(context, theme) {
 
     class Builder(private val context: Context) {

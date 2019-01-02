@@ -9,11 +9,16 @@ import android.widget.Button
 import android.widget.ImageView
 import com.example.uohih.dailylog.R
 
+/**
+ * 숫자 키패드 아답터
+ * mContext: Context
+ * keyPadData: ArrayList<String>: 숫자 정보 리스트
+ */
 class KeyPadAdapter(private val mContext: Context, private val keyPadData: ArrayList<String>) : BaseAdapter() {
 
 
     /**
-     * 버튼클릭 리스너
+     * ----------- 버튼클릭 리스너 start -----------
      */
     private var mListener: mKeyPadListener? = null
 
@@ -25,7 +30,9 @@ class KeyPadAdapter(private val mContext: Context, private val keyPadData: Array
     fun setmKeyPadListener(listener: mKeyPadListener) {
         this.mListener = listener
     }
-
+    /**
+     * ----------- 버튼클릭 리스너 end -----------
+     */
 
     override fun getCount(): Int {
         return keyPadData.size
@@ -45,7 +52,6 @@ class KeyPadAdapter(private val mContext: Context, private val keyPadData: Array
         if (view == null) {
             holder = ViewHolder()
             view = LayoutInflater.from(mContext).inflate(R.layout.key_pad_item, parent, false)
-//            holder.itemText = view.findViewById(R.id.keypad_tv)
             holder.itemBtn = view.findViewById(R.id.keypad_btn)
             holder.itemimg01 = view.findViewById(R.id.keypad_img01)
             holder.itemimg02 = view.findViewById(R.id.keypad_img02)
@@ -56,12 +62,15 @@ class KeyPadAdapter(private val mContext: Context, private val keyPadData: Array
             holder = view.tag as ViewHolder
         }
 
+        // 숫자 키패드 텍스트 설정
         holder.itemBtn.text = keyPadData[position]
 
         if (holder.itemBtn.text == "왼") {
+            // 하단 왼쪽 키패드: 지우기
             holder.itemBtn.visibility = View.GONE
             holder.itemimg01.visibility = View.VISIBLE
         } else if (holder.itemBtn.text == "오") {
+            // 하단 오른쪽 키패드: 없음
             holder.itemBtn.visibility = View.GONE
             holder.itemimg02.visibility = View.VISIBLE
             holder.itemback.visibility=View.VISIBLE
@@ -85,18 +94,13 @@ class KeyPadAdapter(private val mContext: Context, private val keyPadData: Array
             }
         }
 
-
-
         return view!!
     }
 
     inner class ViewHolder {
-        //        lateinit var itemText: TextView
         lateinit var itemBtn: Button
         lateinit var itemimg01: Button
         lateinit var itemimg02: Button
         lateinit var itemback: ImageView
-
-
     }
 }

@@ -16,10 +16,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.support.v4.content.ContextCompat
 
-
+/**
+ * 월간 일지 아답터
+ * mContext: Context
+ * arrayListDayInfo: ArrayList<CalendarDayInfo>: 캘린더 정보 리스트
+ * val date: Date
+ * logData: ArrayList<DBData>: DB에 있는 정보 리스트
+ */
 class MonthlyAdapter(private val mContext: Context, private val arrayListDayInfo: ArrayList<CalendarDayInfo>, val date: Date, val logData: ArrayList<DBData>) : BaseAdapter() {
     var selectedDate = date
     private var sdf = SimpleDateFormat("yyyyMMdd", Locale.getDefault())
+
     override fun getCount(): Int {
         return arrayListDayInfo.size
     }
@@ -80,7 +87,7 @@ class MonthlyAdapter(private val mContext: Context, private val arrayListDayInfo
 
 
         /**
-         * 날짜 그리기
+         * ------------- 날짜 그리기 start -------------
          */
         cell?.text = day.getDay()
 
@@ -99,6 +106,9 @@ class MonthlyAdapter(private val mContext: Context, private val arrayListDayInfo
         } else {
             cell?.setTextColor(Color.GRAY)
         }
+        /**
+         * ------------- 날짜 그리기 end -------------
+         */
 
 
         convertView?.tag = day

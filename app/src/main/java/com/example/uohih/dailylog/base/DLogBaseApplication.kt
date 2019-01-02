@@ -14,29 +14,29 @@ class DLogBaseApplication : Application() {
 
 
     /**
-     * 날짜 세팅
+     * ------------- 날짜 세팅 -------------
      */
     fun setDateInfom(dateInfo: JSONObject) {
         Companion.dateInfo = dateInfo
     }
 
     fun getDateInfom(): JSONObject {
-        return Companion.dateInfo
+        return dateInfo
     }
 
     /**
-     * 전체 선택 체크박스 세팅
+     * ------------- 전체 선택 체크박스 세팅 -------------
      */
     fun setAllCheckBox(allCheckBox: Boolean) {
         Companion.allCheckBox = allCheckBox
     }
 
     fun getAllCheckBox(): Boolean {
-        return Companion.allCheckBox
+        return allCheckBox
     }
 
     /**
-     * 삭제 항목 세팅
+     * ------------- 삭제 항목 세팅 -------------
      */
     fun setDeleteItem(deleteItem: ArrayList<String>?) {
         Companion.deleteItem.clear()
@@ -47,44 +47,29 @@ class DLogBaseApplication : Application() {
     }
 
     fun getDeleteItem(): ArrayList<String> {
-        return Companion.deleteItem
-    }
-
-    /**
-     * 체크 항목 세팅
-     */
-    fun setCheckOnItem(index: String, check: String) {
-        Companion.checkItem.put(index, check)
-    }
-
-    fun setCheckOffItem(index: String) {
-        Companion.checkItem.remove(index)
-    }
-
-    fun getCheckItem(): JSONObject {
-        return Companion.checkItem
+        return deleteItem
     }
 
 
     /**
-     * 캘린더 팝업 날짜 세팅
+     * ------------- 캘린더 팝업 날짜 세팅 -------------
      */
     fun setSeleteDate(selecteDate:String){
         Companion.selecteDate = selecteDate
     }
     fun getSeleteDate():String{
-        return Companion.selecteDate
+        return selecteDate
     }
 
 
     /**
-     * 월간 일지
+     * ------------- 월간 일지 -------------
      */
     fun setMonthly(monthly:Boolean){
         Companion.monthly = monthly
     }
     fun getMonthly():Boolean{
-        return Companion.monthly
+        return monthly
     }
 
 
@@ -93,10 +78,8 @@ class DLogBaseApplication : Application() {
         private var dateInfo: JSONObject = DLogBaseActivity().getToday() //설정 날짜
         private var allCheckBox = false //전체 선택
         private var deleteItem = ArrayList<String>()//삭제 항목
-        private var checkItem = JSONObject()
         private var selecteDate=DLogBaseActivity().getToday().get("yyyymmdd").toString()
         private var monthly=false
-
     }
 
 

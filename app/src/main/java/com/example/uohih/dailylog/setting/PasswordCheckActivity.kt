@@ -13,13 +13,14 @@ import com.example.uohih.dailylog.base.DLogBaseActivity
 import com.example.uohih.dailylog.base.LogUtil
 import kotlinx.android.synthetic.main.activity_password_check.*
 
+/**
+ * 비밀번호 확인
+ */
 class PasswordCheckActivity : DLogBaseActivity() {
 
     private val mIvPwResId = intArrayOf(R.id.iv_pin0, R.id.iv_pin1, R.id.iv_pin2, R.id.iv_pin3, R.id.iv_pin4, R.id.iv_pin5)
     private var mIvPw = arrayOfNulls<ImageView>(mIvPwResId.size)
     private var str: String = ""
-//    private var mView: View? = null
-
     private var reset = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +35,8 @@ class PasswordCheckActivity : DLogBaseActivity() {
             finish()
         })
 
-        /**
-         * 비밀번호 초기화
-         */
+
+        // 비밀번호 초기화
         if (intent.hasExtra("reset")) {
             pwcheck_tv.text = getString(R.string.pwsetting_text_confirm)
             reset = true
@@ -48,17 +48,16 @@ class PasswordCheckActivity : DLogBaseActivity() {
             pwcheck_input.text = ""
         }
 
-        /**
-         * pin id 세팅
-         */
+        // pin id 세팅
         for (i in 0 until mIvPwResId.size) {
             val view: ImageView = pwcheck_linear_pin_input.findViewById(mIvPwResId[i])
             mIvPw[i] = view
             LogUtil.d(mIvPw[i].toString())
         }
 
-
-        // 비밀번호 입력 할 때 마다 리스너
+        /**
+         * 비밀번호 입력 할 때 마다 리스너
+         */
         pwcheck_input.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
@@ -99,6 +98,7 @@ class PasswordCheckActivity : DLogBaseActivity() {
 
     /**
      * 키패드 클릭시 pin 색 변환
+     * inputLen: Int
      */
     private fun setPwImage(inputLen: Int) {
         for (i in 0 until mIvPw.size) {

@@ -14,18 +14,24 @@ import com.example.uohih.dailylog.base.DLogBaseApplication
 import com.example.uohih.dailylog.database.DBHelper
 import com.example.uohih.dailylog.main.UpdateActivity
 import com.example.uohih.dailylog.view.CustomListDialog
-import com.example.uohih.dailylog.view.ListViewAdapter
 import org.json.JSONObject
 
+/**
+ * 일간 일지 아답터
+ *  mContext: Context
+ *  dailyList: ArrayList<DBData>: 일간 일지 정보 리스트
+ *  private val delete: Boolean: (삭제: true)
+ */
 class DailyAdapter(private val mContext: Context, private val dailyList: ArrayList<DBData>, private val delete: Boolean) : BaseAdapter() {
-
     private val base = DLogBaseApplication()
-    private var selected = ArrayList<Boolean>(count) // 체크 된 항목
-    var down = true
+    // 체크 된 항목
+    private var checked = ArrayList<Boolean>(count)
+    // content 커튼 (V)
+    private var down = true
 
 
     /**
-     * 전체 선택 체크박스 리스너
+     * ----------- 전체 선택 체크박스 리스너 start -----------
      */
     private var mListener: mCheckboxListener? = null
 
@@ -36,21 +42,26 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
     fun setmCheckboxListener(listener: mCheckboxListener) {
         this.mListener = listener
     }
+    /**
+     * ----------- 전체 선택 체크박스 리스너 end -----------
+     */
+
 
     /**
      * 전체 선택 및 해제
+     * isCheck: Boolean: 체크 상태 값
      */
     fun setAllCheckList(isCheck: Boolean) {
-        selected.clear()
+        checked.clear()
         for (i in 0 until count) {
-            selected.add(isCheck)
+            checked.add(isCheck)
         }
         notifyDataSetChanged()
     }
 
-
     /**
      * 데이터 삭제
+     * position: Int: 삭제할 index
      */
     fun removeAt(position: Int) {
         dailyList.removeAt(position)
@@ -63,25 +74,13 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
     fun check() {
         var array = ArrayList<String>()
         for (i in 0 until count) {
-            if (selected[i]) {
+            if (checked[i]) {
                 array.add(dailyList[i].no.toString())
-//                base.setCheckOnItem(i.toString(), dailyList[i].no.toString())
-            } else {
-//                base.setCheckOffItem(i.toString())
             }
         }
-
-//        var int = 0
-//        for (i in 0 until count) {
-//            if (!DLogBaseApplication().getCheckItem().optString(i.toString()).isNullOrEmpty()) {
-//                array.add(int, base.getCheckItem().get(i.toString()).toString())
-//                int++
-//            }
-//        }
         notifyDataSetChanged()
         base.setDeleteItem(array)
     }
-
 
     override fun getItem(position: Int): DBData {
         return dailyList[position]
@@ -102,27 +101,33 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
         if (view == null) {
             holder = ViewHolder()
             view = LayoutInflater.from(mContext).inflate(R.layout.daily_item_recycler_view, parent, false)
-            holder.itemTitle = view.findViewById<TextView>(R.id.tv_daily_item_title)
-            holder.itemContent = view.findViewById<TextView>(R.id.tv_daily_item_content)
-            holder.itemBtn = view.findViewById<ImageButton>(R.id.btn_daily_item)
-            holder.itemCheck = view.findViewById<CheckBox>(R.id.check_daily_item)
-            holder.itemSrcLin = view.findViewById<LinearLayout>(R.id.scr_lin_daily_item)
-            holder.itemSrc = view.findViewById<ScrollView>(R.id.scr_daily_item)
-            holder.layout = view.findViewById<LinearLayout>(R.id.lin_daily_item)
+            holder.itemTitle = view.findViewById(R.id.tv_daily_item_title)
+            holder.itemContent = view.findViewById(R.id.tv_daily_item_content)
+            holder.itemBtn = view.findViewById(R.id.btn_daily_item)
+            holder.itemCheck = view.findViewById(R.id.check_daily_item)
+            holder.itemSrcLin = view.findViewById(R.id.scr_lin_daily_item)
+            holder.itemSrc = view.findViewById(R.id.scr_daily_item)
+            holder.layout = view.findViewById(R.id.lin_daily_item)
 
             view.tag = holder
+
+            // 체크 초기값 세팅 (false)
             for (i in 0 until count) {
-                selected.add(false)
+                checked.add(false)
             }
+
         } else {
             holder = view.tag as ViewHolder
         }
 
         holder.itemTitle.text = dailyList[position].title
         holder.itemContent.text = dailyList[position].content
+
+        // DB No.
         var no = dailyList[position].no
 
 
+        // delete: true: 체크박스, false: V버튼
         if (delete) {
             holder.itemBtn.visibility = View.GONE
             holder.itemCheck.visibility = View.VISIBLE
@@ -132,18 +137,13 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
         }
 
 
-        /**
-         * 상세 내용이 없을 때
-         */
+        // 상세 내용이 없을 때
         if (dailyList[position].content.isBlank()) {
             holder.itemBtn.visibility = View.GONE
         }
 
-        /**
-         * 텍스트뷰 터치 이벤트 죽이기
-         */
+        // 텍스트뷰 터치 이벤트 죽이기
         holder.itemContent.setOnTouchListener { v, event ->
-            // TODO Auto-generated method stub
             holder.itemSrc.requestDisallowInterceptTouchEvent(true)
             //스크롤뷰가 텍스트뷰의 터치이벤트를 가져가지 못하게 함
             false
@@ -155,6 +155,7 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
          */
         holder.layout.setOnClickListener {
             if (holder.itemCheck.visibility == View.VISIBLE) {
+                // 체크박스 일 때
                 if (holder.itemCheck.isChecked) {
                     holder.itemCheck.isChecked = false
                 } else {
@@ -166,6 +167,7 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
                 }
 
             } else if (holder.itemBtn.visibility == View.VISIBLE) {
+                // V버튼 일 때
                 if (down) {
                     holder.itemSrcLin.visibility = View.VISIBLE
                     holder.itemBtn.setBackgroundResource(R.drawable.btn_up_selector)
@@ -183,11 +185,11 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
          * 레이아웃 롱클릭 이벤트
          */
         holder.layout.setOnLongClickListener {
-            val listViewAdapter = ListViewAdapter((mContext as Activity), ArrayList())
+            val listViewAdapter = DialogAdapter((mContext as Activity), ArrayList())
             listViewAdapter.setContent(it.resources.getString(R.string.menu_05))
             listViewAdapter.setContent(it.resources.getString(R.string.menu_06))
 
-
+            // 리스트 다이얼로그
             var customDialogList = CustomListDialog(mContext, android.R.style.Theme_Material_Dialog_MinWidth)
             customDialogList = customDialogList.showDialogList(mContext, holder.itemTitle.text.toString(), DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int -> }, listViewAdapter, AdapterView.OnItemClickListener { parent, view, p, id ->
                 when (p) {
@@ -219,7 +221,7 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
         }
 
         /**
-         * 화살표 클릭 이벤트
+         * 화살표(V) 클릭 이벤트
          */
         holder.itemBtn.setOnClickListener {
             if (down) {
@@ -240,25 +242,20 @@ class DailyAdapter(private val mContext: Context, private val dailyList: ArrayLi
         if (holder.itemCheck.visibility == View.VISIBLE) {
             holder.itemCheck.setOnCheckedChangeListener { buttonView, isChecked ->
                 // 체크 상태값 변환
-                selected[position] = isChecked
+                checked[position] = isChecked
                 // 전체 선택 해제 리스너
                 if (!isChecked && mListener != null) {
                     mListener?.onmClickEvent()
                 }
-//                notifyDataSetChanged()
             }
         }
 
-
-
-        if (selected.isNotEmpty()) {
-            holder.itemCheck.isChecked = selected[position]
+        // 체크 상태 설정
+        if (checked.isNotEmpty()) {
+            holder.itemCheck.isChecked = checked[position]
         } else {
             holder.itemCheck.isChecked = false
         }
-
-        // 체크 상태
-//        check()
 
         return view!!
     }
