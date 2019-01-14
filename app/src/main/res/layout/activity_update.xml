@@ -122,7 +122,7 @@
         android:layout_height="@dimen/dp45"
         android:background="@drawable/btn_bottom_selector"
         android:lineSpacingExtra="@dimen/dp10"
-        android:text="@string/btn_03"
+        android:text="@string/btn_05"
         android:textColor="@color/c_333333"
         android:textSize="@dimen/dp17" />
 

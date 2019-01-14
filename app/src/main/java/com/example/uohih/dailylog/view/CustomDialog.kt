@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.view.*
 import com.example.uohih.dailylog.R
+import com.example.uohih.dailylog.base.LogUtil
 import kotlinx.android.synthetic.main.dialog_basic.view.*
 
 /**
@@ -22,7 +23,6 @@ class CustomDialog(context: Context, theme: Int) : Dialog(context, theme) {
 
         private var mNoBtnClickListener: DialogInterface.OnClickListener? = null
         private var mYesBtnClickListener: DialogInterface.OnClickListener? = null
-
 
         /**
          * 메세지 세팅
@@ -73,9 +73,19 @@ class CustomDialog(context: Context, theme: Int) : Dialog(context, theme) {
                 contentView.dialog_no.visibility = View.GONE
             } else {
                 contentView.dialog_no.text = dialogBtnNoText
-                contentView.dialog_no.setOnClickListener {
-                    dialog.dismiss()
+                if(mNoBtnClickListener!=null){
+                    contentView.dialog_no.setOnClickListener {
+                        mNoBtnClickListener!!.onClick(dialog, DialogInterface.BUTTON_NEGATIVE)
+                        dialog.dismiss()
+                    }
+
+//                    contentView.dialog_no.setOnClickListener(mNoBtnClickListener)
+                }else{
+                    contentView.dialog_no.setOnClickListener {
+                        dialog.dismiss()
+                    }
                 }
+
             }
 
             // 확인 버튼
@@ -83,15 +93,27 @@ class CustomDialog(context: Context, theme: Int) : Dialog(context, theme) {
                 contentView.dialog_yes.visibility = View.GONE
             } else {
                 contentView.dialog_yes.text = dialogBtnYesText
-                contentView.dialog_yes.setOnClickListener {
-                    dialog.dismiss()
+                if(mYesBtnClickListener!=null){
+                    contentView.dialog_yes.setOnClickListener {
+                        mYesBtnClickListener!!.onClick(dialog, DialogInterface.BUTTON_POSITIVE)
+                        dialog.dismiss()
+                    }
+//                    contentView.dialog_yes.setOnClickListener(mYesBtnClickListener)
+                }else{
+                    contentView.dialog_yes.setOnClickListener {
+                        dialog.dismiss()
+                    }
                 }
+
             }
+
+
 
             return dialog
         }
 
     }
+
 
     /**
      * 확인 버튼 다이얼로그
@@ -125,12 +147,6 @@ class CustomDialog(context: Context, theme: Int) : Dialog(context, theme) {
         return dialog
     }
 
-//    fun makeDialog() {
-//        CustomDialog.Builder(mCo)
-//                .setText("제목")
-//                .setBtnNoText("메시지")
-//                .setBtnYesText("예")
-//                .show()
-//    }
+
 
 }

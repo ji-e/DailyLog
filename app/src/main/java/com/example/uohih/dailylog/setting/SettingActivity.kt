@@ -34,6 +34,15 @@ class SettingActivity : DLogBaseActivity() {
         }
 
         /**
+         * 엑셀 가져오기 클릭 리스너
+         */
+        setting_excel2.setOnClickListener {
+            val exportExcel=ExportExcel(this)
+            exportExcel.readExcelFile()
+
+        }
+
+        /**
          * 엑셀로 내보내기 클릭 리스너
          */
         setting_excel.setOnClickListener {

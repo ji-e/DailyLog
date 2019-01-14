@@ -30,7 +30,7 @@ class ExportExcel(mContext: Context) {
     private var dataList = ArrayList<DBData>()
     private var columns = arrayOf("NO", "DATE", "TITLE", "CONTENT")
     private val workbook: XSSFWorkbook = XSSFWorkbook()
-    private val sheet = workbook.createSheet("test_sheet")
+    private val sheet = workbook.createSheet("dlog_sheet")
     private val createHelper = workbook.creationHelper
 
 
@@ -125,21 +125,25 @@ class ExportExcel(mContext: Context) {
         val fileout = FileOutputStream(totalName)
         workbook.write(fileout)
         fileout.close()
-        Toast.makeText(mContext, "excel complete!!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(mContext, "엑셀로 내보내기가 완료되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
     /**
      * 엑셀 파일 읽기
      */
     fun readExcelFile() {
+        if(!fileExists(fileName,true)){
+            return
+        }
+
         val excelFile = FileInputStream(File(totalName))
         val workbook = XSSFWorkbook(excelFile)
-        val sheet = workbook.getSheet("test_sheet")
+        val sheet = workbook.getSheet("dlog_sheet")
 
         for (rowIndex in 1 until sheet.physicalNumberOfRows) {
             val row = sheet.getRow(rowIndex)
             if (row != null) {
-                var no: Double = 0.0
+                var no: String = ""
                 var date: String = ""
                 var title: String = ""
                 var content: String = ""
@@ -147,7 +151,7 @@ class ExportExcel(mContext: Context) {
                     val cell = row.getCell(columnIndex)
                     if (cell != null) {
                         when (columnIndex) {
-                            0 -> no = cell.numericCellValue
+                            0 -> no = cell.stringCellValue
                             1 -> date = cell.stringCellValue
                             2 -> title = cell.stringCellValue
                             3 -> content = cell.stringCellValue
@@ -155,9 +159,17 @@ class ExportExcel(mContext: Context) {
                     }
                 }
                 dataList.add(DBData(no.toInt(), date.toInt(), title, content))
+                LogUtil.d(date)
             }
         }
         excelFile.close()
+
+        db.onReset()
+
+        for(i in 0 until dataList.size){
+            db.insert(dataList[i].date,dataList[i].title,dataList[i].content)
+        }
+        Toast.makeText(mContext, "엑셀 가져오기가 완료되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
     /**

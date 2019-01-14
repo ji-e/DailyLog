@@ -112,7 +112,7 @@ class UpdateActivity : DLogBaseActivity() {
             if (update_et_title.toString().isEmpty()) {
                 emptyAlert()
             } else {
-                db.update(dailyIntent.get("no").toString().toInt(), update_et_title.text.toString(), update_et_title.text.toString())
+                db.update(dailyIntent.get("no").toString().toInt(), update_et_title.text.toString(), update_et_content.text.toString())
                 finish()
             }
         }
