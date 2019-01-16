@@ -25,6 +25,8 @@ class WriteActivity : DLogBaseActivity() {
     private val currentDate = getToday().get("yyyymmdd").toString()
     private var date = jsonCalendar.get("yyyymmdd").toString()
     private val db = DBHelper(this)
+    private var dailyIntent = JSONObject()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,15 @@ class WriteActivity : DLogBaseActivity() {
         // 현재 날짜 세팅
         this.write_tv_date.text = String.format(getString(R.string.daily_date), jsonCalendar.get("year"), jsonCalendar.get("month"), jsonCalendar.get("date"), jsonCalendar.get("day"))
         base.setDateInfom(jsonCalendar)
+
+        /**
+         * 수정하기
+         */
+        if (intent.hasExtra("daily")) {
+            dailyIntent = JSONObject(intent.getStringExtra("daily"))
+            write_et_title.setText(dailyIntent.get("title").toString())
+            write_et_content.setText(dailyIntent.get("content").toString())
+        }
 
 
         // 상단 바 캘린더 클릭 이벤트

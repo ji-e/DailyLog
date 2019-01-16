@@ -201,14 +201,14 @@ class TopTitleView : RelativeLayout {
             jsonObject.put("content", dailyList[p].content)
 
 
-            val intent = Intent(mContext, UpdateActivity::class.java)
+            val intent = Intent(mContext, WriteActivity::class.java)
             intent.putExtra("daily", jsonObject.toString())
             (mContext as Activity).startActivity(intent)
             (mContext as Activity).overridePendingTransition(0, 0)
             (mContext as Activity).finish()
-            Toast.makeText(mContext, "수정", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, "불러오기", Toast.LENGTH_SHORT).show()
 
-            DLogBaseApplication().setDateInfom(DLogBaseActivity().getToday(jsonObject.get("date").toString()))
+//            DLogBaseApplication().setDateInfom(DLogBaseActivity().getToday(jsonObject.get("date").toString()))
 
 
         })!!

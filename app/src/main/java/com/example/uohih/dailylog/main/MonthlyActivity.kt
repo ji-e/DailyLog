@@ -149,7 +149,7 @@ class MonthlyActivity : DLogBaseActivity() {
 
         // 그리드뷰 세팅
         getCalendar(mThisMonthCalendar.time)
-        setSelectedDate(Date())
+//        setSelectedDate(Date())
         setData(monthly_tv_date.text.toString().substring(0,4)+monthly_tv_date.text.toString().substring(6,8))
 
         mAadapter = SearchAdapter(this, dayList,false)
