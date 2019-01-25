@@ -43,6 +43,16 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
         lateinit var arrayListDayInfo: ArrayList<CalendarDayInfo>
         private var selectedDate: Date = Date()
 
+        private var date: String? = null
+
+        /**
+         * 날짜 세팅
+         */
+        fun setDate(text: String): Builder {
+            date = text
+            return this
+        }
+
 
         /**
          * 닫기 버튼 리스너
@@ -195,16 +205,18 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
                 instance.add(Calendar.MONTH, -1)
                 getCalendar(instance.time)
                 contentView.calendar_tv_month.text = String.format("%02d", instance.get(Calendar.MONTH) + 1)
+                contentView.calendar_tv_year.text = instance.get(Calendar.YEAR).toString()
             }
 
             /**
              * 월 다음버튼
              */
             contentView.calendar_btn_nextm.setOnClickListener {
-                if (contentView.calendar_tv_month.text.toString().toInt() < todayJson.getString("month").toInt()) {
+                if (contentView.calendar_tv_year.text.toString().toInt() < todayJson.getString("year").toInt() || contentView.calendar_tv_month.text.toString().toInt() < todayJson.getString("month").toInt()) {
                     instance.add(Calendar.MONTH, +1)
                     getCalendar(instance.time)
                     contentView.calendar_tv_month.text = String.format("%02d", instance.get(Calendar.MONTH) + 1)
+                    contentView.calendar_tv_year.text = instance.get(Calendar.YEAR).toString()
                 }
             }
 
@@ -233,7 +245,14 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
             // 그리드뷰 세팅
             gridView = contentView.calendar_gridview
             getCalendar(mThisMonthCalendar.time)
-            setSelectedDate(Date())
+            if (date != null) {
+                val df = SimpleDateFormat("yyyy-MM-dd")
+                LogUtil.d(date!!)
+                val d = df.parse(date)
+                setSelectedDate(d)
+            } else {
+                setSelectedDate(Date())
+            }
             return dialog
         }
 
@@ -243,7 +262,7 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
     /**
      * 캘린더 다이얼로그
      */
-    fun showDialogCalendar(context: Context): CalendarDialog? {
+    fun showDialogCalendar(context: Context,date: String?): CalendarDialog? {
         if (context == null) {
             return null
         }
@@ -258,6 +277,8 @@ class CalendarDialog(context: Context, theme: Int) : Dialog(context, theme) {
 
 
         val builder = CalendarDialog.Builder(context)
+        if (date != null)
+            builder.setDate(date)
         val dialog = builder.create()
         return dialog
     }

@@ -61,6 +61,10 @@ class SearchActivity : DLogBaseActivity() {
                 search_result_tv.visibility = View.VISIBLE
                 search_listview.visibility = View.GONE
                 search_btn_confirm.visibility = View.VISIBLE
+                search_log_date1_tv.text=""
+                search_log_date2_tv.text=""
+                search_log_date1_tv.hint = getToday().get("yyyymmdd").toString()
+                search_log_date2_tv.hint = getToday().get("yyyymmdd").toString()
             } else {
                 search_check_date.isChecked = true
                 search_layout_log.visibility = View.GONE
@@ -119,7 +123,13 @@ class SearchActivity : DLogBaseActivity() {
          */
         search_log_date1.setOnClickListener {
             var calendarDialog = CalendarDialog(this, android.R.style.Theme_Material_Dialog_MinWidth)
-            calendarDialog = calendarDialog.showDialogCalendar(this)!!
+            if (!search_log_date1_tv.text.isNullOrEmpty()) {
+                var date = search_log_date1_tv.text.toString().substring(0, 4) + "-" + search_log_date1_tv.text.toString().substring(4, 6) + "-" + search_log_date1_tv.text.toString().substring(6)
+                calendarDialog = calendarDialog.showDialogCalendar(this, date)!!
+            } else {
+                calendarDialog = calendarDialog.showDialogCalendar(this, null)!!
+            }
+
             calendarDialog.show()
 
             calendarDialog.setOnDismissListener {
@@ -134,7 +144,12 @@ class SearchActivity : DLogBaseActivity() {
          */
         search_log_date2.setOnClickListener {
             var calendarDialog = CalendarDialog(this, android.R.style.Theme_Material_Dialog_MinWidth)
-            calendarDialog = calendarDialog.showDialogCalendar(this)!!
+            if (!search_log_date2_tv.text.isNullOrEmpty()) {
+                var date = search_log_date2_tv.text.toString().substring(0, 4) + "-" + search_log_date2_tv.text.toString().substring(4, 6) + "-" + search_log_date2_tv.text.toString().substring(6)
+                calendarDialog = calendarDialog.showDialogCalendar(this, date)!!
+            } else {
+                calendarDialog = calendarDialog.showDialogCalendar(this, null)!!
+            }
             calendarDialog.show()
 
             calendarDialog.setOnDismissListener {
@@ -147,7 +162,7 @@ class SearchActivity : DLogBaseActivity() {
          * 검색 버튼 클릭
          */
         search_btn_confirm.setOnClickListener {
-            if (search_log_date1_tv.text.toString().isNullOrEmpty()||search_log_date2_tv.text.toString().isNullOrEmpty()) {
+            if (search_log_date1_tv.text.toString().isNullOrEmpty() || search_log_date2_tv.text.toString().isNullOrEmpty()) {
                 getSearchResult(1)
             } else {
                 getSearchResult(2)
@@ -166,7 +181,7 @@ class SearchActivity : DLogBaseActivity() {
                 search_btn_confirm.visibility = View.GONE
                 var jsonCalendar = JSONObject(getToday().toString())
                 search_date1_tv.text = jsonCalendar.get("yyyymmdd").toString()
-                search_date1_tv.text = base.getSeleteDate()
+//                search_date1_tv.text = base.getSeleteDate()
                 getSearchResult(3)
             } else {
                 search_layout_date.visibility = View.GONE
@@ -179,7 +194,12 @@ class SearchActivity : DLogBaseActivity() {
          */
         search_date1.setOnClickListener {
             var calendarDialog = CalendarDialog(this, android.R.style.Theme_Material_Dialog_MinWidth)
-            calendarDialog = calendarDialog.showDialogCalendar(this)!!
+            if (!search_date1_tv.text.isNullOrEmpty()) {
+                var date = search_date1_tv.text.toString().substring(0, 4) + "-" + search_date1_tv.text.toString().substring(4, 6) + "-" + search_date1_tv.text.toString().substring(6)
+                calendarDialog = calendarDialog.showDialogCalendar(this, date)!!
+            } else {
+                calendarDialog = calendarDialog.showDialogCalendar(this, null)!!
+            }
             calendarDialog.show()
 
             calendarDialog.setOnDismissListener {
@@ -198,7 +218,7 @@ class SearchActivity : DLogBaseActivity() {
         /**
          * 검색결과 리스트
          */
-        mAadapter = SearchAdapter(this, searchList,true)
+        mAadapter = SearchAdapter(this, searchList, true)
         search_listview.adapter = mAadapter
 
 
